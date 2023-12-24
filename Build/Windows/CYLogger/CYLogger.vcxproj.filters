@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\CYLoggerImpl.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\CYPublicFunction.cpp">
+      <Filter>Src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\CYLoggerControl.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\CYLoggerEntityFactory.cpp">
+      <Filter>Src\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerBaseAppender.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerConsoleAppender.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerFileAppender.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerRemoteAppender.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerSystemAppender.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Schedule\CYLoggerSchedule.cpp">
+      <Filter>Src\Entity\Schedule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Message\CYEscapeMessage.cpp">
+      <Filter>Src\Common\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Thread\CYNamedCondition.cpp">
+      <Filter>Src\Common\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Thread\CYNamedLocker.cpp">
+      <Filter>Src\Common\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Thread\CYNamedThread.cpp">
+      <Filter>Src\Common\Thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\CYPathConvert.cpp">
+      <Filter>Src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerAppenderFactory.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerMainAppender.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Message\CYStrMessage.cpp">
+      <Filter>Src\Common\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Message\CYNormalMessage.cpp">
+      <Filter>Src\Common\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Config\CYLoggerConfig.cpp">
+      <Filter>Src\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Statistics\CYStatistics.cpp">
+      <Filter>Src\Statistics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerBufferAppender.cpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\SimpleLog\CYSimpleLog.cpp">
+      <Filter>Src\Common\SimpleLog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Exception\CYExceptionLogFile.cpp">
+      <Filter>Src\Common\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\CYFPSCounter.cpp">
+      <Filter>Src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Schedule\CYLoggerClearLogFile.cpp">
+      <Filter>Src\Entity\Schedule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Schedule\CYLoggerDoZipLog.cpp">
+      <Filter>Src\Entity\Schedule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\UpLoad\CYBaseUpLoad.cpp">
+      <Filter>Src\Common\UpLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\UpLoad\CYFTPUpLoad.cpp">
+      <Filter>Src\Common\UpLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Encryption\CYBaseEncryption.cpp">
+      <Filter>Src\Common\Encryption</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\Encryption\CYEncryptionFactory.cpp">
+      <Filter>Src\Common\Encryption</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\UpLoad\CYUpLoadFactory.cpp">
+      <Filter>Src\Common\UpLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Common\CYFileRestriction.cpp">
+      <Filter>Src\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout1.cpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutCustom.cpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutManager.cpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterChain.cpp">
+      <Filter>Src\Entity\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterManager.cpp">
+      <Filter>Src\Entity\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout2.cpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout3.cpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutEscape.cpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\inc\ICYLogger.hpp">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\inc\ICYLoggerDefine.hpp">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\CYLoggerImpl.hpp">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\inc\ICYLoggerTemplateLayout.hpp">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYPublicFunction.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYPrivateDefine.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\CYLoggerControl.hpp">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\CYLoggerEntity.hpp">
+      <Filter>Src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\CYLoggerEntityFactory.hpp">
+      <Filter>Src\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerBaseAppender.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerConsoleAppender.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerFileAppender.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerRemoteAppender.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerSystemAppender.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerSchedule.hpp">
+      <Filter>Src\Entity\Schedule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYNoCopy.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Message\CYEscapeMessage.hpp">
+      <Filter>Src\Common\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Thread\CYNamedCondition.hpp">
+      <Filter>Src\Common\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Thread\CYNamedLocker.hpp">
+      <Filter>Src\Common\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Time\CYTimeUtils.hpp">
+      <Filter>Src\Common\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Thread\CYNamedThread.hpp">
+      <Filter>Src\Common\Thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYPathConvert.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Time\CYTimeElapsed.hpp">
+      <Filter>Src\Common\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerAppenderFactory.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerMainAppender.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Message\CYStrMessage.hpp">
+      <Filter>Src\Common\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Message\CYNormalMessage.hpp">
+      <Filter>Src\Common\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYBind.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYList.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine\CYCoroutineEngine.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine\CYCoroutineEngineDefine.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYDerivableExecutor.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYExecutor.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYInlineExecutor.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYManualExecutor.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYThreadExecutor.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYThreadPoolExecutor.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYWorkerThreadExecutor.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYGenerator.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYLazyResult.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYLazyResultAwaitable.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYMakeResult.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYPromises.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResult.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResultAwaitable.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResumeOn.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYSharedResult.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYSharedResultAwaitable.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYWhenResult.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYConsumerContext.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYGeneratorState.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYLazyResultState.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYProducerContext.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYResultState.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYReturnValueStruct.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYSharedResultState.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Task\CYTask.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYAsyncCondition.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYAsyncLock.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYCacheLine.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYThread.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers\CYTimer.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers\CYTimerQueue.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYCoroutine.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYCoroutineDefine.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYTypeDefine.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception\CYBaseException.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception\CYException.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Message\CYBaseMessage.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Time\CYTimeStamps.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Structure\CYStringUtils.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYDebugString.hpp">
+      <Filter>Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Config\CYLoggerConfig.hpp">
+      <Filter>Src\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Statistics\CYStatistics.hpp">
+      <Filter>Src\Statistics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerBufferAppender.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\SimpleLog\CYSimpleLog.hpp">
+      <Filter>Src\Common\SimpleLog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Exception\CYExceptionLogFile.hpp">
+      <Filter>Src\Common\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Exception\CYExceptionDefine.hpp">
+      <Filter>Src\Common\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerAppenderDefine.hpp">
+      <Filter>Src\Entity\Appender</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYFPSCounter.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerClearLogFile.hpp">
+      <Filter>Src\Entity\Schedule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerDoZipLog.hpp">
+      <Filter>Src\Entity\Schedule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\UpLoad\CYBaseUpLoad.hpp">
+      <Filter>Src\Common\UpLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\UpLoad\CYFTPUpLoad.hpp">
+      <Filter>Src\Common\UpLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Encryption\CYBaseEncryption.hpp">
+      <Filter>Src\Common\Encryption</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\Encryption\CYEncryptionFactory.hpp">
+      <Filter>Src\Common\Encryption</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\UpLoad\CYUpLoadFactory.hpp">
+      <Filter>Src\Common\UpLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerScheduleDefine.hpp">
+      <Filter>Src\Entity\Schedule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYFileRestriction.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Inc\ICYLoggerPatternFilter.hpp">
+      <Filter>Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout1.hpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutCustom.hpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutManager.hpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterChain.hpp">
+      <Filter>Src\Entity\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterManager.hpp">
+      <Filter>Src\Entity\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout2.hpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout3.hpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggertemplateLayoutDefine.hpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutEscape.hpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Inc">
+      <UniqueIdentifier>{4f600d31-e6d6-41d1-a834-69f0d0fce4db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{4d3961aa-821b-4b6e-9020-972348f23e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common">
+      <UniqueIdentifier>{2e725490-9887-4b3e-a783-946d5a216a87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty">
+      <UniqueIdentifier>{58b0bbe8-0bb2-48ff-a9fc-34b76edd3d6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Entity">
+      <UniqueIdentifier>{631dedfe-8c88-4aff-b212-07832dbed9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Entity\Appender">
+      <UniqueIdentifier>{b27a15c2-17d7-4915-9bc2-dc0917bd419f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Entity\Layout">
+      <UniqueIdentifier>{1fd81272-0522-454c-8076-f346cefb4dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Entity\Filter">
+      <UniqueIdentifier>{c7e9eb9c-c39e-4156-8695-c78de75adc2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Entity\Schedule">
+      <UniqueIdentifier>{7822f9e5-b8bf-4708-b4de-eb13f59f94b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common\Message">
+      <UniqueIdentifier>{dc269093-bef3-490a-89bc-2f653efa9bd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common\Thread">
+      <UniqueIdentifier>{78ab87dc-1aaa-40c9-b027-e43ec3017211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common\Time">
+      <UniqueIdentifier>{8a69556a-d250-4d7e-9827-41588a10d170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine">
+      <UniqueIdentifier>{32ca43d1-04ce-44af-a0c2-b750907f2ce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc">
+      <UniqueIdentifier>{4abbafd1-0805-4c04-91b0-a0faad78f631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine">
+      <UniqueIdentifier>{698131b0-461e-4ff3-9512-4c605c614a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common">
+      <UniqueIdentifier>{a43b341c-a1ad-4f55-942b-0f5df01fab7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine">
+      <UniqueIdentifier>{2084f15b-c777-4916-9a4d-ad9ec1d1171f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors">
+      <UniqueIdentifier>{41f2646f-3a7b-4b42-a34b-2fc80884d200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results">
+      <UniqueIdentifier>{92f24c89-bdee-4686-ac68-f5c64cdee248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl">
+      <UniqueIdentifier>{a20c67f8-51af-4a0c-b85f-4a795d415223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Task">
+      <UniqueIdentifier>{b52c8a7e-7d61-439f-88dc-9dd94fb35cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads">
+      <UniqueIdentifier>{a42bcec6-3c36-46a2-be1c-4a891a7f41a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers">
+      <UniqueIdentifier>{987ffd6d-b609-4d44-967a-46d4ffd8cb69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception">
+      <UniqueIdentifier>{55f909c4-07b4-4e1d-96e7-7a79f17781ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Message">
+      <UniqueIdentifier>{020b7a16-9e44-402b-9748-f514ced2081f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Time">
+      <UniqueIdentifier>{e4bb1364-3b93-46ba-9142-081fa8e85240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Structure">
+      <UniqueIdentifier>{01cafc5c-4253-416a-ac50-3ae4b4fb2610}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Config">
+      <UniqueIdentifier>{2c93a519-7047-4374-a423-1938ead5aa28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Statistics">
+      <UniqueIdentifier>{c7fbf54c-d25e-4658-9899-350283eadc0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common\SimpleLog">
+      <UniqueIdentifier>{9c01deb1-8904-4b3c-a4c3-a7e608bedec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common\Exception">
+      <UniqueIdentifier>{3f0fea14-d452-4f36-b97d-a340a95961e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common\UpLoad">
+      <UniqueIdentifier>{37846790-6e93-4f9e-8162-827ef04da31f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Common\Encryption">
+      <UniqueIdentifier>{42b9942f-6322-42bb-a2a3-131265934578}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

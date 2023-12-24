@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{4d5ca559-4c2c-414d-9716-e68f9b600ced}</ProjectGuid>
+    <RootNamespace>CYLogger</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>$(ProjectName)D</TargetName>
+    <OutDir>$(SolutionDir)\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;CYLOGGER_USE_DLL;CYLOGGER_EXPORTS;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <EnableModules>true</EnableModules>
+      <AdditionalIncludeDirectories>./;../../../;../../../Src/ThirdParty/CYCoroutine/Inc;../../../Src/ThirdParty/CYCoroutine</AdditionalIncludeDirectories>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <BuildStlModules>false</BuildStlModules>
+      <EnableModules>true</EnableModules>
+      <AdditionalIncludeDirectories>./;../../../;../../../Src/ThirdParty/CYCoroutine/Inc;../../../Src/ThirdParty/CYCoroutine</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\inc\ICYLogger.hpp" />
+    <ClInclude Include="..\..\..\inc\ICYLoggerDefine.hpp" />
+    <ClInclude Include="..\..\..\Inc\ICYLoggerPatternFilter.hpp" />
+    <ClInclude Include="..\..\..\inc\ICYLoggerTemplateLayout.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYFileRestriction.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYFPSCounter.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYPathConvert.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYPublicFunction.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYNoCopy.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYPrivateDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Encryption\CYBaseEncryption.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Encryption\CYEncryptionFactory.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Exception\CYExceptionDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Exception\CYExceptionLogFile.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Message\CYEscapeMessage.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Message\CYNormalMessage.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Message\CYStrMessage.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\SimpleLog\CYSimpleLog.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Thread\CYNamedCondition.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Thread\CYNamedLocker.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Thread\CYNamedThread.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Time\CYTimeElapsed.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\Time\CYTimeUtils.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\UpLoad\CYBaseUpLoad.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\UpLoad\CYFTPUpLoad.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\UpLoad\CYUpLoadFactory.hpp" />
+    <ClInclude Include="..\..\..\Src\Config\CYLoggerConfig.hpp" />
+    <ClInclude Include="..\..\..\Src\CYLoggerControl.hpp" />
+    <ClInclude Include="..\..\..\src\CYLoggerImpl.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerAppenderDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerAppenderFactory.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerBaseAppender.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerBufferAppender.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerConsoleAppender.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerFileAppender.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerMainAppender.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerRemoteAppender.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Appender\CYLoggerSystemAppender.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\CYLoggerEntity.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\CYLoggerEntityFactory.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterChain.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterManager.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout2.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout3.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutCustom.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout1.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggertemplateLayoutDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutEscape.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutManager.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerClearLogFile.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerDoZipLog.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerSchedule.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerScheduleDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\Statistics\CYStatistics.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYBind.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYDebugString.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYList.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception\CYBaseException.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception\CYException.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Message\CYBaseMessage.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Structure\CYStringUtils.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Time\CYTimeStamps.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYCoroutine.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYCoroutineDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYTypeDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine\CYCoroutineEngine.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine\CYCoroutineEngineDefine.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYDerivableExecutor.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYExecutor.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYInlineExecutor.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYManualExecutor.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYThreadExecutor.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYThreadPoolExecutor.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYWorkerThreadExecutor.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYGenerator.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYLazyResult.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYLazyResultAwaitable.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYMakeResult.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYPromises.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResult.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResultAwaitable.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResumeOn.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYSharedResult.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYSharedResultAwaitable.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYWhenResult.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYConsumerContext.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYGeneratorState.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYLazyResultState.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYProducerContext.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYResultState.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYReturnValueStruct.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYSharedResultState.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Task\CYTask.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYAsyncCondition.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYAsyncLock.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYCacheLine.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYThread.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers\CYTimer.hpp" />
+    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers\CYTimerQueue.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Src\Common\CYFileRestriction.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\CYFPSCounter.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\CYPathConvert.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\CYPublicFunction.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Encryption\CYBaseEncryption.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Encryption\CYEncryptionFactory.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Exception\CYExceptionLogFile.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Message\CYEscapeMessage.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Message\CYNormalMessage.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Message\CYStrMessage.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\SimpleLog\CYSimpleLog.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Thread\CYNamedCondition.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Thread\CYNamedLocker.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\Thread\CYNamedThread.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\UpLoad\CYBaseUpLoad.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\UpLoad\CYFTPUpLoad.cpp" />
+    <ClCompile Include="..\..\..\Src\Common\UpLoad\CYUpLoadFactory.cpp" />
+    <ClCompile Include="..\..\..\Src\Config\CYLoggerConfig.cpp" />
+    <ClCompile Include="..\..\..\Src\CYLoggerControl.cpp" />
+    <ClCompile Include="..\..\..\src\CYLoggerImpl.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerAppenderFactory.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerBaseAppender.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerBufferAppender.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerConsoleAppender.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerFileAppender.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerMainAppender.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerRemoteAppender.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Appender\CYLoggerSystemAppender.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\CYLoggerEntityFactory.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterChain.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterManager.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout2.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout3.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutCustom.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout1.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutEscape.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutManager.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Schedule\CYLoggerClearLogFile.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Schedule\CYLoggerDoZipLog.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Schedule\CYLoggerSchedule.cpp" />
+    <ClCompile Include="..\..\..\Src\Statistics\CYStatistics.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
