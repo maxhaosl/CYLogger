@@ -1,0 +1,11 @@
+CYLogger V1.0.0 features:
+1. C++ 20 coroutine implementation
+2. Double buffer queue.
+3. independent lock.
+4. log pattern filter.
+5. Log template layout.
+6. Exception handling.
+7. The interface is simple and easy to use and supports cross-platform.
+
+Included plugins:
+1. CYCoroutine.

@@ -1,7 +1,7 @@
 # CYLogger
-C++ logging library based on C 20, cross-platform, coroutine support
+C++ logging library based on C++ 20, cross-platform, coroutine support
 
-Log library implemented based on C 20, coroutine support, independent locks, double cache queues, format, range, templates, constraints, etc. Enjoy it.
+Log library implemented based on C++ 20, coroutine support, independent locks, double cache queues, format, range, templates, constraints, etc. Enjoy it.
 
 ```
 #include <iostream>
