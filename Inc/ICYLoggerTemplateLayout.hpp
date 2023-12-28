@@ -32,14 +32,14 @@
  * ===============================================================================
  */
 
- /*
-  * AUTHORS:  ShiLiang.Hao <newhaosl@163.com>, foobra<vipgs99@gmail.com>
-  * VERSION:  1.0.0
-  * PURPOSE:  A cross-platform efficient and stable Log library.
-  * CREATION: 2023.04.15
-  * LCHANGE:  2023.04.15
-  * LICENSE:  Expat/MIT License, See Copyright Notice at the begin of this file.
-  */
+/*
+ * AUTHORS:  ShiLiang.Hao <newhaosl@163.com>, foobra<vipgs99@gmail.com>
+ * VERSION:  1.0.0
+ * PURPOSE:  A cross-platform efficient and stable Log library.
+ * CREATION: 2023.04.15
+ * LCHANGE:  2023.04.15
+ * LICENSE:  Expat/MIT License, See Copyright Notice at the begin of this file.
+ */
 
 #ifndef __I_CYLOGGERTEXTEMPLATE_LAYOUT_HPP__
 #define __I_CYLOGGERTEXTEMPLATE_LAYOUT_HPP__
@@ -54,13 +54,13 @@ CYLOGGER_NAMESPACE_BEGIN
 class CYLOGGER_API ICYLoggerTemplateLayout
 {
 public:
-	ICYLoggerTemplateLayout()
-	{
-	}
+    ICYLoggerTemplateLayout()
+    {
+    }
 
-	virtual ~ICYLoggerTemplateLayout()
-	{
-	}
+    virtual ~ICYLoggerTemplateLayout()
+    {
+    }
 
 public:
     /**
@@ -93,13 +93,13 @@ public:
 protected:
     struct STFormatTIme
     {
-        int				m_nYY;		// Year
-        int				m_nMM;		// Month
-        int				m_nDD;		// Day
-        int				m_nHR;		// Hour
-        int				m_nMN;		// Minute
-        int				m_nSC;		// Second
-        int				m_nMMN;		// MicroSecond
+        int             m_nYY;      // Year
+        int             m_nMM;      // Month
+        int             m_nDD;      // Day
+        int             m_nHR;      // Hour
+        int             m_nMN;      // Minute
+        int             m_nSC;      // Second
+        int             m_nMMN;     // MicroSecond
 
         /**
          * @brief The interface does not use the C++ 20 format syntax. It uses the old setw method to format strings to prevent interface pollution. The dynamic library method does not require the project to use the C++ 20 method.

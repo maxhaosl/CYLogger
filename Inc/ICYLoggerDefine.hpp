@@ -46,9 +46,9 @@
 
 #include "CYCoroutine/CYTypeDefine.hpp"
 
-#define CYLOGGER_NAMESPACE_BEGIN		namespace cry {
-#define CYLOGGER_NAMESPACE				cry
-#define CYLOGGER_NAMESPACE_END			}
+#define CYLOGGER_NAMESPACE_BEGIN        namespace cry {
+#define CYLOGGER_NAMESPACE              cry
+#define CYLOGGER_NAMESPACE_END          }
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -87,17 +87,17 @@ CYLOGGER_NAMESPACE_BEGIN
 */
 enum ELogType
 {
-	LOG_TYPE_NONE			= 0,
-	LOG_TYPE_TRACE			= 1,				    ///< (Trace) type records detailed debugging information, such as method parameters and variable values.
-	LOG_TYPE_DEBUG			= 2,				    ///< (Debug) type records some detailed information and pays more attention to the logical execution process of the code.
-	LOG_TYPE_INFO			= 3,				    ///< (Info)  type records some important operating information, such as system startup, configuration loading and other operating status.
-	LOG_TYPE_WARN			= 4,				    ///< (Warn)  type records some warning information. The program has some potential problems, but it will not cause the system to crash or affect the normal operation of the system.
-	LOG_TYPE_ERROR			= 5,				    ///< (Error) type records some error information. The program has some abnormal situations that cannot be handled. Error level logs are usually accompanied by abnormal termination or unavailability of the system.
-	LOG_TYPE_FATAL			= 6,				    ///< (Fatal) type records some very serious errors, indicating that the system can no longer run. Fatal level logs are usually accompanied by system crashes and data loss.
-	LOG_TYPE_MAIN			= 7,				    ///< (Main)  Keep all logs.
-	LOG_TYPE_REMOTE			= 8,				    ///< (Remote)Write to remote log.
-	LOG_TYPE_SYS			= 9,				    ///< (Sys)   Write to system log.
-	LOG_TYPE_MAX			   ,
+    LOG_TYPE_NONE           = 0,
+    LOG_TYPE_TRACE          = 1,                    ///< (Trace) type records detailed debugging information, such as method parameters and variable values.
+    LOG_TYPE_DEBUG          = 2,                    ///< (Debug) type records some detailed information and pays more attention to the logical execution process of the code.
+    LOG_TYPE_INFO           = 3,                    ///< (Info)  type records some important operating information, such as system startup, configuration loading and other operating status.
+    LOG_TYPE_WARN           = 4,                    ///< (Warn)  type records some warning information. The program has some potential problems, but it will not cause the system to crash or affect the normal operation of the system.
+    LOG_TYPE_ERROR          = 5,                    ///< (Error) type records some error information. The program has some abnormal situations that cannot be handled. Error level logs are usually accompanied by abnormal termination or unavailability of the system.
+    LOG_TYPE_FATAL          = 6,                    ///< (Fatal) type records some very serious errors, indicating that the system can no longer run. Fatal level logs are usually accompanied by system crashes and data loss.
+    LOG_TYPE_MAIN           = 7,                    ///< (Main)  Keep all logs.
+    LOG_TYPE_REMOTE         = 8,                    ///< (Remote)Write to remote log.
+    LOG_TYPE_SYS            = 9,                    ///< (Sys)   Write to system log.
+    LOG_TYPE_MAX               ,
 };
 
 /**
@@ -105,15 +105,15 @@ enum ELogType
 */
 enum ELogLevel
 {
-	LOG_LEVEL_CONSOLE	    = 1,
-	LOG_LEVEL_TRACE		    = 2,
-	LOG_LEVEL_DEBUG		    = 4,
-	LOG_LEVEL_INFO		    = 8,
-	LOG_LEVEL_WARN		    = 16,
-	LOG_LEVEL_ERROR		    = 32,
-	LOG_LEVEL_FATAL		    = 64,
-	LOG_LEVEL_REMOTE	    = 128,
-	LOG_LEVEL_SYS		    = 256
+    LOG_LEVEL_CONSOLE       = 1,
+    LOG_LEVEL_TRACE         = 2,
+    LOG_LEVEL_DEBUG         = 4,
+    LOG_LEVEL_INFO          = 8,
+    LOG_LEVEL_WARN          = 16,
+    LOG_LEVEL_ERROR         = 32,
+    LOG_LEVEL_FATAL         = 64,
+    LOG_LEVEL_REMOTE        = 128,
+    LOG_LEVEL_SYS           = 256
 };
 
 /**
@@ -121,29 +121,29 @@ enum ELogLevel
 */
 enum ELogLevelFilter
 {
-	LOG_FILTER_ALL =
-	LOG_LEVEL_CONSOLE |
-	LOG_LEVEL_TRACE |
-	LOG_LEVEL_DEBUG |
-	LOG_LEVEL_INFO |
-	LOG_LEVEL_WARN |
-	LOG_LEVEL_ERROR  |
-	LOG_LEVEL_FATAL,
+    LOG_FILTER_ALL =
+    LOG_LEVEL_CONSOLE |
+    LOG_LEVEL_TRACE |
+    LOG_LEVEL_DEBUG |
+    LOG_LEVEL_INFO |
+    LOG_LEVEL_WARN |
+    LOG_LEVEL_ERROR  |
+    LOG_LEVEL_FATAL,
 
-	LOG_FILTER_WARNS_AND_ERRORS =
+    LOG_FILTER_WARNS_AND_ERRORS =
     LOG_LEVEL_INFO |
     LOG_LEVEL_WARN |
     LOG_LEVEL_ERROR |
     LOG_LEVEL_FATAL,
 
-	LOG_FILTER_ERRORS =
-	LOG_LEVEL_ERROR |
-	LOG_LEVEL_FATAL,
+    LOG_FILTER_ERRORS =
+    LOG_LEVEL_ERROR |
+    LOG_LEVEL_FATAL,
 
-	/**
-	* Nothing will be put in the Log
-	*/
-	LOG_FILTER_NONE = 0
+    /**
+    * Nothing will be put in the Log
+    */
+    LOG_FILTER_NONE = 0
 };
 
 /**
@@ -171,8 +171,8 @@ enum ELogLayoutType
 */
 struct STStatistics 
 {
-	uint64_t nTotalLine             = 0;		     ///< The total number of logs written.
-	uint64_t nTotalByte             = 0;		     ///< Total log bytes written.
+    uint64_t nTotalLine             = 0;             ///< The total number of logs written.
+    uint64_t nTotalByte             = 0;             ///< Total log bytes written.
     double   fTotalCurrentFps       = 0;             ///< The current total fps written to the log.
     double   fTotalAverageFps       = 0;             ///< The average total fps written to the log.
     uint32_t nTotalPublicQueue      = 0;             ///< Total public queue length.
@@ -268,24 +268,24 @@ CYLOGGER_NAMESPACE_END
 
 // CYLogger Config.
 //////////////////////////////////////////////////////////////////////////
-static constexpr bool								LOG_SHOW_CONSOLE_WINDOW = false;		        ///< Whether the console log displays the window.
-static constexpr bool								LOG_WRITE_REMOTE = false;				        ///< Whether to write logs to remote.
-static constexpr bool								LOG_WRITE_SYS = false;				            ///< Whether to write the error log to the system event log, only applicable to Windows operating system.
+static constexpr bool                               LOG_SHOW_CONSOLE_WINDOW = false;                ///< Whether the console log displays the window.
+static constexpr bool                               LOG_WRITE_REMOTE = false;                       ///< Whether to write logs to remote.
+static constexpr bool                               LOG_WRITE_SYS = false;                          ///< Whether to write the error log to the system event log, only applicable to Windows operating system.
 static constexpr CYLOGGER_NAMESPACE::ELogFileMode   LOG_FILE_MODE = CYLOGGER_NAMESPACE::ELogFileMode::LOG_MODE_FILE_TIME;    ///< Log file naming method.
 static constexpr CYLOGGER_NAMESPACE::ELogLayoutType LOG_LAYOUT_TYPE = CYLOGGER_NAMESPACE::ELogLayoutType::LOG_LAYOUT_TYPE_BUILDIN_1; ///< Default log layout template.
 
 // CYLogger Limit.
 //////////////////////////////////////////////////////////////////////////
-static constexpr bool								LOG_LIMIT_ENABLE = false;				        ///< Detection switch is enabled by default.
-static constexpr bool								LOG_LIMIT_CLEAR_UNLOGFILE = true;               ///< Clean up non-log files in the log directory, such as package files and log files named in non-date format that remain after switching the date naming format for log files.
+static constexpr bool                               LOG_LIMIT_ENABLE = true;                        ///< Detection switch is enabled by default.
+static constexpr bool                               LOG_LIMIT_CLEAR_UNLOGFILE = true;               ///< Clean up non-log files in the log directory, such as package files and log files named in non-date format that remain after switching the date naming format for log files.
 
-static constexpr int								LOG_TIME_CLEAR_LOG = 60;			            ///< Time limit for cleaning expired log files, in seconds, default is 1 minutes.
-static constexpr int								LOG_TIME_EXPIRED_FILE = 24;			            ///< Limit for cleaning expired log files, in hours, default is 1 day.
+static constexpr int                                LOG_TIME_CLEAR_LOG = 60;                        ///< Time limit for cleaning expired log files, in seconds, default is 1 minutes.
+static constexpr int                                LOG_TIME_EXPIRED_FILE = 24;                     ///< Limit for cleaning expired log files, in hours, default is 1 day.
 static constexpr int                                LOG_CHECK_FILE_SIZE_TIME = 60 * 5;              ///< Detect the file size time interval, the second is the unit, the default is 5 minutes.
 static constexpr int                                LOG_CHECK_FILE_COUNT_TIME = 60;                 ///< The time interval for detecting the number of log files, in seconds, the default is 1 minute.
-static constexpr int								LOG_CHECK_FILE_SIZE = 1024 * 1024 * 5;          ///< Detect file size limit, in bytes. If a single file exceeds this limit, it will automatically switch to a new file. This limit is only effective in the log file naming method based on date.
-static constexpr int								LOG_COUNT_PER_TYPE = 20;				        ///< The limit on the number of log files of each type. If there are multiple limits, which limit is triggered first and which limit is calculated according to.
-static constexpr int								LOG_CHECK_FILE_TYPE_SIZE = 1024 * 1024 * 500;   ///< The total log file size limit for each type of log. If this limit is exceeded, the log file with the earliest time and date will be cleared.
+static constexpr int                                LOG_CHECK_FILE_SIZE = 1024 * 1024 * 5;          ///< Detect file size limit, in bytes. If a single file exceeds this limit, it will automatically switch to a new file. This limit is only effective in the log file naming method based on date.
+static constexpr int                                LOG_COUNT_PER_TYPE = 20;                        ///< The limit on the number of log files of each type. If there are multiple limits, which limit is triggered first and which limit is calculated according to.
+static constexpr int                                LOG_CHECK_FILE_TYPE_SIZE = 1024 * 1024 * 500;   ///< The total log file size limit for each type of log. If this limit is exceeded, the log file with the earliest time and date will be cleared.
 static constexpr int                                LOG_CHECK_FILE_ALL_SIZE = 1024 * 1024 * 1024;   ///< Limit the total size of the log file, in bytes, the default size is 1G.
 
 // CYLogger Filter Level.

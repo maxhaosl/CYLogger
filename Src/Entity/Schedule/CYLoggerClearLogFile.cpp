@@ -124,6 +124,8 @@ void CYLoggerClearLogFile::PreprocessData(const std::list<CYLogFileInfo>& lstUse
         objFileInfo.strCheckName = GetCheckName(strLogFile);
         objFileInfo.eLogType = GetLogFileType(lstUsedLogFile, objFileInfo.strCheckName);
 
+        GetFileInfomation(objFileInfo);
+
         TString strFileName = CYPublicFunction::GetFileName(strLogFile);
 
         std::map<TString, CYLogFileInfo> mapTypeLogFile;
@@ -277,7 +279,7 @@ void CYLoggerClearLogFile::ProcessClearLogALLSize(FileClassMap& mapLogFileInfo)
         for (const auto& fileInfo : mapLog.second)
         {
             nALLSize += fileInfo.second.nSize;
-            mapALLFile.emplace(fileInfo.first, fileInfo.second);
+            mapALLFile.insert(std::pair<TString, CYLogFileInfo>(fileInfo.first, fileInfo.second));
         }
     }
 
@@ -424,8 +426,8 @@ void CYLoggerClearLogFile::GetFileInfomation(CYLogFileInfo& objLogFileInfo)
 {
     EXCEPTION_BEGIN
 
-        // Get file size
-        objLogFileInfo.nSize = std::filesystem::file_size(objLogFileInfo.strLogFilePath);
+    // Get file size
+    objLogFileInfo.nSize = std::filesystem::file_size(objLogFileInfo.strLogFilePath);
 
     // Get file creation time
     const auto timepoint = std::filesystem::last_write_time(objLogFileInfo.strLogFilePath);
