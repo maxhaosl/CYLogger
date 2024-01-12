@@ -121,7 +121,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>./;../../../;../../../Src/ThirdParty/CYCoroutine/Inc;../../../Src/ThirdParty/CYCoroutine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -140,14 +140,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;CYLOGGER_USE_DLL;CYLOGGER_EXPORTS;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <BuildStlModules>false</BuildStlModules>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>./;../../../;../../../Src/ThirdParty/CYCoroutine/Inc;../../../Src/ThirdParty/CYCoroutine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -216,51 +216,6 @@
     <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerSchedule.hpp" />
     <ClInclude Include="..\..\..\Src\Entity\Schedule\CYLoggerScheduleDefine.hpp" />
     <ClInclude Include="..\..\..\Src\Statistics\CYStatistics.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYBind.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYDebugString.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\CYList.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception\CYBaseException.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Exception\CYException.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Message\CYBaseMessage.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Structure\CYStringUtils.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Common\Time\CYTimeStamps.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYCoroutine.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYCoroutineDefine.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\CYTypeDefine.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine\CYCoroutineEngine.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Engine\CYCoroutineEngineDefine.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYDerivableExecutor.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYExecutor.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYInlineExecutor.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYManualExecutor.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYThreadExecutor.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYThreadPoolExecutor.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Executors\CYWorkerThreadExecutor.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYGenerator.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYLazyResult.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYLazyResultAwaitable.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYMakeResult.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYPromises.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResult.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResultAwaitable.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYResumeOn.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYSharedResult.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYSharedResultAwaitable.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\CYWhenResult.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYConsumerContext.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYGeneratorState.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYLazyResultState.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYProducerContext.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYResultState.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYReturnValueStruct.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Results\Impl\CYSharedResultState.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Task\CYTask.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYAsyncCondition.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYAsyncLock.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYCacheLine.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Threads\CYThread.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers\CYTimer.hpp" />
-    <ClInclude Include="..\..\..\Src\ThirdParty\CYCoroutine\Inc\CYCoroutine\Timers\CYTimerQueue.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Src\Common\CYFileRestriction.cpp" />
