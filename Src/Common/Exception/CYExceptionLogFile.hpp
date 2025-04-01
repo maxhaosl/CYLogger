@@ -103,9 +103,9 @@ CYLOGGER_NAMESPACE_END
 
 #define ExceptionLog(e) CYLOGGER_NAMESPACE::ExceptionLogFile()->WriteLog(CYCOROUTINE_NAMESPACE::AtoT(e))
 
-#define EXCEPTION_BEGIN 	UniquePtr<CYBaseException> excp;  try {
+#define EXCEPTION_BEGIN 	UniquePtr<CYBaseException> excp;  try 
 
-#define EXCEPTION_END		 }catch (CYCOROUTINE_NAMESPACE::CYBaseException* e) {	excp.reset(e); ExceptionLog(excp->what()); } \
+#define EXCEPTION_END		catch (CYCOROUTINE_NAMESPACE::CYBaseException* e) {	excp.reset(e); ExceptionLog(excp->what()); } \
 							  catch (...) { ExceptionLog("Unknown exception!"); }
 
 

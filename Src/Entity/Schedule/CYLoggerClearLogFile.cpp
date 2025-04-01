@@ -425,14 +425,14 @@ void CYLoggerClearLogFile::EnumNotLogFile(TString strLogPath, std::list<TString>
 void CYLoggerClearLogFile::GetFileInfomation(CYLogFileInfo& objLogFileInfo)
 {
     EXCEPTION_BEGIN
+    {
+        // Get file size
+        objLogFileInfo.nSize = std::filesystem::file_size(objLogFileInfo.strLogFilePath);
 
-    // Get file size
-    objLogFileInfo.nSize = std::filesystem::file_size(objLogFileInfo.strLogFilePath);
-
-    // Get file creation time
-    const auto timepoint = std::filesystem::last_write_time(objLogFileInfo.strLogFilePath);
-    objLogFileInfo.tpCreateTime = std::chrono::clock_cast<std::chrono::system_clock>(timepoint);
-
+        // Get file creation time
+        const auto timepoint = std::filesystem::last_write_time(objLogFileInfo.strLogFilePath);
+        objLogFileInfo.tpCreateTime = std::chrono::clock_cast<std::chrono::system_clock>(timepoint);
+    }
     EXCEPTION_END
 }
 
