@@ -46,6 +46,8 @@
 
 #include "Src/Common/CYPrivateDefine.hpp"
 
+#include <chrono>
+
 CYLOGGER_NAMESPACE_BEGIN
 
 /**
