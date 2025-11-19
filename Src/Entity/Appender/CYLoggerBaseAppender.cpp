@@ -20,7 +20,7 @@ CYLoggerBaseAppender::~CYLoggerBaseAppender() noexcept
 }
 
 /**
-	* @brief Start Log Thread.
+ * @brief Start Log Thread.
 */
 void CYLoggerBaseAppender::StartLogThread()
 {
@@ -28,7 +28,7 @@ void CYLoggerBaseAppender::StartLogThread()
 }
 
 /**
-	* @brief Stop Log Thread.
+ * @brief Stop Log Thread.
 */
 void CYLoggerBaseAppender::StopLogThread()
 {
@@ -56,7 +56,7 @@ CYCOROUTINE_NAMESPACE::CYResult<std::tuple<int, int>> CYLoggerBaseAppender::DoWo
 }
 
 /**
-	* @brief Flip buffering.
+ * @brief Flip buffering.
 */
 void CYLoggerBaseAppender::FlipBuffer()
 {

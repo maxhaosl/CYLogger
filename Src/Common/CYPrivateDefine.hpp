@@ -50,6 +50,7 @@
 #include <winsock2.h>
 #include <windows.h>
 #include <sys/timeb.h>
+#include <chrono>
 
 CYLOGGER_NAMESPACE_BEGIN
 
