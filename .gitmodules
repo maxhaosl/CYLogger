@@ -4,3 +4,6 @@
 [submodule "ThirdParty/CYCoroutine"]
 	path = ThirdParty/CYCoroutine
 	url = https://github.com/maxhaosl/CYCoroutine.git
+[submodule "ThirdParty/fmt"]
+	path = ThirdParty/fmt
+	url = https://github.com/fmtlib/fmt.git
