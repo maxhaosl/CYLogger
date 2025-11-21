@@ -50,8 +50,6 @@
 #define CYLOGGER_NAMESPACE              cry
 #define CYLOGGER_NAMESPACE_END          }
 
-CYLOGGER_NAMESPACE_BEGIN
-
 #if defined(__MINGW32__)
 #    define CYLOGGER_MINGW_OS
 #elif defined(_WIN32)
@@ -68,7 +66,7 @@ CYLOGGER_NAMESPACE_BEGIN
 #    define CYLOGGER_LINUX_OS
 #endif
 
-#ifdef _WIN32
+#ifdef CYLOGGER_WIN_OS
 #ifdef CYLOGGER_USE_DLL
 #ifdef CYLOGGER_EXPORTS
 #define CYLOGGER_API __declspec(dllexport)
@@ -81,6 +79,8 @@ CYLOGGER_NAMESPACE_BEGIN
 #else
 #define CYLOGGER_API __attribute__ ((visibility ("default")))
 #endif
+
+CYLOGGER_NAMESPACE_BEGIN
 
 /**
 * @brief The type of the logger.

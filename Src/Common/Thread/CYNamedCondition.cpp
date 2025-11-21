@@ -1,4 +1,4 @@
-#include "Src/Common/Thread/CYNamedCondition.hpp"
+#include "Common/Thread/CYNamedCondition.hpp"
 
 #include <chrono>
 using namespace std::chrono;

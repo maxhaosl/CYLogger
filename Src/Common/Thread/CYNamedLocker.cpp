@@ -1,5 +1,5 @@
-#include "Src/Common/Thread/CYNamedLocker.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/Thread/CYNamedLocker.hpp"
+#include "Common/CYPrivateDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

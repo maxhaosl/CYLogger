@@ -45,9 +45,9 @@
 #define __CY_LOGGER_ENTITY_HPP__
 
 #include "Inc/ICYLogger.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Entity/Appender/CYLoggerBaseAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerAppenderDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Entity/Appender/CYLoggerBaseAppender.hpp"
+#include "Entity/Appender/CYLoggerAppenderDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

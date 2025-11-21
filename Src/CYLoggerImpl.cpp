@@ -1,19 +1,20 @@
-#include "Src/CYLoggerImpl.hpp"
-#include "Src/CYLoggerControl.hpp"
-#include "Src/Config/CYLoggerConfig.hpp"
-#include "Src/Common/CYPublicFunction.hpp"
-#include "Src/Common/Message/CYEscapeMessage.hpp"
-#include "Src/Common/Message/CYNormalMessage.hpp"
-#include "Src/Common/Message/CYStrMessage.hpp"
+#include "CYLoggerImpl.hpp"
+#include "CYLoggerControl.hpp"
+#include "Config/CYLoggerConfig.hpp"
+#include "Common/CYPublicFunction.hpp"
+#include "Common/Message/CYEscapeMessage.hpp"
+#include "Common/Message/CYNormalMessage.hpp"
+#include "Common/Message/CYStrMessage.hpp"
 #include "CYCoroutine/Common/Exception/CYException.hpp"
-#include "Src/Common/Exception/CYExceptionLogFile.hpp"
-#include "Src/Statistics/CYStatistics.hpp"
+#include "Common/Exception/CYExceptionLogFile.hpp"
+#include "Statistics/CYStatistics.hpp"
 
 #include <cstdarg>
 #include <strstream>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <algorithm>
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -166,7 +167,7 @@ void CYLLoggerImpl::WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, c
     EXCEPTION_BEGIN
     {
         va_list args;
-    #if defined(_WIN32) && CY_USE_UNICODE
+    #if defined(CYLOGGER_WIN_OS) && CY_USE_UNICODE
         va_start(args, szMsg);
         int iLen = cy_vscprintf(szMsg, args) + 1;
         UniquePtr<TChar[]> ptrLogBuffer = MakeUnique<TChar[]>(iLen);
@@ -221,7 +222,7 @@ void CYLLoggerImpl::WriteEscapeLog(int nLogLevel, ELogType eMsgType, int nSeverC
 	EXCEPTION_BEGIN
 	{
         va_list args;
-    #if defined(_WIN32) && CY_USE_UNICODE
+    #if defined(CYLOGGER_WIN_OS) && CY_USE_UNICODE
         va_start(args, szMsg);
         int iLen = cy_vscprintf(szMsg, args) + 1;
         UniquePtr<TChar[]> ptrLogBuffer = MakeUnique<TChar[]>(iLen);
@@ -263,7 +264,8 @@ void CYLLoggerImpl::WriteHexLog(int nLogLevel, ELogType eMsgType, int nSeverCode
         int nLineSize = 0;
         for (int nPos = 0; nPos < nLen; nHexLine++)
         {
-            nLineSize = min(nLen - nPos, 16);
+#undef min
+            nLineSize = std::min(nLen - nPos, 16);
             memcpy(cLine, pszMsg + nPos, nLineSize);
             nPos += nLineSize;
             msgStream << TEXT("[") << std::dec << std::uppercase << std::setw(2) << std::setfill(TEXT('0')) << nHexLine << TEXT("]");

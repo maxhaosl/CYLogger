@@ -44,7 +44,7 @@
 #ifndef __CY_LOGGER_PATTERN_FILTER_MANAGER_HPP__
 #define __CY_LOGGER_PATTERN_FILTER_MANAGER_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
 #include "Inc/ICYLoggerPatternFilter.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN

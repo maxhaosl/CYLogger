@@ -45,10 +45,10 @@
 #ifndef __CY_LOGGER_TRACE_APPENDER_HPP__
 #define __CY_LOGGER_TRACE_APPENDER_HPP__
 
-#include "Src/Entity/Appender/CYLoggerBufferAppender.hpp"
-#include "Src/Common/CYPublicFunction.hpp"
-#include "Src/Common/CYFileRestriction.hpp"
-#include "Src/Common/Thread/CYNamedLocker.hpp"
+#include "Entity/Appender/CYLoggerBufferAppender.hpp"
+#include "Common/CYPublicFunction.hpp"
+#include "Common/CYFileRestriction.hpp"
+#include "Common/Thread/CYNamedLocker.hpp"
 
 #include <map>
 #include <future>

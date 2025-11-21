@@ -1,5 +1,5 @@
-#include "Src/Entity/Schedule/CYLoggerDoZipLog.hpp"
-#include "Src/Entity/CYLoggerEntityFactory.hpp"
+#include "Entity/Schedule/CYLoggerDoZipLog.hpp"
+#include "Entity/CYLoggerEntityFactory.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

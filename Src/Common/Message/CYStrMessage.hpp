@@ -46,7 +46,7 @@
 
 #include "Inc/ICYLogger.hpp"
 #include "CYCoroutine/Common/Message/CYBaseMessage.hpp"
-#include "Src/Entity/Layout/CYLoggerTemplateLayoutEscape.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayoutEscape.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -68,7 +68,7 @@ public:
     virtual int32_t GetTypeIndex() override;
 
 private:
-	uint32_t processId;
+	uint32_t m_nProcessId;
 };
 
 CYLOGGER_NAMESPACE_END

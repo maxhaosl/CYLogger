@@ -48,7 +48,7 @@
 #include <cstdlib>
 #include <stdint.h>
 
-#ifdef _WIN32
+#ifdef CYLOGGER_WIN_OS
 #include <windows.h>
 #include <wincrypt.h>
 //#include <intrin.h>

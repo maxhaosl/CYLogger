@@ -1,12 +1,12 @@
 #include "CYLoggerControl.hpp"
-#include "Src/Entity/CYLoggerEntityFactory.hpp"
-#include "Src/Common/CYPathConvert.hpp"
-#include "Src/Config/CYLoggerConfig.hpp"
-#include "Src/Statistics/CYStatistics.hpp"
-#include "Src/Entity/Schedule/CYLoggerSchedule.hpp"
-#include "Src/Common/CYFileRestriction.hpp"
-#include "Src/Entity/Filter/CYLoggerPatternFilterManager.hpp"
-#include "Src/Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
+#include "Entity/CYLoggerEntityFactory.hpp"
+#include "Common/CYPathConvert.hpp"
+#include "Config/CYLoggerConfig.hpp"
+#include "Statistics/CYStatistics.hpp"
+#include "Entity/Schedule/CYLoggerSchedule.hpp"
+#include "Common/CYFileRestriction.hpp"
+#include "Entity/Filter/CYLoggerPatternFilterManager.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -85,7 +85,7 @@ bool CYLoggerControl::AddApender(ELogType eLogType, const TChar* szChannel, cons
 */
 void CYLoggerControl::WriteLog(int nLogLevel, const SharePtr<CYBaseMessage>& ptrMessage)
 {
-	IfTrueThrow(!ptrMessage, TEXT("ptrMessage cannot be empty"));
+    IfTrueThrow(!ptrMessage, TEXT("ptrMessage cannot be empty"));
 
 	if (0 == (m_eLogFilterLevel & nLogLevel))
 		return;

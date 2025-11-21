@@ -46,7 +46,7 @@
 
 #include <list>
 
-#include "Src/Common/CYPublicFunction.hpp"
+#include "Common/CYPublicFunction.hpp"
 #include "CYCoroutine/Common/Message/CYBaseMessage.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN

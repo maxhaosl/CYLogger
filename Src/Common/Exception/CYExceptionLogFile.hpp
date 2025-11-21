@@ -44,8 +44,8 @@
 #ifndef __CY_EXCEPTION_LOG_FILE_HPP__
 #define __CY_EXCEPTION_LOG_FILE_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Common/Exception/CYExceptionDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Common/Exception/CYExceptionDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

@@ -51,35 +51,35 @@ CYLOGGER_NAMESPACE_BEGIN
 class CYNoCopy
 {
 public:
-	/**
-	 * @brief Constructor.
-	*/
-	CYNoCopy() = default;
+    /**
+     * @brief Constructor.
+    */
+    CYNoCopy() = default;
 
-	/**
-	 * @brief Destructor.
-	*/
-	virtual ~CYNoCopy() = default;
+    /**
+     * @brief Destructor.
+    */
+    virtual ~CYNoCopy() = default;
 
-	/**
-	* @brief No copy constructor
-	*/
-	CYNoCopy(const CYNoCopy&) = delete;
+    /**
+    * @brief No copy constructor
+    */
+    CYNoCopy(const CYNoCopy&) = delete;
 
-	/**
-	* @brief No copy constructor
-	*/
-	CYNoCopy(const CYNoCopy&&) = delete;
+    /**
+    * @brief No copy constructor
+    */
+    CYNoCopy(const CYNoCopy&&) = delete;
 
-	/**
-	* @brief No assignment operator
-	*/
-	CYNoCopy& operator=(const CYNoCopy&) = delete;
+    /**
+    * @brief No assignment operator
+    */
+    CYNoCopy& operator=(const CYNoCopy&) = delete;
 
-	/**
-	* @brief No assignment operator
-	*/
-	CYNoCopy& operator=(const CYNoCopy&&) = delete;
+    /**
+    * @brief No assignment operator
+    */
+    CYNoCopy& operator=(const CYNoCopy&&) = delete;
 };
 
 CYLOGGER_NAMESPACE_END

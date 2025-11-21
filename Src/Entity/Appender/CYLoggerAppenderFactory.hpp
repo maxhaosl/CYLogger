@@ -44,7 +44,7 @@
 #ifndef __CY_LOGGER_APPENDER_FACTORY_HPP__
 #define __CY_LOGGER_APPENDER_FACTORY_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

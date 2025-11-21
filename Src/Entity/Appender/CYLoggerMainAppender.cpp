@@ -1,30 +1,31 @@
 #include "CYCoroutine/CYCoroutine.hpp"
-#include "Src/Entity/Appender/CYLoggerMainAppender.hpp"
-#include "Src/Statistics/CYStatistics.hpp"
+#include "Entity/Appender/CYLoggerMainAppender.hpp"
+#include "Statistics/CYStatistics.hpp"
+#include "Common/CYFormatDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
 CYLoggerMainAppender::CYLoggerMainAppender(const TString& strFileName, ELogFileMode eFileMode, ELogType eLogType)
-	: CYLoggerBufferAppender("MainThread")
-	, CYFileRestriction()
-	, m_bForceNewFile(false)
+    : CYLoggerBufferAppender("MainThread")
+    , CYFileRestriction()
+    , m_bForceNewFile(false)
 {
-	this->m_eFileMode = eFileMode;
-	IfTrueThrow(strFileName.length() == 0, TEXT("fileName cannot be empty"));
+    this->m_eFileMode = eFileMode;
+    IfTrueThrow(strFileName.length() == 0, TEXT("fileName cannot be empty"));
 
-	TChar* p = cy_fullpath(nullptr, strFileName.c_str(), 0);
-	IfTrueThrow(p == nullptr, TEXT("_fullpath() failed"));
-	this->m_strFileName = p;
-	delete p;
+    TChar* p = cy_fullpath(nullptr, strFileName.c_str(), 0);
+    IfTrueThrow(p == nullptr, TEXT("_fullpath() failed"));
+    this->m_strFileName = p;
+    delete p;
 
-	this->m_eLogType = eLogType;
+    this->m_eLogType = eLogType;
 
-	StartLogThread();
+    StartLogThread();
 }
 
 CYLoggerMainAppender::~CYLoggerMainAppender()
 {
-	StopLogThread();
+    StopLogThread();
 }
 
 /**
@@ -33,17 +34,17 @@ CYLoggerMainAppender::~CYLoggerMainAppender()
 void CYLoggerMainAppender::OpenFile(int flags)
 {
 #if CY_USE_UNICODE
-	//m_objLogFile.imbue(std::locale("chs"));
-	m_objLogFile.imbue(std::locale(std::locale::classic(), ".OCP", std::locale::ctype | std::locale::collate));
+    //m_objLogFile.imbue(std::locale("chs"));
+    m_objLogFile.imbue(std::locale(std::locale::classic(), ".OCP", std::locale::ctype | std::locale::collate));
 #endif
-	m_objLogFile.open(m_strFileName.c_str(), flags);
+    m_objLogFile.open(m_strFileName.c_str(), flags);
 
-	IfTrueThrow(!m_objLogFile, TString(TEXT("cannot open file ")) += m_strFileName);
-	if ((flags & TIos::app) == TIos::app)
-	{
-		m_objLogFile.seekp(0, std::ios_base::end);
-		IfTrueThrow(!m_objLogFile, TString(TEXT("seekp() failed ")) += m_strFileName);
-	}
+    IfTrueThrow(!m_objLogFile, TString(TEXT("cannot open file ")) += m_strFileName);
+    if ((flags & TIos::app) == TIos::app)
+    {
+        m_objLogFile.seekp(0, std::ios_base::end);
+        IfTrueThrow(!m_objLogFile, TString(TEXT("seekp() failed ")) += m_strFileName);
+    }
 }
 
 /**
@@ -69,7 +70,7 @@ void CYLoggerMainAppender::CreateNewLogFile()
     TString strData = CYTimeStamps().GetTimeStr();
     TString strFileExt = CYPublicFunction::GetFileExt(this->m_strFileName);
     TString strFileBase = CYPublicFunction::GetBasePath(this->m_strFileName);
-    TString strNewLogFile = std::format(TEXT("{}_{}.{}"), strFileBase, strData, strFileExt);
+    TString strNewLogFile = strFileBase + TEXT("_") + strData + TEXT(".") + strFileExt;
 
     switch (m_eFileMode)
     {
@@ -95,12 +96,12 @@ void CYLoggerMainAppender::CreateNewLogFile()
 */
 void CYLoggerMainAppender::Log(const TStringView& strMsg, int nTypeIndex, bool bFlush)
 {
-	CYFPSCounter::UpdateCounter();
-	m_objLogFile << strMsg << TEXT("\n");
-	IfTrueThrow(m_objLogFile.fail(), TString(TEXT("operator<<() failed for file ")) += m_strFileName);
+    CYFPSCounter::UpdateCounter();
+    m_objLogFile << strMsg << TEXT("\n");
+    IfTrueThrow(m_objLogFile.fail(), TString(TEXT("operator<<() failed for file ")) += m_strFileName);
 
-	if (bFlush)
-		Flush();
+    if (bFlush)
+        Flush();
 
     Statistics()->AddMainLine(1);
     Statistics()->AddMainBytes(strMsg.size() + TEXT_BYTE_LEN);
@@ -118,7 +119,7 @@ void CYLoggerMainAppender::Log(const TStringView& strMsg, int nTypeIndex, bool b
         }
     }
 
-	CreateNewLogFile();
+    CreateNewLogFile();
 }
 
 /**
@@ -131,7 +132,7 @@ void CYLoggerMainAppender::ForceNewFile()
     m_objNewFilePromise.swap(objNewFilePromise);
     m_objNewFileFuture = m_objNewFilePromise.get_future();
 
-	m_bForceNewFile = true;
+    m_bForceNewFile = true;
 
     m_objNewFileFuture.get();
 }

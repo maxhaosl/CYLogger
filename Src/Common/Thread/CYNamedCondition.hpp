@@ -45,8 +45,8 @@
 #define __CY_NAMED_CONDITION_HPP__
 
 #include "Inc/ICYLoggerDefine.hpp"
-#include "Src/Common/CYNoCopy.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYNoCopy.hpp"
+#include "Common/CYPrivateDefine.hpp"
 
 #include <mutex>
 #include <functional>

@@ -1,7 +1,7 @@
-#include "Src/Entity/CYLoggerEntityFactory.hpp"
-#include "Src/Entity/Appender/CYLoggerBaseAppender.hpp"
-#include "Src/Entity/CYLoggerEntity.hpp"
-#include "Src/Entity/Appender/CYLoggerAppenderFactory.hpp"
+#include "Entity/CYLoggerEntityFactory.hpp"
+#include "Entity/Appender/CYLoggerBaseAppender.hpp"
+#include "Entity/CYLoggerEntity.hpp"
+#include "Entity/Appender/CYLoggerAppenderFactory.hpp"
 
 #include <assert.h>
 

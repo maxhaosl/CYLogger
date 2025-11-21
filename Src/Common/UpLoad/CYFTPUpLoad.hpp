@@ -44,7 +44,7 @@
 #ifndef __CY_FTP_UPLOAD_HPP__
 #define __CY_FTP_UPLOAD_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

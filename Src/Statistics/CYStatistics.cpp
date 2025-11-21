@@ -1,4 +1,4 @@
-#include "Src/Statistics/CYStatistics.hpp"
+#include "Statistics/CYStatistics.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

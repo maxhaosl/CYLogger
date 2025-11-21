@@ -44,12 +44,35 @@
 #ifndef __CY_SIMPLE_LOG_HPP__
 #define __CY_SIMPLE_LOG_HPP__
 
+#include "Common/CYPrivateDefine.hpp"
+
+#ifdef CYLOGGER_WIN_OS
 #include <WinSock2.h>
 #include <windows.h>
+#else
+#include <sys/time.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <string.h>
+#endif
 #include <time.h>
 #include <stdio.h>
+#include <string>
 
-#include "Src/Common/CYPrivateDefine.hpp"
+  // console color definitions
+enum ConsoleColor
+{
+    COLOR_BLACK = 0,
+    COLOR_BLUE = 1,
+    COLOR_GREEN = 2,
+    COLOR_CYAN = 3,
+    COLOR_RED = 4,
+    COLOR_MAGENTA = 5,
+    COLOR_YELLOW = 6,
+    COLOR_WHITE = 7,
+    COLOR_GRAY = 8,
+    COLOR_INTENSITY = 0x08
+};
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -62,58 +85,58 @@ CYLOGGER_NAMESPACE_BEGIN
 class CYSimpleLog
 {
 public:
-	enum ESimpleLogType
-	{
-		LOG_TYPE_NONE = 0,
-		LOG_TYPE_FILE,
-		LOG_TYPE_CONSOLE,
-		LOG_TYPE_ALL
-	};
+    enum ESimpleLogType
+    {
+        LOG_TYPE_NONE = 0,
+        LOG_TYPE_FILE,
+        LOG_TYPE_CONSOLE,
+        LOG_TYPE_ALL
+    };
 
 public:
-	CYSimpleLog();
-	~CYSimpleLog();
+    CYSimpleLog();
+    ~CYSimpleLog();
 
-	virtual bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, va_list args = nullptr) = 0;
-	virtual bool WriteString(TChar* szStr) = 0;
-	virtual void CloseLog() = 0;
+    virtual bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, va_list args = nullptr) = 0;
+    virtual bool WriteString(TChar* szStr) = 0;
+    virtual void CloseLog() = 0;
 
-	ESimpleLogType GetLogType() { return m_eLogType; }
+    ESimpleLogType GetLogType() { return m_eLogType; }
 
-	bool WriteLog(const TChar* szStr, ...);
+    bool WriteLog(const TChar* szStr, ...);
 
 protected:
-	ESimpleLogType	m_eLogType;
+    ESimpleLogType	m_eLogType;
 
-	bool	m_bInit;
-	bool	m_bLogTime;
-	bool	m_bLogLineCount;
-	int 	m_nLogLineCount;
+    bool	m_bInit;
+    bool	m_bLogTime;
+    bool	m_bLogLineCount;
+    int 	m_nLogLineCount;
 
-	DWORD	m_dwLineCount;
+    unsigned m_dwLineCount;
 };
 
 class CYSimpleLogFile : public CYSimpleLog
 {
 public:
-	CYSimpleLogFile();
-	~CYSimpleLogFile();
+    CYSimpleLogFile();
+    ~CYSimpleLogFile();
 
-	bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, va_list args = nullptr);
-	void CloseLog();
+    bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, va_list args = nullptr);
+    void CloseLog();
 
-	bool WriteString(TChar* szStr);
+    bool WriteString(TChar* szStr);
 
-	void DeleteAllFile(TChar* szDir);
-
-private:
-	void CreateDir();
+    void DeleteAllFile(TChar* szDir);
 
 private:
-	FILE* m_pFile;
-	TChar	m_szLogDir[MAX_LOG_PATH_SIZE];
-	TChar	m_szWorkPath[MAX_LOG_PATH_SIZE];
-	TChar	m_szFilePath[MAX_LOG_PATH_SIZE];
+    void CreateDir();
+
+private:
+    FILE* m_pFile;
+    TChar	m_szLogDir[MAX_LOG_PATH_SIZE];
+    TChar	m_szWorkPath[MAX_LOG_PATH_SIZE];
+    TChar	m_szFilePath[MAX_LOG_PATH_SIZE];
 };
 
 class CYSimpleLogConsole : public CYSimpleLog
@@ -128,13 +151,33 @@ public:
 
     void Color(unsigned int color)
     {
+#ifdef CYLOGGER_WIN_OS
         SetConsoleTextAttribute(m_hOutputHandle, (WORD)color);
+#else
+        // ANSI color codes for Unix-like systems
+        const char* colors[] = {
+            "\033[0;30m",  // BLACK
+            "\033[0;34m",  // BLUE
+            "\033[0;32m",  // GREEN
+            "\033[0;36m",  // CYAN
+            "\033[0;31m",  // RED
+            "\033[0;35m",  // MAGENTA
+            "\033[0;33m",  // YELLOW
+            "\033[0;37m",  // WHITE
+            "\033[1;30m",  // GRAY
+            "\033[1m"      // INTENSITY
+        };
+        printf("%s", colors[color & 0x0F]);
+#endif
     }
 
 private:
+#ifdef CYLOGGER_WIN_OS
     HANDLE	m_hInputHandle;
     HANDLE	m_hOutputHandle;
-
+#else
+    int     m_fdOut;
+#endif
     TChar	m_szConsoleTitle[MAX_CONSOLE_TITLE_SIZE];
 };
 

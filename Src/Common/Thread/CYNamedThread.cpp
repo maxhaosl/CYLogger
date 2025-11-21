@@ -1,4 +1,4 @@
-#include "Src/Common/Thread/CYNamedThread.hpp"
+#include "Common/Thread/CYNamedThread.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -16,16 +16,22 @@ bool CYNamedThread::StartThread()
     if (this->m_thread.joinable())
         return false;
 
+#ifdef __cpp_lib_jthread
     std::stop_source objStopSource;
     m_objStopSource.swap(objStopSource);
     m_objToken = m_objStopSource.get_token();
-    this->m_thread = std::jthread(&CYNamedThread::Entry, this);
+    this->m_thread = std::jthread([this]() { Entry(); });
+#else
+    this->m_thread = std::thread(&CYNamedThread::Entry, this);
+#endif
     return this->m_thread.joinable();
 }
 
 bool CYNamedThread::StopThread()
 {
+#ifdef __cpp_lib_jthread
     m_objStopSource.request_stop();
+#endif
     if (this->m_thread.joinable())
     {
         this->m_thread.join();
@@ -34,14 +40,25 @@ bool CYNamedThread::StopThread()
     return false;
 }
 
+#ifdef __cpp_lib_jthread
 std::jthread::id CYNamedThread::GetId() const noexcept
 {
     return this->m_thread.get_id();
 }
+#else
+std::thread::id CYNamedThread::GetId() const noexcept
+{
+    return this->m_thread.get_id();
+}
+#endif
 
 bool CYNamedThread::IsRunning() const noexcept
 {
+#ifdef __cpp_lib_jthread
     return !m_objToken.stop_requested();
+#else
+    return this->m_thread.joinable();
+#endif
 }
 
 void CYNamedThread::Wait()

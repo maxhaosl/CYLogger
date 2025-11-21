@@ -1,19 +1,21 @@
-#include "Src/Entity/Appender/CYLoggerConsoleAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerAppenderDefine.hpp"
-#include "Src/Statistics/CYStatistics.hpp"
+#include "Entity/Appender/CYLoggerConsoleAppender.hpp"
+#include "Entity/Appender/CYLoggerAppenderDefine.hpp"
+#include "Statistics/CYStatistics.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
 CYLoggerConsoleAppender::CYLoggerConsoleAppender(const TStringView& strConsoleTile, bool bWindow)
-	: CYLoggerBufferAppender("ConsoleThread")
-	, m_bWindow(bWindow)
-	, m_strTitle(strConsoleTile)
+    : CYLoggerBufferAppender("ConsoleThread")
+    , m_bWindow(bWindow)
+    , m_strTitle(strConsoleTile)
     , m_bForceNewFile(false)
 {
     if (m_bWindow)
     {
+#ifdef CYLOGGER_WIN_OS
         AllocConsole();
         SetConsoleTitle(m_strTitle.data());
+#endif
     }
 
     StartLogThread();
@@ -25,7 +27,9 @@ CYLoggerConsoleAppender::~CYLoggerConsoleAppender()
 
     if (m_bWindow)
     {
+#ifdef CYLOGGER_WIN_OS
         FreeConsole();
+#endif
     }
 }
 
@@ -34,7 +38,7 @@ CYLoggerConsoleAppender::~CYLoggerConsoleAppender()
 */
 const ELogType CYLoggerConsoleAppender::GetId() const
 {
-	return ELogType::LOG_TYPE_NONE;
+    return ELogType::LOG_TYPE_NONE;
 }
 
 /**
@@ -44,44 +48,44 @@ const ELogType CYLoggerConsoleAppender::GetId() const
 */
 void CYLoggerConsoleAppender::Log(const TStringView& strMsg, int nTypeIndex, bool bFlush)
 {
-	CYFPSCounter::UpdateCounter();
+    CYFPSCounter::UpdateCounter();
 
     ClearConsole();
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     if (m_bWindow)
     {
-		DWORD color = TWHITE;
-		switch (strMsg[nTypeIndex])
-		{
-		case 'I': color = TWHITE;	break;
-		case 'D': color = TGREEN;	break;
-		case 'T': color = TBLUE;	break;
-		case 'W': color = TYELLOW;	break;
-		case 'E': color = TRED;		break;
-		case 'F': color = TRED;		break;
-		default:  color = TWHITE;	break;
-		}
+        DWORD color = TWHITE;
+        switch (strMsg[nTypeIndex])
+        {
+        case 'I': color = TWHITE;	break;
+        case 'D': color = TGREEN;	break;
+        case 'T': color = TBLUE;	break;
+        case 'W': color = TYELLOW;	break;
+        case 'E': color = TRED;		break;
+        case 'F': color = TRED;		break;
+        default:  color = TWHITE;	break;
+        }
 
-		unsigned long dwWrittenSize = 0;
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (WORD)color);
-		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), strMsg.data(), (DWORD)cy_strlen(strMsg.data()), &dwWrittenSize, nullptr);
-		WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), TEXT("\r\n"), (DWORD)cy_strlen(TEXT("\r\n")), &dwWrittenSize, nullptr);
+        unsigned long dwWrittenSize = 0;
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (WORD)color);
+        WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), strMsg.data(), (DWORD)cy_strlen(strMsg.data()), &dwWrittenSize, nullptr);
+        WriteConsole(GetStdHandle(STD_OUTPUT_HANDLE), TEXT("\r\n"), (DWORD)cy_strlen(TEXT("\r\n")), &dwWrittenSize, nullptr);
     }
-	else
-	{
-		OutputDebugString(strMsg.data());
-		OutputDebugString(TEXT("\r\n"));
-	}
+    else
+    {
+        OutputDebugString(strMsg.data());
+        OutputDebugString(TEXT("\r\n"));
+    }
 #else
-	printf(strMsg.data());
-	printf("\n");
+    printf(strMsg.data());
+    printf("\n");
 #endif
 
     Statistics()->AddConsoleLine(1);
     Statistics()->AddConsoleBytes(strMsg.size() + TEXT_BYTE_LEN + TEXT_BYTE_LEN);
 
-	Statistics()->AddConsoleCurrentFPS(CYFPSCounter::GetCurrentFPS());
-	Statistics()->AddConsoleAverageFPS(CYFPSCounter::GetAverageFPS());
+    Statistics()->AddConsoleCurrentFPS(CYFPSCounter::GetCurrentFPS());
+    Statistics()->AddConsoleAverageFPS(CYFPSCounter::GetAverageFPS());
 }
 
 /**
@@ -106,11 +110,11 @@ void CYLoggerConsoleAppender::Flush()
 //virtual long GetSize() {
 int64_t CYLoggerConsoleAppender::GetSize()
 {
-	return 0;
+    return 0;
 }
 
 /**
-* Attempt to physically copy data 
+* Attempt to physically copy data
 */
 void CYLoggerConsoleAppender::Copy(const TString& strTarget)
 {
@@ -130,7 +134,7 @@ void CYLoggerConsoleAppender::ClearContents()
 */
 const TString& CYLoggerConsoleAppender::GetLogName()
 {
-	return m_strLogName;
+    return m_strLogName;
 }
 
 /**
@@ -151,7 +155,7 @@ void CYLoggerConsoleAppender::ClearConsole()
 
     m_bForceNewFile = false;
 
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     if (m_bWindow)
     {
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -178,7 +182,7 @@ void CYLoggerConsoleAppender::ClearConsole()
 
 #else
     printf("\033[2J\033[H");
-    fflush(stdout);  
+    fflush(stdout);
 #endif
 }
 

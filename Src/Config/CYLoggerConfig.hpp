@@ -45,7 +45,7 @@
 #define __CY_LOGGER_CONFIG_HPP__
 
 #include "Inc/ICYLogger.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -115,7 +115,7 @@ public:
 	static void ReleaseInstance();
 
 private:
-#ifdef _WIN32
+#ifdef CYLOGGER_WIN_OS
 	/**
 	 * @brief Get windows exe path.
 	*/

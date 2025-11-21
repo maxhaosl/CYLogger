@@ -45,7 +45,7 @@
 #define __CY_NAMED_THREAD_HPP__
 
 #include "Inc/ICYLoggerDefine.hpp"
-#include <thread>
+#include "Common/CYJThreadDefine.hpp"
 #include <string>
 #include <future>
 
@@ -64,7 +64,11 @@ public:
 
     virtual void Run() = 0;
 
+#ifdef __cpp_lib_jthread
     std::jthread::id GetId() const noexcept;
+#else
+    std::thread::id GetId() const noexcept;
+#endif
 
 protected:
     void Wait();
@@ -75,10 +79,14 @@ protected:
 
 private:
     std::string m_strName;
+#ifdef __cpp_lib_jthread
     std::jthread m_thread;
 
     std::stop_token m_objToken;
     std::stop_source m_objStopSource;
+#else
+    std::thread m_thread;
+#endif
 };
 
 CYLOGGER_NAMESPACE_END

@@ -69,7 +69,7 @@ private:
     void UpdateAverageFPS(int nIndex);
 
 private:
-    int m_nFrameCount[2]; 
+    int m_nFrameCount[2];
     int m_nMeasureDuration;
 
     double m_fCurrentFps;

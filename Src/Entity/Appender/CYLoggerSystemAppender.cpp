@@ -1,6 +1,6 @@
-#include "Src/Entity/Appender/CYLoggerSystemAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerAppenderDefine.hpp"
-#include "Src/Statistics/CYStatistics.hpp"
+#include "Entity/Appender/CYLoggerSystemAppender.hpp"
+#include "Entity/Appender/CYLoggerAppenderDefine.hpp"
+#include "Statistics/CYStatistics.hpp"
 
 #if defined(CYLOGGER_LINUX_OS) || defined(CYLOGGER_MAC_OS)
 #include <syslog.h>
@@ -10,6 +10,7 @@ CYLOGGER_NAMESPACE_BEGIN
 
 namespace
 {
+#if defined(CYLOGGER_WIN_OS)
 	void WriteToEventLog(const TString& strName, LPCTSTR message, WORD eventType)
 	{
 		HANDLE hEventLog = RegisterEventSource(NULL, strName.c_str());
@@ -23,6 +24,14 @@ namespace
 			DeregisterEventSource(hEventLog);
 		}
 	}
+#else
+	void WriteToSyslog(const TString& strName, const TString& message, int eventType)
+	{
+		openlog(strName.c_str(), LOG_PID | LOG_CONS, LOG_USER);
+		syslog(eventType, message.c_str());
+		closelog();
+	}		
+#endif
 }
 
 CYLoggerSystemAppender::CYLoggerSystemAppender(const TString& strName) noexcept
@@ -53,9 +62,9 @@ const ELogType CYLoggerSystemAppender::GetId() const
 void CYLoggerSystemAppender::Log(const TStringView& strMsg, int nTypeIndex, bool bFlush)
 {
 	CYFPSCounter::UpdateCounter();
-	LPCTSTR logMessage = strMsg.data();
+	const TChar* logMessage = strMsg.data();
 
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
 	WORD eventType = EVENTLOG_INFORMATION_TYPE;
 	switch (strMsg[nTypeIndex])
 	{

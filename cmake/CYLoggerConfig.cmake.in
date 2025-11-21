@@ -1,0 +1,22 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# 查找依赖
+find_dependency(Threads REQUIRED)
+
+# 包含目标文件
+include("${CMAKE_CURRENT_LIST_DIR}/CYLoggerTargets.cmake")
+
+# 设置变量
+set(CYLOGGER_VERSION @PROJECT_VERSION@)
+set(CYLOGGER_FOUND TRUE)
+
+# 检查组件
+check_required_components(CYLogger)
+
+# 提供便利变量
+if(TARGET CYLogger::CYLogger)
+    set(CYLOGGER_LIBRARIES CYLogger::CYLogger)
+    get_target_property(CYLOGGER_INCLUDE_DIRS CYLogger::CYLogger INTERFACE_INCLUDE_DIRECTORIES)
+endif()

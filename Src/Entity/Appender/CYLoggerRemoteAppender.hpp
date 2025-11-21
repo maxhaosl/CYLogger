@@ -44,8 +44,8 @@
 #ifndef __CY_LOGGER_REMOTE_APPENDER_HPP__
 #define __CY_LOGGER_REMOTE_APPENDER_HPP__
 
-#include "Src/Entity/Appender/CYLoggerBufferAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerAppenderDefine.hpp"
+#include "Entity/Appender/CYLoggerBufferAppender.hpp"
+#include "Entity/Appender/CYLoggerAppenderDefine.hpp"
 
 #include <map>
 
@@ -157,7 +157,7 @@ private:
 	/**
 	 * @brief socket handle.
 	*/
-#ifdef	WIN32
+#ifdef	CYLOGGER_WIN_OS
     SOCKET	m_socket;
 #else	
     int		m_socket;

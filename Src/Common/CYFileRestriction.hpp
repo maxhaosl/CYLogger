@@ -99,5 +99,4 @@ private:
 
 CYLOGGER_NAMESPACE_END
 
-
 #endif //__CY_FILE_RESTRICTION_HPP__

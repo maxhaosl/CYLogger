@@ -120,7 +120,7 @@ protected:
                 std::setw(2) << std::setfill(TEXT('0')) << m_nSC << 
                 std::setw(1) << TEXT('.') <<
                 std::setw(3) << std::setfill(TEXT('0')) << m_nMMN;
-           // return std::format(TEXT("{:0>4}-{:0>2}-{:0>2} {:0>2}:{:0>2}:{:0>2}.{:0>3}"), m_nYY, m_nMM, m_nDD, m_nHR, m_nMN, m_nSC, m_nMMN);
+           // return fmtx::format(TEXT("{:0>4}-{:0>2}-{:0>2} {:0>2}:{:0>2}:{:0>2}.{:0>3}"), m_nYY, m_nMM, m_nDD, m_nHR, m_nMN, m_nSC, m_nMMN);
            return ss.str();
         }
     };

@@ -2,8 +2,8 @@
 #define __CYLOGGER_IMPL_HPP__
 
 #include "Inc/ICYLogger.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Common/Thread/CYNamedLocker.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Common/Thread/CYNamedLocker.hpp"
 
 #include <atomic>
 

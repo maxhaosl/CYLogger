@@ -1,4 +1,4 @@
-#include "Src/Common/CYFPSCounter.hpp"
+#include "Common/CYFPSCounter.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -82,6 +82,5 @@ double CYFPSCounter::GetAverageFPS() const
 {
     return m_fAverageFps;
 }
-
 
 CYLOGGER_NAMESPACE_END

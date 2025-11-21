@@ -1,9 +1,9 @@
-#include "Src/Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
-#include "Src/Entity/Layout/CYLoggerTemplateLayoutCustom.hpp"
-#include "Src/Entity/Layout/CYLoggerTemplateLayout1.hpp"
-#include "Src/Entity/Layout/CYLoggerTemplateLayout2.hpp"
-#include "Src/Entity/Layout/CYLoggerTemplateLayout3.hpp"
-#include "Src/Config/CYLoggerConfig.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayoutCustom.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayout1.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayout2.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayout3.hpp"
+#include "Config/CYLoggerConfig.hpp"
 
 #include <memory>
 

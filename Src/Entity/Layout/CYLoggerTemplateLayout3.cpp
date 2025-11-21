@@ -1,25 +1,40 @@
-#include "Src/Entity/Layout/CYLoggerTemplateLayout3.hpp"
-#include "Src/Entity/Filter/CYLoggerPatternFilterManager.hpp"
-
-#include <format>
+#include "Entity/Layout/CYLoggerTemplateLayout3.hpp"
+#include "Entity/Filter/CYLoggerPatternFilterManager.hpp"
+#include "Common/CYFormatDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
 CYLoggerTemplateLayout3::CYLoggerTemplateLayout3()
     : ICYLoggerTemplateLayout()
-        , CYLoggerTemplateLayoutEscape()
+    , CYLoggerTemplateLayoutEscape()
 {
-
 }
 
 CYLoggerTemplateLayout3::~CYLoggerTemplateLayout3()
 {
-
 }
 
 const TString CYLoggerTemplateLayout3::GetTimeStamps(int nYY, int nMM, int nDD, int nHR, int nMN, int nSC, int nMMN)
 {
-	return std::format(TEXT("{:0>4}-{:0>2}-{:0>2} {:0>2}:{:0>2}:{:0>2}.{:0>3}"), nYY, nMM, nDD, nHR, nMN, nSC, nMMN);
+#ifdef CYLOGGER_WIN_OS
+    return fmtx::format(TEXT("{:0>4}-{:0>2}-{:0>2} {:0>2}:{:0>2}:{:0>2}.{:0>3}"), nYY, nMM, nDD, nHR, nMN, nSC, nMMN);
+#else
+    TOStringStream ss;
+    ss << std::setw(4) << std::setfill(TEXT('0')) << nYY <<
+        std::setw(1) << TEXT('-') <<
+        std::setw(2) << std::setfill(TEXT('0')) << nMM <<
+        std::setw(1) << TEXT('-') <<
+        std::setw(2) << std::setfill(TEXT('0')) << nDD <<
+        std::setw(1) << TEXT(' ') <<
+        std::setw(2) << std::setfill(TEXT('0')) << nHR <<
+        std::setw(1) << TEXT(':') <<
+        std::setw(2) << std::setfill(TEXT('0')) << nMN <<
+        std::setw(1) << TEXT(':') <<
+        std::setw(2) << std::setfill(TEXT('0')) << nSC <<
+        std::setw(1) << TEXT('.') <<
+        std::setw(3) << std::setfill(TEXT('0')) << nMMN;
+    return ss.str();
+#endif
 }
 
 /**

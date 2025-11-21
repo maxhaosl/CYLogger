@@ -44,11 +44,11 @@
 #ifndef __CY_LOGGER_BASE_APPENDER_HPP__
 #define __CY_LOGGER_BASE_APPENDER_HPP__
 
-#include "Src/Common/Thread/CYNamedThread.hpp"
-#include "Src/Common/Thread/CYNamedLocker.hpp"
-#include "Src/Common/Thread/CYNamedCondition.hpp"
-#include "Src/Common/Time/CYTimeElapsed.hpp"
-#include "Src/Common/CYFPSCounter.hpp"
+#include "Common/Thread/CYNamedThread.hpp"
+#include "Common/Thread/CYNamedLocker.hpp"
+#include "Common/Thread/CYNamedCondition.hpp"
+#include "Common/Time/CYTimeElapsed.hpp"
+#include "Common/CYFPSCounter.hpp"
 
 #include "CYCoroutine/Common/Exception/CYException.hpp"
 #include "CYCoroutine/Results/CYResult.hpp"

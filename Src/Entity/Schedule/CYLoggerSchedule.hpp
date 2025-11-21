@@ -44,9 +44,9 @@
 #ifndef __CY_LOGGER_SCHEDULE_HPP__
 #define __CY_LOGGER_SCHEDULE_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Common/Thread/CYNamedThread.hpp"
-#include "Src/Common/Thread/CYNamedCondition.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Common/Thread/CYNamedThread.hpp"
+#include "Common/Thread/CYNamedCondition.hpp"
 
 #include <list>
 

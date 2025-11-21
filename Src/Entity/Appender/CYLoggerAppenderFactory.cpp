@@ -1,10 +1,10 @@
-#include "Src/Entity/Appender/CYLoggerAppenderFactory.hpp"
-#include "Src/Entity/Appender/CYLoggerFileAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerMainAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerConsoleAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerRemoteAppender.hpp"
-#include "Src/Entity/Appender/CYLoggerSystemAppender.hpp"
-#include "Src/Config/CYLoggerConfig.hpp"
+#include "Entity/Appender/CYLoggerAppenderFactory.hpp"
+#include "Entity/Appender/CYLoggerFileAppender.hpp"
+#include "Entity/Appender/CYLoggerMainAppender.hpp"
+#include "Entity/Appender/CYLoggerConsoleAppender.hpp"
+#include "Entity/Appender/CYLoggerRemoteAppender.hpp"
+#include "Entity/Appender/CYLoggerSystemAppender.hpp"
+#include "Config/CYLoggerConfig.hpp"
 #include "CYCoroutine/Common/Exception/CYException.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN

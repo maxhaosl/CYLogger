@@ -45,7 +45,7 @@
 #define __CY_LOGGER_CONSOLE_APPENDER_HPP__
 
 #include "Inc/ICYLoggerDefine.hpp"
-#include "Src/Entity/Appender/CYLoggerBufferAppender.hpp"
+#include "Entity/Appender/CYLoggerBufferAppender.hpp"
 
 #include <map>
 

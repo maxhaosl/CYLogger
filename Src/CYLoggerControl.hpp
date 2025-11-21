@@ -2,8 +2,8 @@
 #define __CY_LOGGER_CONTROL_HPP__
 
 #include "Inc/ICYLogger.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Entity/CYLoggerEntity.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Entity/CYLoggerEntity.hpp"
 #include "CYCoroutine/Common/Message/CYBaseMessage.hpp"
 
 #include <array>

@@ -1,5 +1,5 @@
-#include "Src/Config/CYLoggerConfig.hpp"
-#include "Src/Common/CYPublicFunction.hpp"
+#include "Config/CYLoggerConfig.hpp"
+#include "Common/CYPublicFunction.hpp"
 
 #include <iostream>
 #include <cstdlib>
@@ -38,7 +38,7 @@ TString CYLoggerConfig::GetErrorLogName()
 
 TString CYLoggerConfig::GetWorkPath()
 {
-#ifdef _WIN32
+#ifdef CYLOGGER_WIN_OS
 	return GetExePath();
 #else
 	TString strPath = std::getenv("PWD");
@@ -67,7 +67,7 @@ void CYLoggerConfig::ReleaseInstance()
 	m_ptrInstance.reset();
 }
 
-#ifdef _WIN32
+#ifdef CYLOGGER_WIN_OS
 /**
  * @brief Get windows exe path.
 */

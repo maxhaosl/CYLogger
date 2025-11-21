@@ -4,7 +4,7 @@
 #include "Src/Common/Exception/CYExceptionLogFile.hpp"
 #include "CYCoroutine/Common/Structure/CYStringUtils.hpp"
 
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
 #include <winsock2.h>
 #else
 #include <netdb.h>
@@ -22,7 +22,7 @@ CYLoggerRemoteAppender::CYLoggerRemoteAppender(const TString& strHost) noexcept
     : CYLoggerBufferAppender("RemoteThread")
     , m_bSocketInit(false)
     , m_ipAddr(0)
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     , m_socket(INVALID_SOCKET)
 #else
     , m_socket(0)
@@ -49,7 +49,7 @@ EXCEPTION_BEGIN
 {
     StopLogThread();
     CloseSocket();
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     if (m_bSocketInit)
     {
         WSACleanup();
@@ -152,7 +152,7 @@ void CYLoggerRemoteAppender::OpenSocket()
     if (!m_ipAddr)
     {
         struct hostent* pHostent = gethostbyname(m_strHost.c_str());
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
         if (pHostent == nullptr)
         {
             if (WSAGetLastError() == WSANOTINITIALISED)
@@ -186,7 +186,7 @@ void CYLoggerRemoteAppender::OpenSocket()
     // Get a datagram socket.
     m_socket = socket(AF_INET, SOCK_DGRAM, 0);
     if
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     (m_socket == INVALID_SOCKET)
 #else
     (m_socket < 0)
@@ -203,7 +203,7 @@ void CYLoggerRemoteAppender::CloseSocket()
 {
     if (m_socket)
     {
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
         closesocket(m_socket);
 #else
         ::close(m_socket);
@@ -218,7 +218,7 @@ void CYLoggerRemoteAppender::CloseSocket()
 void CYLoggerRemoteAppender::WriteSocket(std::string strMsg)
 {
     if
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     (m_socket == INVALID_SOCKET)
 #else
         (m_socket < 0)

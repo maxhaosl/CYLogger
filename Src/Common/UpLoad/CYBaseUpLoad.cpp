@@ -1,4 +1,4 @@
-#include "Src/Common/UpLoad/CYBaseUpLoad.hpp"
+#include "Common/UpLoad/CYBaseUpLoad.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

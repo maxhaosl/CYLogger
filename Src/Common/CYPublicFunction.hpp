@@ -45,7 +45,9 @@
 #define __CY_FUN_PUBLIC_HPP__
 
 #include "Inc/ICYLoggerDefine.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
+
+#include <chrono>
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -60,60 +62,80 @@ CYLOGGER_NAMESPACE_BEGIN
 class CYPublicFunction
 {
 public:
-	/**
-	* Extracts the directory name from path and deeply creates it
-	*/
-	static void CreateDirectory(const TString& strPath);
+    /**
+    * Extracts the directory name from path and deeply creates it
+    */
+    static void CreateDirectory(const TString& strPath);
 
-	/**
-	* Makes a copy of a file, creating the target file with all the directories if necessarily
-	*/
-	static void CopyFile(const TString& strSrc, const TString& strDst, bool bAppendMode, bool bFailedIfDstExists);
+    /**
+    * Makes a copy of a file, creating the target file with all the directories if necessarily
+    */
+    static void CopyFile(const TString& strSrc, const TString& strDst, bool bAppendMode, bool bFailedIfDstExists);
 
-	/**
-	* Synchronized console output, multithread ready
-	*/
-	static void WriteToConsole(const TString& strMsg);
+    /**
+    * Synchronized console output, multithread ready
+    */
+    static void WriteToConsole(const TString& strMsg);
 
-	/**
-	* Sleep millisec
-	*/
-	static void SLEEP(unsigned long millisec);
+    /**
+    * Sleep millisec
+    */
+    static void SLEEP(unsigned long millisec);
 
-	/**
-	 * @brief Format String.
-	*/
-	static const TString FmtString(const TChar* pszFormat, ...);
+    /**
+     * @brief Format String.
+    */
+    static const TString FmtString(const TChar* pszFormat, ...);
 
-	/**
-	 * @brief Print log to file.
-	*/
-	static int PrintLog(FILE* pfile, const char* pszFormat, ...);
-	static int PrintHexLog(FILE* pfile, void* pData, int nSize);
+    /**
+     * @brief Print log to file.
+    */
+    static int PrintLog(FILE* pfile, const char* pszFormat, ...);
+    static int PrintHexLog(FILE* pfile, void* pData, int nSize);
 
-	static int PrintTraceHexLog(void* pData, int nSize);
-	static int PrintTraceLog(const char* pformat, ...);
-	static int Verify(int bStatus, const char* szBuf, const char* szFile, int nLine);
+    static int PrintTraceHexLog(void* pData, int nSize);
+    static int PrintTraceLog(const char* pformat, ...);
+    static int Verify(int bStatus, const char* szBuf, const char* szFile, int nLine);
 
-	/**
-	 * @brief Read Or Write File.
-	*/
-	static int ReadFile(int nFile, void* pData, int* pSize);
-	static int WriteFile(int nFile, void* pData, int nSize);
+    /**
+     * @brief Read Or Write File.
+    */
+    static int ReadFile(int nFile, void* pData, int* pSize);
+    static int WriteFile(int nFile, void* pData, int nSize);
 
-	/**
-	 * @brief Trim String.
-	*/
-	static char* TrimString(char* szDest);
-	static TString	TrimString(const TString& s);
+    /**
+     * @brief Trim String.
+    */
+    static char* TrimString(char* szDest);
+    static TString	TrimString(const TString& s);
 
-	/**
-	 * @brief Get File Name OR Ext.
-	*/
-	static TString GetFileName(const TString& strPath);
-	static TString GetFileExt(const TString& strPath);
-	static TString GetBaseLogName(const TString& strPath);
-	static TString GetBasePath(const TString& strPath);
+    /**
+     * @brief Get File Name OR Ext.
+    */
+    static TString GetFileName(const TString& strPath);
+    static TString GetFileExt(const TString& strPath);
+    static TString GetBaseLogName(const TString& strPath);
+    static TString GetBasePath(const TString& strPath);
+
+    /**
+     * @brief Remove File.
+    */
+    static bool Remove(const TString& strPath);
+
+    /**
+     * @brief Get File SIze.
+     */
+    static unsigned long long GetFileSize(const TString& strPath);
+
+    /**
+     * @brief Get Last Write Time.
+     */
+    static std::chrono::system_clock::time_point GetLastWriteTime(const TString& strPath);
+
+    /**
+    * @brief Get Local Time Zone Offset.
+    */
+    static int GetLocalUTCOffsetHours();
 };
 
 CYLOGGER_NAMESPACE_END

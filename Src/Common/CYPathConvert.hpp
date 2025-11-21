@@ -44,24 +44,24 @@
 #ifndef __CY_PAtH_CONVERt_HPP__
 #define __CY_PAtH_CONVERt_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
 class CYPathConvert
 {
 public:
-	static TString GetLogFilePath(const TChar* szChannel, const TChar* szFile, ELogFileMode eFileMode);
+    static TString GetLogFilePath(const TChar* szChannel, const TChar* szFile, ELogFileMode eFileMode);
 
-	/**
-	 * @brief Convert Log Path.
-	*/
-	static const TString ConvertFilePath(const TChar* pszFileName, const TChar* pszLogPath, const TChar* pszLogDir = LOG_DIR);
+    /**
+     * @brief Convert Log Path.
+    */
+    static const TString ConvertFilePath(const TChar* pszFileName, const TChar* pszLogPath, const TChar* pszLogDir = LOG_DIR);
 
-	/**
-	 * @brief Convert Log Path.
-	*/
-	static const TString ConvertFilePath(const TString& strFileName, const TString& strLogPath, const TString& strLogDir = LOG_DIR);
+    /**
+     * @brief Convert Log Path.
+    */
+    static const TString ConvertFilePath(const TString& strFileName, const TString& strLogPath, const TString& strLogDir = LOG_DIR);
 };
 
 CYLOGGER_NAMESPACE_END

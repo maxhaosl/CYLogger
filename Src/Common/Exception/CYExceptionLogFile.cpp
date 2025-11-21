@@ -1,8 +1,8 @@
-#include "Src/Common/Exception/CYExceptionLogFile.hpp"
-#include "Src/Common/SimpleLog/CYSimpleLog.hpp"
+#include "Common/Exception/CYExceptionLogFile.hpp"
+#include "Common/SimpleLog/CYSimpleLog.hpp"
 
 #include <assert.h>
-#include <varargs.h>
+#include <stdarg.h>
 
 CYLOGGER_NAMESPACE_BEGIN
 

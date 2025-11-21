@@ -1,4 +1,4 @@
-#include "Src/Common/Encryption/CYEncryptionFactory.hpp"
+#include "Common/Encryption/CYEncryptionFactory.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

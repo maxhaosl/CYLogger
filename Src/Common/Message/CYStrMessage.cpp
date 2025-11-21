@@ -1,5 +1,5 @@
-#include "Src/Common/Message/CYStrMessage.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/Message/CYStrMessage.hpp"
+#include "Common/CYPrivateDefine.hpp"
 
 #include <sstream>
 
@@ -9,7 +9,11 @@ CYStrMessage::CYStrMessage(const TString& strChannel, ELogType eMsgType, int nSe
 : CYBaseMessage(strChannel, eMsgType, nServerCode, strMsg)
 , CYLoggerTemplateLayoutEscape()
 {
-	processId = GetCurrentProcessId();
+#ifdef _WIN32
+    m_nProcessId = GetCurrentProcessId();
+#else
+    m_nProcessId = getpid();
+#endif
 }
 
 /**
@@ -68,7 +72,7 @@ const TString CYStrMessage::GetFormatMessage() const
 
 	// PROCESS ID.
 	sss.str(TEXT(""));
-	sss << TEXT("P:") << processId;
+	sss << TEXT("P:") << m_nProcessId;
 	ss << delimiters[TYPE_FIELD_VALUE_END] << sss.str();
 
 	// THREAD ID

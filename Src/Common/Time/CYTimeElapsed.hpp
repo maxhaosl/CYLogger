@@ -45,7 +45,7 @@
 #define __CY_TIME_ELAPSED_HPP__
 
 #include "Inc/ICYLoggerDefine.hpp"
-#include "Src/Common/CYNoCopy.hpp"
+#include "Common/CYNoCopy.hpp"
 
 #include <chrono>
 

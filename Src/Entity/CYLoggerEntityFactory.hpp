@@ -45,8 +45,8 @@
 #define __CY_LOGGER_ENTITY_FACTORY_HPP__
 
 #include "Inc/ICYLogger.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Entity/Appender/CYLoggerAppenderDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Entity/Appender/CYLoggerAppenderDefine.hpp"
 
 #include <map>
 

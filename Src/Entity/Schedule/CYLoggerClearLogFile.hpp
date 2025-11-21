@@ -44,11 +44,12 @@
 #ifndef __CY_LOGGER_CLEAR_LOG_FILE_HPP__
 #define __CY_LOGGER_CLEAR_LOG_FILE_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Entity/Schedule/CYLoggerScheduleDefine.hpp"
-#include "Src/Common/Time/CYTimeElapsed.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Entity/Schedule/CYLoggerScheduleDefine.hpp"
+#include "Common/Time/CYTimeElapsed.hpp"
 
 #include <map>
+#include <list>
 
 CYLOGGER_NAMESPACE_BEGIN
 

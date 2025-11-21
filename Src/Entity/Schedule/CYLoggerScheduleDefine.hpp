@@ -44,7 +44,9 @@
 #ifndef __CY_LOGGER_SCHEDULE_DEFINE_HPP__
 #define __CY_LOGGER_SCHEDULE_DEFINE_HPP__
 
-#include "Src/Common/CYPrivateDefine.hpp"
+#include "Common/CYPrivateDefine.hpp"
+
+#include <chrono>
 
 CYLOGGER_NAMESPACE_BEGIN
 

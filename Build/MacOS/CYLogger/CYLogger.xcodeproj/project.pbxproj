@@ -1,0 +1,843 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9B50CCF92ECDCC880046E3C4 /* ICYLoggerDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CCF52ECDCC880046E3C4 /* ICYLoggerDefine.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B50CCFA2ECDCC880046E3C4 /* ICYLogger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CCF42ECDCC880046E3C4 /* ICYLogger.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B50CCFB2ECDCC880046E3C4 /* ICYLoggerTemplateLayout.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CCF72ECDCC880046E3C4 /* ICYLoggerTemplateLayout.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B50CCFC2ECDCC880046E3C4 /* ICYLoggerPatternFilter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CCF62ECDCC880046E3C4 /* ICYLoggerPatternFilter.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		9B50CD6B2ECDCCAC0046E3C4 /* CYFileRestriction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD222ECDCCAC0046E3C4 /* CYFileRestriction.cpp */; };
+		9B50CD6C2ECDCCAC0046E3C4 /* CYLoggerSchedule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD5B2ECDCCAC0046E3C4 /* CYLoggerSchedule.cpp */; };
+		9B50CD6D2ECDCCAC0046E3C4 /* CYLoggerBufferAppender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD372ECDCCAC0046E3C4 /* CYLoggerBufferAppender.cpp */; };
+		9B50CD6E2ECDCCAC0046E3C4 /* CYEncryptionFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD002ECDCCAC0046E3C4 /* CYEncryptionFactory.cpp */; };
+		9B50CD6F2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD4F2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.cpp */; };
+		9B50CD702ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD392ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.cpp */; };
+		9B50CD712ECDCCAC0046E3C4 /* CYLoggerBaseAppender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD352ECDCCAC0046E3C4 /* CYLoggerBaseAppender.cpp */; };
+		9B50CD722ECDCCAC0046E3C4 /* CYSimpleLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD0E2ECDCCAC0046E3C4 /* CYSimpleLog.cpp */; };
+		9B50CD732ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD462ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.cpp */; };
+		9B50CD742ECDCCAC0046E3C4 /* CYEscapeMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD072ECDCCAC0046E3C4 /* CYEscapeMessage.cpp */; };
+		9B50CD752ECDCCAC0046E3C4 /* CYStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD632ECDCCAC0046E3C4 /* CYStatistics.cpp */; };
+		9B50CD762ECDCCAC0046E3C4 /* CYNormalMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD092ECDCCAC0046E3C4 /* CYNormalMessage.cpp */; };
+		9B50CD772ECDCCAC0046E3C4 /* CYLoggerSystemAppender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD412ECDCCAC0046E3C4 /* CYLoggerSystemAppender.cpp */; };
+		9B50CD782ECDCCAC0046E3C4 /* CYPathConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD292ECDCCAC0046E3C4 /* CYPathConvert.cpp */; };
+		9B50CD792ECDCCAC0046E3C4 /* CYUpLoadFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD1F2ECDCCAC0046E3C4 /* CYUpLoadFactory.cpp */; };
+		9B50CD7A2ECDCCAC0046E3C4 /* CYLoggerControl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD672ECDCCAC0046E3C4 /* CYLoggerControl.cpp */; };
+		9B50CD7B2ECDCCAC0046E3C4 /* CYLoggerImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD692ECDCCAC0046E3C4 /* CYLoggerImpl.cpp */; };
+		9B50CD7C2ECDCCAC0046E3C4 /* CYFPSCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD252ECDCCAC0046E3C4 /* CYFPSCounter.cpp */; };
+		9B50CD7D2ECDCCAC0046E3C4 /* CYStrMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD0B2ECDCCAC0046E3C4 /* CYStrMessage.cpp */; };
+		9B50CD7E2ECDCCAC0046E3C4 /* CYBaseEncryption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CCFE2ECDCCAC0046E3C4 /* CYBaseEncryption.cpp */; };
+		9B50CD7F2ECDCCAC0046E3C4 /* CYExceptionLogFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD042ECDCCAC0046E3C4 /* CYExceptionLogFile.cpp */; };
+		9B50CD802ECDCCAC0046E3C4 /* CYLoggerClearLogFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD572ECDCCAC0046E3C4 /* CYLoggerClearLogFile.cpp */; };
+		9B50CD812ECDCCAC0046E3C4 /* CYNamedCondition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD112ECDCCAC0046E3C4 /* CYNamedCondition.cpp */; };
+		9B50CD822ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD492ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.cpp */; };
+		9B50CD832ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD4D2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.cpp */; };
+		9B50CD842ECDCCAC0046E3C4 /* CYLoggerMainAppender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD3D2ECDCCAC0046E3C4 /* CYLoggerMainAppender.cpp */; };
+		9B50CD852ECDCCAC0046E3C4 /* CYLoggerEntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD602ECDCCAC0046E3C4 /* CYLoggerEntityFactory.cpp */; };
+		9B50CD862ECDCCAC0046E3C4 /* CYNamedLocker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD132ECDCCAC0046E3C4 /* CYNamedLocker.cpp */; };
+		9B50CD872ECDCCAC0046E3C4 /* CYLoggerConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD2F2ECDCCAC0046E3C4 /* CYLoggerConfig.cpp */; };
+		9B50CD882ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD4B2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.cpp */; };
+		9B50CD892ECDCCAC0046E3C4 /* CYFTPUpLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD1D2ECDCCAC0046E3C4 /* CYFTPUpLoad.cpp */; };
+		9B50CD8A2ECDCCAC0046E3C4 /* CYPublicFunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD2C2ECDCCAC0046E3C4 /* CYPublicFunction.cpp */; };
+		9B50CD8B2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD3F2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.cpp */; };
+		9B50CD8C2ECDCCAC0046E3C4 /* CYLoggerDoZipLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD592ECDCCAC0046E3C4 /* CYLoggerDoZipLog.cpp */; };
+		9B50CD8D2ECDCCAC0046E3C4 /* CYBaseUpLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD1B2ECDCCAC0046E3C4 /* CYBaseUpLoad.cpp */; };
+		9B50CD8E2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD542ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.cpp */; };
+		9B50CD8F2ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD442ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.cpp */; };
+		9B50CD902ECDCCAC0046E3C4 /* CYNamedThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD152ECDCCAC0046E3C4 /* CYNamedThread.cpp */; };
+		9B50CD912ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD522ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.cpp */; };
+		9B50CD922ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD332ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.cpp */; };
+		9B50CD932ECDCCAC0046E3C4 /* CYLoggerFileAppender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CD3B2ECDCCAC0046E3C4 /* CYLoggerFileAppender.cpp */; };
+		9B50CD942ECDCCAC0046E3C4 /* CYLoggerSchedule.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD5A2ECDCCAC0046E3C4 /* CYLoggerSchedule.hpp */; };
+		9B50CD952ECDCCAC0046E3C4 /* CYLoggerBaseAppender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD342ECDCCAC0046E3C4 /* CYLoggerBaseAppender.hpp */; };
+		9B50CD962ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD4A2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.hpp */; };
+		9B50CD972ECDCCAC0046E3C4 /* CYNamedCondition.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD102ECDCCAC0046E3C4 /* CYNamedCondition.hpp */; };
+		9B50CD982ECDCCAC0046E3C4 /* CYLoggerAppenderDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD312ECDCCAC0046E3C4 /* CYLoggerAppenderDefine.hpp */; };
+		9B50CD992ECDCCAC0046E3C4 /* CYPathConvert.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD282ECDCCAC0046E3C4 /* CYPathConvert.hpp */; };
+		9B50CD9A2ECDCCAC0046E3C4 /* CYPublicFunction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD2B2ECDCCAC0046E3C4 /* CYPublicFunction.hpp */; };
+		9B50CD9B2ECDCCAC0046E3C4 /* CYFTPUpLoad.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD1C2ECDCCAC0046E3C4 /* CYFTPUpLoad.hpp */; };
+		9B50CD9C2ECDCCAC0046E3C4 /* CYBaseEncryption.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CCFD2ECDCCAC0046E3C4 /* CYBaseEncryption.hpp */; };
+		9B50CD9D2ECDCCAC0046E3C4 /* CYExceptionLogFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD032ECDCCAC0046E3C4 /* CYExceptionLogFile.hpp */; };
+		9B50CD9E2ECDCCAC0046E3C4 /* CYFPSCounter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD242ECDCCAC0046E3C4 /* CYFPSCounter.hpp */; };
+		9B50CD9F2ECDCCAC0046E3C4 /* CYTimeUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD182ECDCCAC0046E3C4 /* CYTimeUtils.hpp */; };
+		9B50CDA02ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD532ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.hpp */; };
+		9B50CDA12ECDCCAC0046E3C4 /* CYBaseUpLoad.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD1A2ECDCCAC0046E3C4 /* CYBaseUpLoad.hpp */; };
+		9B50CDA22ECDCCAC0046E3C4 /* CYExceptionDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD022ECDCCAC0046E3C4 /* CYExceptionDefine.hpp */; };
+		9B50CDA32ECDCCAC0046E3C4 /* CYEncryptionFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CCFF2ECDCCAC0046E3C4 /* CYEncryptionFactory.hpp */; };
+		9B50CDA42ECDCCAC0046E3C4 /* CYLoggerMainAppender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD3C2ECDCCAC0046E3C4 /* CYLoggerMainAppender.hpp */; };
+		9B50CDA52ECDCCAC0046E3C4 /* CYJThreadDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD262ECDCCAC0046E3C4 /* CYJThreadDefine.hpp */; };
+		9B50CDA62ECDCCAC0046E3C4 /* CYLoggerEntity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD5E2ECDCCAC0046E3C4 /* CYLoggerEntity.hpp */; };
+		9B50CDA72ECDCCAC0046E3C4 /* CYStatistics.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD622ECDCCAC0046E3C4 /* CYStatistics.hpp */; };
+		9B50CDA82ECDCCAC0046E3C4 /* CYLoggerImpl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD682ECDCCAC0046E3C4 /* CYLoggerImpl.hpp */; };
+		9B50CDA92ECDCCAC0046E3C4 /* CYStrMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD0A2ECDCCAC0046E3C4 /* CYStrMessage.hpp */; };
+		9B50CDAA2ECDCCAC0046E3C4 /* CYPrivateDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD2A2ECDCCAC0046E3C4 /* CYPrivateDefine.hpp */; };
+		9B50CDAB2ECDCCAC0046E3C4 /* CYLoggerClearLogFile.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD562ECDCCAC0046E3C4 /* CYLoggerClearLogFile.hpp */; };
+		9B50CDAC2ECDCCAC0046E3C4 /* CYLoggerBufferAppender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD362ECDCCAC0046E3C4 /* CYLoggerBufferAppender.hpp */; };
+		9B50CDAD2ECDCCAC0046E3C4 /* CYTimeElapsed.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD172ECDCCAC0046E3C4 /* CYTimeElapsed.hpp */; };
+		9B50CDAE2ECDCCAC0046E3C4 /* CYNamedThread.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD142ECDCCAC0046E3C4 /* CYNamedThread.hpp */; };
+		9B50CDAF2ECDCCAC0046E3C4 /* CYNoCopy.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD272ECDCCAC0046E3C4 /* CYNoCopy.hpp */; };
+		9B50CDB02ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD512ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.hpp */; };
+		9B50CDB12ECDCCAC0046E3C4 /* CYEscapeMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD062ECDCCAC0046E3C4 /* CYEscapeMessage.hpp */; };
+		9B50CDB22ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD4E2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.hpp */; };
+		9B50CDB32ECDCCAC0046E3C4 /* CYLoggerEntityFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD5F2ECDCCAC0046E3C4 /* CYLoggerEntityFactory.hpp */; };
+		9B50CDB42ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD382ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.hpp */; };
+		9B50CDB52ECDCCAC0046E3C4 /* CYSimpleLog.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD0D2ECDCCAC0046E3C4 /* CYSimpleLog.hpp */; };
+		9B50CDB62ECDCCAC0046E3C4 /* CYLoggerControl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD662ECDCCAC0046E3C4 /* CYLoggerControl.hpp */; };
+		9B50CDB72ECDCCAC0046E3C4 /* CYNormalMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD082ECDCCAC0046E3C4 /* CYNormalMessage.hpp */; };
+		9B50CDB82ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD4C2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.hpp */; };
+		9B50CDB92ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD322ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.hpp */; };
+		9B50CDBA2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD482ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.hpp */; };
+		9B50CDBB2ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD452ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.hpp */; };
+		9B50CDBC2ECDCCAC0046E3C4 /* CYFileRestriction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD212ECDCCAC0046E3C4 /* CYFileRestriction.hpp */; };
+		9B50CDBD2ECDCCAC0046E3C4 /* CYLoggerFileAppender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD3A2ECDCCAC0046E3C4 /* CYLoggerFileAppender.hpp */; };
+		9B50CDBE2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD3E2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.hpp */; };
+		9B50CDBF2ECDCCAC0046E3C4 /* CYLoggerDoZipLog.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD582ECDCCAC0046E3C4 /* CYLoggerDoZipLog.hpp */; };
+		9B50CDC02ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD432ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.hpp */; };
+		9B50CDC12ECDCCAC0046E3C4 /* CYFormatDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD232ECDCCAC0046E3C4 /* CYFormatDefine.hpp */; };
+		9B50CDC22ECDCCAC0046E3C4 /* CYLoggerSystemAppender.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD402ECDCCAC0046E3C4 /* CYLoggerSystemAppender.hpp */; };
+		9B50CDC32ECDCCAC0046E3C4 /* CYLoggerConfig.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD2E2ECDCCAC0046E3C4 /* CYLoggerConfig.hpp */; };
+		9B50CDC42ECDCCAC0046E3C4 /* CYUpLoadFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD1E2ECDCCAC0046E3C4 /* CYUpLoadFactory.hpp */; };
+		9B50CDC52ECDCCAC0046E3C4 /* CYLoggertemplateLayoutDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD502ECDCCAC0046E3C4 /* CYLoggertemplateLayoutDefine.hpp */; };
+		9B50CDC62ECDCCAC0046E3C4 /* CYLoggerScheduleDefine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD5C2ECDCCAC0046E3C4 /* CYLoggerScheduleDefine.hpp */; };
+		9B50CDC72ECDCCAC0046E3C4 /* CYNamedLocker.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9B50CD122ECDCCAC0046E3C4 /* CYNamedLocker.hpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9B50CCE42ECDCC0D0046E3C4 /* libCYLogger.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCYLogger.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B50CCF42ECDCC880046E3C4 /* ICYLogger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ICYLogger.hpp; sourceTree = "<group>"; };
+		9B50CCF52ECDCC880046E3C4 /* ICYLoggerDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ICYLoggerDefine.hpp; sourceTree = "<group>"; };
+		9B50CCF62ECDCC880046E3C4 /* ICYLoggerPatternFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ICYLoggerPatternFilter.hpp; sourceTree = "<group>"; };
+		9B50CCF72ECDCC880046E3C4 /* ICYLoggerTemplateLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ICYLoggerTemplateLayout.hpp; sourceTree = "<group>"; };
+		9B50CCFD2ECDCCAC0046E3C4 /* CYBaseEncryption.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYBaseEncryption.hpp; sourceTree = "<group>"; };
+		9B50CCFE2ECDCCAC0046E3C4 /* CYBaseEncryption.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYBaseEncryption.cpp; sourceTree = "<group>"; };
+		9B50CCFF2ECDCCAC0046E3C4 /* CYEncryptionFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYEncryptionFactory.hpp; sourceTree = "<group>"; };
+		9B50CD002ECDCCAC0046E3C4 /* CYEncryptionFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYEncryptionFactory.cpp; sourceTree = "<group>"; };
+		9B50CD022ECDCCAC0046E3C4 /* CYExceptionDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYExceptionDefine.hpp; sourceTree = "<group>"; };
+		9B50CD032ECDCCAC0046E3C4 /* CYExceptionLogFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYExceptionLogFile.hpp; sourceTree = "<group>"; };
+		9B50CD042ECDCCAC0046E3C4 /* CYExceptionLogFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYExceptionLogFile.cpp; sourceTree = "<group>"; };
+		9B50CD062ECDCCAC0046E3C4 /* CYEscapeMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYEscapeMessage.hpp; sourceTree = "<group>"; };
+		9B50CD072ECDCCAC0046E3C4 /* CYEscapeMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYEscapeMessage.cpp; sourceTree = "<group>"; };
+		9B50CD082ECDCCAC0046E3C4 /* CYNormalMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYNormalMessage.hpp; sourceTree = "<group>"; };
+		9B50CD092ECDCCAC0046E3C4 /* CYNormalMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYNormalMessage.cpp; sourceTree = "<group>"; };
+		9B50CD0A2ECDCCAC0046E3C4 /* CYStrMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYStrMessage.hpp; sourceTree = "<group>"; };
+		9B50CD0B2ECDCCAC0046E3C4 /* CYStrMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYStrMessage.cpp; sourceTree = "<group>"; };
+		9B50CD0D2ECDCCAC0046E3C4 /* CYSimpleLog.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYSimpleLog.hpp; sourceTree = "<group>"; };
+		9B50CD0E2ECDCCAC0046E3C4 /* CYSimpleLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYSimpleLog.cpp; sourceTree = "<group>"; };
+		9B50CD102ECDCCAC0046E3C4 /* CYNamedCondition.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYNamedCondition.hpp; sourceTree = "<group>"; };
+		9B50CD112ECDCCAC0046E3C4 /* CYNamedCondition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYNamedCondition.cpp; sourceTree = "<group>"; };
+		9B50CD122ECDCCAC0046E3C4 /* CYNamedLocker.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYNamedLocker.hpp; sourceTree = "<group>"; };
+		9B50CD132ECDCCAC0046E3C4 /* CYNamedLocker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYNamedLocker.cpp; sourceTree = "<group>"; };
+		9B50CD142ECDCCAC0046E3C4 /* CYNamedThread.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYNamedThread.hpp; sourceTree = "<group>"; };
+		9B50CD152ECDCCAC0046E3C4 /* CYNamedThread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYNamedThread.cpp; sourceTree = "<group>"; };
+		9B50CD172ECDCCAC0046E3C4 /* CYTimeElapsed.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYTimeElapsed.hpp; sourceTree = "<group>"; };
+		9B50CD182ECDCCAC0046E3C4 /* CYTimeUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYTimeUtils.hpp; sourceTree = "<group>"; };
+		9B50CD1A2ECDCCAC0046E3C4 /* CYBaseUpLoad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYBaseUpLoad.hpp; sourceTree = "<group>"; };
+		9B50CD1B2ECDCCAC0046E3C4 /* CYBaseUpLoad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYBaseUpLoad.cpp; sourceTree = "<group>"; };
+		9B50CD1C2ECDCCAC0046E3C4 /* CYFTPUpLoad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYFTPUpLoad.hpp; sourceTree = "<group>"; };
+		9B50CD1D2ECDCCAC0046E3C4 /* CYFTPUpLoad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYFTPUpLoad.cpp; sourceTree = "<group>"; };
+		9B50CD1E2ECDCCAC0046E3C4 /* CYUpLoadFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYUpLoadFactory.hpp; sourceTree = "<group>"; };
+		9B50CD1F2ECDCCAC0046E3C4 /* CYUpLoadFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYUpLoadFactory.cpp; sourceTree = "<group>"; };
+		9B50CD212ECDCCAC0046E3C4 /* CYFileRestriction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYFileRestriction.hpp; sourceTree = "<group>"; };
+		9B50CD222ECDCCAC0046E3C4 /* CYFileRestriction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYFileRestriction.cpp; sourceTree = "<group>"; };
+		9B50CD232ECDCCAC0046E3C4 /* CYFormatDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYFormatDefine.hpp; sourceTree = "<group>"; };
+		9B50CD242ECDCCAC0046E3C4 /* CYFPSCounter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYFPSCounter.hpp; sourceTree = "<group>"; };
+		9B50CD252ECDCCAC0046E3C4 /* CYFPSCounter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYFPSCounter.cpp; sourceTree = "<group>"; };
+		9B50CD262ECDCCAC0046E3C4 /* CYJThreadDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYJThreadDefine.hpp; sourceTree = "<group>"; };
+		9B50CD272ECDCCAC0046E3C4 /* CYNoCopy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYNoCopy.hpp; sourceTree = "<group>"; };
+		9B50CD282ECDCCAC0046E3C4 /* CYPathConvert.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYPathConvert.hpp; sourceTree = "<group>"; };
+		9B50CD292ECDCCAC0046E3C4 /* CYPathConvert.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYPathConvert.cpp; sourceTree = "<group>"; };
+		9B50CD2A2ECDCCAC0046E3C4 /* CYPrivateDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYPrivateDefine.hpp; sourceTree = "<group>"; };
+		9B50CD2B2ECDCCAC0046E3C4 /* CYPublicFunction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYPublicFunction.hpp; sourceTree = "<group>"; };
+		9B50CD2C2ECDCCAC0046E3C4 /* CYPublicFunction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYPublicFunction.cpp; sourceTree = "<group>"; };
+		9B50CD2E2ECDCCAC0046E3C4 /* CYLoggerConfig.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerConfig.hpp; sourceTree = "<group>"; };
+		9B50CD2F2ECDCCAC0046E3C4 /* CYLoggerConfig.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerConfig.cpp; sourceTree = "<group>"; };
+		9B50CD312ECDCCAC0046E3C4 /* CYLoggerAppenderDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerAppenderDefine.hpp; sourceTree = "<group>"; };
+		9B50CD322ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerAppenderFactory.hpp; sourceTree = "<group>"; };
+		9B50CD332ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerAppenderFactory.cpp; sourceTree = "<group>"; };
+		9B50CD342ECDCCAC0046E3C4 /* CYLoggerBaseAppender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerBaseAppender.hpp; sourceTree = "<group>"; };
+		9B50CD352ECDCCAC0046E3C4 /* CYLoggerBaseAppender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerBaseAppender.cpp; sourceTree = "<group>"; };
+		9B50CD362ECDCCAC0046E3C4 /* CYLoggerBufferAppender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerBufferAppender.hpp; sourceTree = "<group>"; };
+		9B50CD372ECDCCAC0046E3C4 /* CYLoggerBufferAppender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerBufferAppender.cpp; sourceTree = "<group>"; };
+		9B50CD382ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerConsoleAppender.hpp; sourceTree = "<group>"; };
+		9B50CD392ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerConsoleAppender.cpp; sourceTree = "<group>"; };
+		9B50CD3A2ECDCCAC0046E3C4 /* CYLoggerFileAppender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerFileAppender.hpp; sourceTree = "<group>"; };
+		9B50CD3B2ECDCCAC0046E3C4 /* CYLoggerFileAppender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerFileAppender.cpp; sourceTree = "<group>"; };
+		9B50CD3C2ECDCCAC0046E3C4 /* CYLoggerMainAppender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerMainAppender.hpp; sourceTree = "<group>"; };
+		9B50CD3D2ECDCCAC0046E3C4 /* CYLoggerMainAppender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerMainAppender.cpp; sourceTree = "<group>"; };
+		9B50CD3E2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerRemoteAppender.hpp; sourceTree = "<group>"; };
+		9B50CD3F2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerRemoteAppender.cpp; sourceTree = "<group>"; };
+		9B50CD402ECDCCAC0046E3C4 /* CYLoggerSystemAppender.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerSystemAppender.hpp; sourceTree = "<group>"; };
+		9B50CD412ECDCCAC0046E3C4 /* CYLoggerSystemAppender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerSystemAppender.cpp; sourceTree = "<group>"; };
+		9B50CD432ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerPatternFilterChain.hpp; sourceTree = "<group>"; };
+		9B50CD442ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerPatternFilterChain.cpp; sourceTree = "<group>"; };
+		9B50CD452ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerPatternFilterManager.hpp; sourceTree = "<group>"; };
+		9B50CD462ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerPatternFilterManager.cpp; sourceTree = "<group>"; };
+		9B50CD482ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerTemplateLayout1.hpp; sourceTree = "<group>"; };
+		9B50CD492ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerTemplateLayout1.cpp; sourceTree = "<group>"; };
+		9B50CD4A2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerTemplateLayout2.hpp; sourceTree = "<group>"; };
+		9B50CD4B2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerTemplateLayout2.cpp; sourceTree = "<group>"; };
+		9B50CD4C2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerTemplateLayout3.hpp; sourceTree = "<group>"; };
+		9B50CD4D2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerTemplateLayout3.cpp; sourceTree = "<group>"; };
+		9B50CD4E2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerTemplateLayoutCustom.hpp; sourceTree = "<group>"; };
+		9B50CD4F2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerTemplateLayoutCustom.cpp; sourceTree = "<group>"; };
+		9B50CD502ECDCCAC0046E3C4 /* CYLoggertemplateLayoutDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggertemplateLayoutDefine.hpp; sourceTree = "<group>"; };
+		9B50CD512ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerTemplateLayoutEscape.hpp; sourceTree = "<group>"; };
+		9B50CD522ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerTemplateLayoutEscape.cpp; sourceTree = "<group>"; };
+		9B50CD532ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerTemplateLayoutManager.hpp; sourceTree = "<group>"; };
+		9B50CD542ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerTemplateLayoutManager.cpp; sourceTree = "<group>"; };
+		9B50CD562ECDCCAC0046E3C4 /* CYLoggerClearLogFile.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerClearLogFile.hpp; sourceTree = "<group>"; };
+		9B50CD572ECDCCAC0046E3C4 /* CYLoggerClearLogFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerClearLogFile.cpp; sourceTree = "<group>"; };
+		9B50CD582ECDCCAC0046E3C4 /* CYLoggerDoZipLog.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerDoZipLog.hpp; sourceTree = "<group>"; };
+		9B50CD592ECDCCAC0046E3C4 /* CYLoggerDoZipLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerDoZipLog.cpp; sourceTree = "<group>"; };
+		9B50CD5A2ECDCCAC0046E3C4 /* CYLoggerSchedule.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerSchedule.hpp; sourceTree = "<group>"; };
+		9B50CD5B2ECDCCAC0046E3C4 /* CYLoggerSchedule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerSchedule.cpp; sourceTree = "<group>"; };
+		9B50CD5C2ECDCCAC0046E3C4 /* CYLoggerScheduleDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerScheduleDefine.hpp; sourceTree = "<group>"; };
+		9B50CD5E2ECDCCAC0046E3C4 /* CYLoggerEntity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerEntity.hpp; sourceTree = "<group>"; };
+		9B50CD5F2ECDCCAC0046E3C4 /* CYLoggerEntityFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerEntityFactory.hpp; sourceTree = "<group>"; };
+		9B50CD602ECDCCAC0046E3C4 /* CYLoggerEntityFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerEntityFactory.cpp; sourceTree = "<group>"; };
+		9B50CD622ECDCCAC0046E3C4 /* CYStatistics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYStatistics.hpp; sourceTree = "<group>"; };
+		9B50CD632ECDCCAC0046E3C4 /* CYStatistics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYStatistics.cpp; sourceTree = "<group>"; };
+		9B50CD652ECDCCAC0046E3C4 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		9B50CD662ECDCCAC0046E3C4 /* CYLoggerControl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerControl.hpp; sourceTree = "<group>"; };
+		9B50CD672ECDCCAC0046E3C4 /* CYLoggerControl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerControl.cpp; sourceTree = "<group>"; };
+		9B50CD682ECDCCAC0046E3C4 /* CYLoggerImpl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CYLoggerImpl.hpp; sourceTree = "<group>"; };
+		9B50CD692ECDCCAC0046E3C4 /* CYLoggerImpl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CYLoggerImpl.cpp; sourceTree = "<group>"; };
+		9B50CDCB2ECDCD7A0046E3C4 /* ICYLogger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ICYLogger.hpp; path = ../../../Inc/ICYLogger.hpp; sourceTree = "<group>"; };
+		9B50CDCC2ECDCD7B0046E3C4 /* ICYLoggerTemplateLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ICYLoggerTemplateLayout.hpp; path = ../../../Inc/ICYLoggerTemplateLayout.hpp; sourceTree = "<group>"; };
+		9B50CDCD2ECDCD7B0046E3C4 /* ICYLoggerDefine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ICYLoggerDefine.hpp; path = ../../../Inc/ICYLoggerDefine.hpp; sourceTree = "<group>"; };
+		9B50CDCE2ECDCD7B0046E3C4 /* ICYLoggerPatternFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ICYLoggerPatternFilter.hpp; path = ../../../Inc/ICYLoggerPatternFilter.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9B50CCE22ECDCC0D0046E3C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9B50CCDB2ECDCC0D0046E3C4 = {
+			isa = PBXGroup;
+			children = (
+				9B50CDCB2ECDCD7A0046E3C4 /* ICYLogger.hpp */,
+				9B50CDCD2ECDCD7B0046E3C4 /* ICYLoggerDefine.hpp */,
+				9B50CDCE2ECDCD7B0046E3C4 /* ICYLoggerPatternFilter.hpp */,
+				9B50CDCC2ECDCD7B0046E3C4 /* ICYLoggerTemplateLayout.hpp */,
+				9B50CD6A2ECDCCAC0046E3C4 /* Src */,
+				9B50CCF82ECDCC880046E3C4 /* Inc */,
+				9B50CCE52ECDCC0D0046E3C4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9B50CCE52ECDCC0D0046E3C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CCE42ECDCC0D0046E3C4 /* libCYLogger.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9B50CCF82ECDCC880046E3C4 /* Inc */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CCF42ECDCC880046E3C4 /* ICYLogger.hpp */,
+				9B50CCF52ECDCC880046E3C4 /* ICYLoggerDefine.hpp */,
+				9B50CCF62ECDCC880046E3C4 /* ICYLoggerPatternFilter.hpp */,
+				9B50CCF72ECDCC880046E3C4 /* ICYLoggerTemplateLayout.hpp */,
+			);
+			name = Inc;
+			path = /Users/shilianghao/Desktop/CLionProjects/CYLogger/Inc;
+			sourceTree = "<absolute>";
+		};
+		9B50CD012ECDCCAC0046E3C4 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CCFD2ECDCCAC0046E3C4 /* CYBaseEncryption.hpp */,
+				9B50CCFE2ECDCCAC0046E3C4 /* CYBaseEncryption.cpp */,
+				9B50CCFF2ECDCCAC0046E3C4 /* CYEncryptionFactory.hpp */,
+				9B50CD002ECDCCAC0046E3C4 /* CYEncryptionFactory.cpp */,
+			);
+			path = Encryption;
+			sourceTree = "<group>";
+		};
+		9B50CD052ECDCCAC0046E3C4 /* Exception */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD022ECDCCAC0046E3C4 /* CYExceptionDefine.hpp */,
+				9B50CD032ECDCCAC0046E3C4 /* CYExceptionLogFile.hpp */,
+				9B50CD042ECDCCAC0046E3C4 /* CYExceptionLogFile.cpp */,
+			);
+			path = Exception;
+			sourceTree = "<group>";
+		};
+		9B50CD0C2ECDCCAC0046E3C4 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD062ECDCCAC0046E3C4 /* CYEscapeMessage.hpp */,
+				9B50CD072ECDCCAC0046E3C4 /* CYEscapeMessage.cpp */,
+				9B50CD082ECDCCAC0046E3C4 /* CYNormalMessage.hpp */,
+				9B50CD092ECDCCAC0046E3C4 /* CYNormalMessage.cpp */,
+				9B50CD0A2ECDCCAC0046E3C4 /* CYStrMessage.hpp */,
+				9B50CD0B2ECDCCAC0046E3C4 /* CYStrMessage.cpp */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		9B50CD0F2ECDCCAC0046E3C4 /* SimpleLog */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD0D2ECDCCAC0046E3C4 /* CYSimpleLog.hpp */,
+				9B50CD0E2ECDCCAC0046E3C4 /* CYSimpleLog.cpp */,
+			);
+			path = SimpleLog;
+			sourceTree = "<group>";
+		};
+		9B50CD162ECDCCAC0046E3C4 /* Thread */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD102ECDCCAC0046E3C4 /* CYNamedCondition.hpp */,
+				9B50CD112ECDCCAC0046E3C4 /* CYNamedCondition.cpp */,
+				9B50CD122ECDCCAC0046E3C4 /* CYNamedLocker.hpp */,
+				9B50CD132ECDCCAC0046E3C4 /* CYNamedLocker.cpp */,
+				9B50CD142ECDCCAC0046E3C4 /* CYNamedThread.hpp */,
+				9B50CD152ECDCCAC0046E3C4 /* CYNamedThread.cpp */,
+			);
+			path = Thread;
+			sourceTree = "<group>";
+		};
+		9B50CD192ECDCCAC0046E3C4 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD172ECDCCAC0046E3C4 /* CYTimeElapsed.hpp */,
+				9B50CD182ECDCCAC0046E3C4 /* CYTimeUtils.hpp */,
+			);
+			path = Time;
+			sourceTree = "<group>";
+		};
+		9B50CD202ECDCCAC0046E3C4 /* UpLoad */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD1A2ECDCCAC0046E3C4 /* CYBaseUpLoad.hpp */,
+				9B50CD1B2ECDCCAC0046E3C4 /* CYBaseUpLoad.cpp */,
+				9B50CD1C2ECDCCAC0046E3C4 /* CYFTPUpLoad.hpp */,
+				9B50CD1D2ECDCCAC0046E3C4 /* CYFTPUpLoad.cpp */,
+				9B50CD1E2ECDCCAC0046E3C4 /* CYUpLoadFactory.hpp */,
+				9B50CD1F2ECDCCAC0046E3C4 /* CYUpLoadFactory.cpp */,
+			);
+			path = UpLoad;
+			sourceTree = "<group>";
+		};
+		9B50CD2D2ECDCCAC0046E3C4 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD012ECDCCAC0046E3C4 /* Encryption */,
+				9B50CD052ECDCCAC0046E3C4 /* Exception */,
+				9B50CD0C2ECDCCAC0046E3C4 /* Message */,
+				9B50CD0F2ECDCCAC0046E3C4 /* SimpleLog */,
+				9B50CD162ECDCCAC0046E3C4 /* Thread */,
+				9B50CD192ECDCCAC0046E3C4 /* Time */,
+				9B50CD202ECDCCAC0046E3C4 /* UpLoad */,
+				9B50CD212ECDCCAC0046E3C4 /* CYFileRestriction.hpp */,
+				9B50CD222ECDCCAC0046E3C4 /* CYFileRestriction.cpp */,
+				9B50CD232ECDCCAC0046E3C4 /* CYFormatDefine.hpp */,
+				9B50CD242ECDCCAC0046E3C4 /* CYFPSCounter.hpp */,
+				9B50CD252ECDCCAC0046E3C4 /* CYFPSCounter.cpp */,
+				9B50CD262ECDCCAC0046E3C4 /* CYJThreadDefine.hpp */,
+				9B50CD272ECDCCAC0046E3C4 /* CYNoCopy.hpp */,
+				9B50CD282ECDCCAC0046E3C4 /* CYPathConvert.hpp */,
+				9B50CD292ECDCCAC0046E3C4 /* CYPathConvert.cpp */,
+				9B50CD2A2ECDCCAC0046E3C4 /* CYPrivateDefine.hpp */,
+				9B50CD2B2ECDCCAC0046E3C4 /* CYPublicFunction.hpp */,
+				9B50CD2C2ECDCCAC0046E3C4 /* CYPublicFunction.cpp */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		9B50CD302ECDCCAC0046E3C4 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD2E2ECDCCAC0046E3C4 /* CYLoggerConfig.hpp */,
+				9B50CD2F2ECDCCAC0046E3C4 /* CYLoggerConfig.cpp */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		9B50CD422ECDCCAC0046E3C4 /* Appender */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD312ECDCCAC0046E3C4 /* CYLoggerAppenderDefine.hpp */,
+				9B50CD322ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.hpp */,
+				9B50CD332ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.cpp */,
+				9B50CD342ECDCCAC0046E3C4 /* CYLoggerBaseAppender.hpp */,
+				9B50CD352ECDCCAC0046E3C4 /* CYLoggerBaseAppender.cpp */,
+				9B50CD362ECDCCAC0046E3C4 /* CYLoggerBufferAppender.hpp */,
+				9B50CD372ECDCCAC0046E3C4 /* CYLoggerBufferAppender.cpp */,
+				9B50CD382ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.hpp */,
+				9B50CD392ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.cpp */,
+				9B50CD3A2ECDCCAC0046E3C4 /* CYLoggerFileAppender.hpp */,
+				9B50CD3B2ECDCCAC0046E3C4 /* CYLoggerFileAppender.cpp */,
+				9B50CD3C2ECDCCAC0046E3C4 /* CYLoggerMainAppender.hpp */,
+				9B50CD3D2ECDCCAC0046E3C4 /* CYLoggerMainAppender.cpp */,
+				9B50CD3E2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.hpp */,
+				9B50CD3F2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.cpp */,
+				9B50CD402ECDCCAC0046E3C4 /* CYLoggerSystemAppender.hpp */,
+				9B50CD412ECDCCAC0046E3C4 /* CYLoggerSystemAppender.cpp */,
+			);
+			path = Appender;
+			sourceTree = "<group>";
+		};
+		9B50CD472ECDCCAC0046E3C4 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD432ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.hpp */,
+				9B50CD442ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.cpp */,
+				9B50CD452ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.hpp */,
+				9B50CD462ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.cpp */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		9B50CD552ECDCCAC0046E3C4 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD482ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.hpp */,
+				9B50CD492ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.cpp */,
+				9B50CD4A2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.hpp */,
+				9B50CD4B2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.cpp */,
+				9B50CD4C2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.hpp */,
+				9B50CD4D2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.cpp */,
+				9B50CD4E2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.hpp */,
+				9B50CD4F2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.cpp */,
+				9B50CD502ECDCCAC0046E3C4 /* CYLoggertemplateLayoutDefine.hpp */,
+				9B50CD512ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.hpp */,
+				9B50CD522ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.cpp */,
+				9B50CD532ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.hpp */,
+				9B50CD542ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.cpp */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		9B50CD5D2ECDCCAC0046E3C4 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD562ECDCCAC0046E3C4 /* CYLoggerClearLogFile.hpp */,
+				9B50CD572ECDCCAC0046E3C4 /* CYLoggerClearLogFile.cpp */,
+				9B50CD582ECDCCAC0046E3C4 /* CYLoggerDoZipLog.hpp */,
+				9B50CD592ECDCCAC0046E3C4 /* CYLoggerDoZipLog.cpp */,
+				9B50CD5A2ECDCCAC0046E3C4 /* CYLoggerSchedule.hpp */,
+				9B50CD5B2ECDCCAC0046E3C4 /* CYLoggerSchedule.cpp */,
+				9B50CD5C2ECDCCAC0046E3C4 /* CYLoggerScheduleDefine.hpp */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		9B50CD612ECDCCAC0046E3C4 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD422ECDCCAC0046E3C4 /* Appender */,
+				9B50CD472ECDCCAC0046E3C4 /* Filter */,
+				9B50CD552ECDCCAC0046E3C4 /* Layout */,
+				9B50CD5D2ECDCCAC0046E3C4 /* Schedule */,
+				9B50CD5E2ECDCCAC0046E3C4 /* CYLoggerEntity.hpp */,
+				9B50CD5F2ECDCCAC0046E3C4 /* CYLoggerEntityFactory.hpp */,
+				9B50CD602ECDCCAC0046E3C4 /* CYLoggerEntityFactory.cpp */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		9B50CD642ECDCCAC0046E3C4 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD622ECDCCAC0046E3C4 /* CYStatistics.hpp */,
+				9B50CD632ECDCCAC0046E3C4 /* CYStatistics.cpp */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		9B50CD6A2ECDCCAC0046E3C4 /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				9B50CD2D2ECDCCAC0046E3C4 /* Common */,
+				9B50CD302ECDCCAC0046E3C4 /* Config */,
+				9B50CD612ECDCCAC0046E3C4 /* Entity */,
+				9B50CD642ECDCCAC0046E3C4 /* Statistics */,
+				9B50CD652ECDCCAC0046E3C4 /* CMakeLists.txt */,
+				9B50CD662ECDCCAC0046E3C4 /* CYLoggerControl.hpp */,
+				9B50CD672ECDCCAC0046E3C4 /* CYLoggerControl.cpp */,
+				9B50CD682ECDCCAC0046E3C4 /* CYLoggerImpl.hpp */,
+				9B50CD692ECDCCAC0046E3C4 /* CYLoggerImpl.cpp */,
+			);
+			name = Src;
+			path = /Users/shilianghao/Desktop/CLionProjects/CYLogger/Src;
+			sourceTree = "<absolute>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9B50CCE02ECDCC0D0046E3C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B50CCFA2ECDCC880046E3C4 /* ICYLogger.hpp in Headers */,
+				9B50CCFB2ECDCC880046E3C4 /* ICYLoggerTemplateLayout.hpp in Headers */,
+				9B50CCF92ECDCC880046E3C4 /* ICYLoggerDefine.hpp in Headers */,
+				9B50CCFC2ECDCC880046E3C4 /* ICYLoggerPatternFilter.hpp in Headers */,
+				9B50CD942ECDCCAC0046E3C4 /* CYLoggerSchedule.hpp in Headers */,
+				9B50CD952ECDCCAC0046E3C4 /* CYLoggerBaseAppender.hpp in Headers */,
+				9B50CD962ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.hpp in Headers */,
+				9B50CD972ECDCCAC0046E3C4 /* CYNamedCondition.hpp in Headers */,
+				9B50CD982ECDCCAC0046E3C4 /* CYLoggerAppenderDefine.hpp in Headers */,
+				9B50CD992ECDCCAC0046E3C4 /* CYPathConvert.hpp in Headers */,
+				9B50CD9A2ECDCCAC0046E3C4 /* CYPublicFunction.hpp in Headers */,
+				9B50CD9B2ECDCCAC0046E3C4 /* CYFTPUpLoad.hpp in Headers */,
+				9B50CD9C2ECDCCAC0046E3C4 /* CYBaseEncryption.hpp in Headers */,
+				9B50CD9D2ECDCCAC0046E3C4 /* CYExceptionLogFile.hpp in Headers */,
+				9B50CD9E2ECDCCAC0046E3C4 /* CYFPSCounter.hpp in Headers */,
+				9B50CD9F2ECDCCAC0046E3C4 /* CYTimeUtils.hpp in Headers */,
+				9B50CDA02ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.hpp in Headers */,
+				9B50CDA12ECDCCAC0046E3C4 /* CYBaseUpLoad.hpp in Headers */,
+				9B50CDA22ECDCCAC0046E3C4 /* CYExceptionDefine.hpp in Headers */,
+				9B50CDA32ECDCCAC0046E3C4 /* CYEncryptionFactory.hpp in Headers */,
+				9B50CDA42ECDCCAC0046E3C4 /* CYLoggerMainAppender.hpp in Headers */,
+				9B50CDA52ECDCCAC0046E3C4 /* CYJThreadDefine.hpp in Headers */,
+				9B50CDA62ECDCCAC0046E3C4 /* CYLoggerEntity.hpp in Headers */,
+				9B50CDA72ECDCCAC0046E3C4 /* CYStatistics.hpp in Headers */,
+				9B50CDA82ECDCCAC0046E3C4 /* CYLoggerImpl.hpp in Headers */,
+				9B50CDA92ECDCCAC0046E3C4 /* CYStrMessage.hpp in Headers */,
+				9B50CDAA2ECDCCAC0046E3C4 /* CYPrivateDefine.hpp in Headers */,
+				9B50CDAB2ECDCCAC0046E3C4 /* CYLoggerClearLogFile.hpp in Headers */,
+				9B50CDAC2ECDCCAC0046E3C4 /* CYLoggerBufferAppender.hpp in Headers */,
+				9B50CDAD2ECDCCAC0046E3C4 /* CYTimeElapsed.hpp in Headers */,
+				9B50CDAE2ECDCCAC0046E3C4 /* CYNamedThread.hpp in Headers */,
+				9B50CDAF2ECDCCAC0046E3C4 /* CYNoCopy.hpp in Headers */,
+				9B50CDB02ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.hpp in Headers */,
+				9B50CDB12ECDCCAC0046E3C4 /* CYEscapeMessage.hpp in Headers */,
+				9B50CDB22ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.hpp in Headers */,
+				9B50CDB32ECDCCAC0046E3C4 /* CYLoggerEntityFactory.hpp in Headers */,
+				9B50CDB42ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.hpp in Headers */,
+				9B50CDB52ECDCCAC0046E3C4 /* CYSimpleLog.hpp in Headers */,
+				9B50CDB62ECDCCAC0046E3C4 /* CYLoggerControl.hpp in Headers */,
+				9B50CDB72ECDCCAC0046E3C4 /* CYNormalMessage.hpp in Headers */,
+				9B50CDB82ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.hpp in Headers */,
+				9B50CDB92ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.hpp in Headers */,
+				9B50CDBA2ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.hpp in Headers */,
+				9B50CDBB2ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.hpp in Headers */,
+				9B50CDBC2ECDCCAC0046E3C4 /* CYFileRestriction.hpp in Headers */,
+				9B50CDBD2ECDCCAC0046E3C4 /* CYLoggerFileAppender.hpp in Headers */,
+				9B50CDBE2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.hpp in Headers */,
+				9B50CDBF2ECDCCAC0046E3C4 /* CYLoggerDoZipLog.hpp in Headers */,
+				9B50CDC02ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.hpp in Headers */,
+				9B50CDC12ECDCCAC0046E3C4 /* CYFormatDefine.hpp in Headers */,
+				9B50CDC22ECDCCAC0046E3C4 /* CYLoggerSystemAppender.hpp in Headers */,
+				9B50CDC32ECDCCAC0046E3C4 /* CYLoggerConfig.hpp in Headers */,
+				9B50CDC42ECDCCAC0046E3C4 /* CYUpLoadFactory.hpp in Headers */,
+				9B50CDC52ECDCCAC0046E3C4 /* CYLoggertemplateLayoutDefine.hpp in Headers */,
+				9B50CDC62ECDCCAC0046E3C4 /* CYLoggerScheduleDefine.hpp in Headers */,
+				9B50CDC72ECDCCAC0046E3C4 /* CYNamedLocker.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9B50CCE32ECDCC0D0046E3C4 /* CYLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B50CCEF2ECDCC0D0046E3C4 /* Build configuration list for PBXNativeTarget "CYLogger" */;
+			buildPhases = (
+				9B50CCE02ECDCC0D0046E3C4 /* Headers */,
+				9B50CCE12ECDCC0D0046E3C4 /* Sources */,
+				9B50CCE22ECDCC0D0046E3C4 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CYLogger;
+			packageProductDependencies = (
+			);
+			productName = CYLogger;
+			productReference = 9B50CCE42ECDCC0D0046E3C4 /* libCYLogger.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9B50CCDC2ECDCC0D0046E3C4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 2610;
+				TargetAttributes = {
+					9B50CCE32ECDCC0D0046E3C4 = {
+						CreatedOnToolsVersion = 26.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 9B50CCDF2ECDCC0D0046E3C4 /* Build configuration list for PBXProject "CYLogger" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9B50CCDB2ECDCC0D0046E3C4;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 9B50CCE52ECDCC0D0046E3C4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9B50CCE32ECDCC0D0046E3C4 /* CYLogger */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9B50CCE12ECDCC0D0046E3C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B50CD6B2ECDCCAC0046E3C4 /* CYFileRestriction.cpp in Sources */,
+				9B50CD6C2ECDCCAC0046E3C4 /* CYLoggerSchedule.cpp in Sources */,
+				9B50CD6D2ECDCCAC0046E3C4 /* CYLoggerBufferAppender.cpp in Sources */,
+				9B50CD6E2ECDCCAC0046E3C4 /* CYEncryptionFactory.cpp in Sources */,
+				9B50CD6F2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutCustom.cpp in Sources */,
+				9B50CD702ECDCCAC0046E3C4 /* CYLoggerConsoleAppender.cpp in Sources */,
+				9B50CD712ECDCCAC0046E3C4 /* CYLoggerBaseAppender.cpp in Sources */,
+				9B50CD722ECDCCAC0046E3C4 /* CYSimpleLog.cpp in Sources */,
+				9B50CD732ECDCCAC0046E3C4 /* CYLoggerPatternFilterManager.cpp in Sources */,
+				9B50CD742ECDCCAC0046E3C4 /* CYEscapeMessage.cpp in Sources */,
+				9B50CD752ECDCCAC0046E3C4 /* CYStatistics.cpp in Sources */,
+				9B50CD762ECDCCAC0046E3C4 /* CYNormalMessage.cpp in Sources */,
+				9B50CD772ECDCCAC0046E3C4 /* CYLoggerSystemAppender.cpp in Sources */,
+				9B50CD782ECDCCAC0046E3C4 /* CYPathConvert.cpp in Sources */,
+				9B50CD792ECDCCAC0046E3C4 /* CYUpLoadFactory.cpp in Sources */,
+				9B50CD7A2ECDCCAC0046E3C4 /* CYLoggerControl.cpp in Sources */,
+				9B50CD7B2ECDCCAC0046E3C4 /* CYLoggerImpl.cpp in Sources */,
+				9B50CD7C2ECDCCAC0046E3C4 /* CYFPSCounter.cpp in Sources */,
+				9B50CD7D2ECDCCAC0046E3C4 /* CYStrMessage.cpp in Sources */,
+				9B50CD7E2ECDCCAC0046E3C4 /* CYBaseEncryption.cpp in Sources */,
+				9B50CD7F2ECDCCAC0046E3C4 /* CYExceptionLogFile.cpp in Sources */,
+				9B50CD802ECDCCAC0046E3C4 /* CYLoggerClearLogFile.cpp in Sources */,
+				9B50CD812ECDCCAC0046E3C4 /* CYNamedCondition.cpp in Sources */,
+				9B50CD822ECDCCAC0046E3C4 /* CYLoggerTemplateLayout1.cpp in Sources */,
+				9B50CD832ECDCCAC0046E3C4 /* CYLoggerTemplateLayout3.cpp in Sources */,
+				9B50CD842ECDCCAC0046E3C4 /* CYLoggerMainAppender.cpp in Sources */,
+				9B50CD852ECDCCAC0046E3C4 /* CYLoggerEntityFactory.cpp in Sources */,
+				9B50CD862ECDCCAC0046E3C4 /* CYNamedLocker.cpp in Sources */,
+				9B50CD872ECDCCAC0046E3C4 /* CYLoggerConfig.cpp in Sources */,
+				9B50CD882ECDCCAC0046E3C4 /* CYLoggerTemplateLayout2.cpp in Sources */,
+				9B50CD892ECDCCAC0046E3C4 /* CYFTPUpLoad.cpp in Sources */,
+				9B50CD8A2ECDCCAC0046E3C4 /* CYPublicFunction.cpp in Sources */,
+				9B50CD8B2ECDCCAC0046E3C4 /* CYLoggerRemoteAppender.cpp in Sources */,
+				9B50CD8C2ECDCCAC0046E3C4 /* CYLoggerDoZipLog.cpp in Sources */,
+				9B50CD8D2ECDCCAC0046E3C4 /* CYBaseUpLoad.cpp in Sources */,
+				9B50CD8E2ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutManager.cpp in Sources */,
+				9B50CD8F2ECDCCAC0046E3C4 /* CYLoggerPatternFilterChain.cpp in Sources */,
+				9B50CD902ECDCCAC0046E3C4 /* CYNamedThread.cpp in Sources */,
+				9B50CD912ECDCCAC0046E3C4 /* CYLoggerTemplateLayoutEscape.cpp in Sources */,
+				9B50CD922ECDCCAC0046E3C4 /* CYLoggerAppenderFactory.cpp in Sources */,
+				9B50CD932ECDCCAC0046E3C4 /* CYLoggerFileAppender.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9B50CCED2ECDCC0D0046E3C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6KUBQ5K5V7;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9B50CCEE2ECDCC0D0046E3C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6KUBQ5K5V7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9B50CCF02ECDCC0D0046E3C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KUBQ5K5V7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/../../../",
+					"${PROJECT_DIR}/../../../Inc",
+					"${PROJECT_DIR}/../../../Src",
+					"${PROJECT_DIR}/../../../ThirdParty/CYCoroutine/Inc",
+					"${PROJECT_DIR}/../../../ThirdParty/fmt/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9B50CCF12ECDCC0D0046E3C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6KUBQ5K5V7;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/../../../",
+					"${PROJECT_DIR}/../../../Inc",
+					"${PROJECT_DIR}/../../../Src",
+					"${PROJECT_DIR}/../../../ThirdParty/CYCoroutine/Inc",
+					"${PROJECT_DIR}/../../../ThirdParty/fmt/include",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9B50CCDF2ECDCC0D0046E3C4 /* Build configuration list for PBXProject "CYLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B50CCED2ECDCC0D0046E3C4 /* Debug */,
+				9B50CCEE2ECDCC0D0046E3C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B50CCEF2ECDCC0D0046E3C4 /* Build configuration list for PBXNativeTarget "CYLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B50CCF02ECDCC0D0046E3C4 /* Debug */,
+				9B50CCF12ECDCC0D0046E3C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9B50CCDC2ECDCC0D0046E3C4 /* Project object */;
+}

@@ -1,9 +1,9 @@
-#include "Src/Entity/Schedule/CYLoggerSchedule.hpp"
-#include "Src/Entity/Schedule/CYLoggerDoZipLog.hpp"
-#include "Src/Entity/Schedule/CYLoggerClearLogFile.hpp"
+#include "Entity/Schedule/CYLoggerSchedule.hpp"
+#include "Entity/Schedule/CYLoggerDoZipLog.hpp"
+#include "Entity/Schedule/CYLoggerClearLogFile.hpp"
 #include "CYCoroutine/Common/Exception/CYException.hpp"
-#include "Src/Common/Exception/CYExceptionLogFile.hpp"
-#include "Src/Common/Time/CYTimeElapsed.hpp"
+#include "Common/Exception/CYExceptionLogFile.hpp"
+#include "Common/Time/CYTimeElapsed.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -53,6 +53,7 @@ void CYLoggerSchedule::StartSchedule()
 */
 void CYLoggerSchedule::StopSchedule()
 {
+    m_objCondition.SignalOne();
     CYNamedThread::StopThread();
 }
 

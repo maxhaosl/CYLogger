@@ -1,15 +1,22 @@
-#include "Src/Entity/Schedule/CYLoggerClearLogFile.hpp"
-#include "Src/Config/CYLoggerConfig.hpp"
-#include "Src/Common/CYPathConvert.hpp"
-#include "Src/Entity/Appender/CYLoggerBaseAppender.hpp"
-#include "Src/Entity/CYLoggerEntity.hpp"
-#include "Src/Entity/CYLoggerEntityFactory.hpp"
-#include "Src/Common/Exception/CYExceptionLogFile.hpp"
-#include "Src/Common/CYPublicFunction.hpp"
+#include "Entity/Schedule/CYLoggerClearLogFile.hpp"
+#include "Config/CYLoggerConfig.hpp"
+#include "Common/CYPathConvert.hpp"
+#include "Entity/Appender/CYLoggerBaseAppender.hpp"
+#include "Entity/CYLoggerEntity.hpp"
+#include "Entity/CYLoggerEntityFactory.hpp"
+#include "Common/Exception/CYExceptionLogFile.hpp"
+#include "Common/CYPublicFunction.hpp"
 
 #include <filesystem>
 #include <chrono>
 #include <ctime>
+#ifdef CYLOGGER_WIN_OS
+#include <windows.h>
+#else
+#include <sys/stat.h>
+#include <dirent.h>
+#include <cstring>
+#endif
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -79,7 +86,7 @@ void CYLoggerClearLogFile::ProcessRunningLogFile(const std::list<ELogType>& lstL
     for (auto& eLogType : lstLogType)
     {
         SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> ptrEntity = LoggerEntityFactory()->GetLoggerEntity(eLogType);
-        if (ptrEntity->GetLogName().empty()) 
+        if (ptrEntity->GetLogName().empty())
             continue;
 
         CYLogFileInfo objFileInfo;
@@ -147,7 +154,7 @@ void CYLoggerClearLogFile::ProcessClearNonLog(const std::list<TString>& lstNotLo
 {
     for (auto& objFileInfo : lstNotLogFile)
     {
-        std::filesystem::remove(objFileInfo.c_str());
+        CYPublicFunction::Remove(objFileInfo.c_str());
     }
 }
 
@@ -173,7 +180,7 @@ void CYLoggerClearLogFile::ProcessClearLogCount(FileClassMap& mapLogFileInfo)
                     break;
 
                 lstKeysToDelete.push_back(objFileInfo.first);
-                std::filesystem::remove(objFileInfo.second.strLogFilePath);
+                CYPublicFunction::Remove(objFileInfo.second.strLogFilePath);
                 nSize--;
             }
 
@@ -209,7 +216,7 @@ void CYLoggerClearLogFile::ProcessClearLogExpired(FileClassMap& mapLogFileInfo)
             if (nHours > m_nLimitTimeExpiredFile)
             {
                 lstKeysToDelete.push_back(objFileInfo.first);
-                std::filesystem::remove(objFileInfo.second.strLogFilePath);
+                CYPublicFunction::Remove(objFileInfo.second.strLogFilePath);
             }
         }
 
@@ -238,7 +245,7 @@ void CYLoggerClearLogFile::ProcessClearLogTypeSize(FileClassMap& mapLogFileInfo)
             nLogTotalBytes += objFileInfo.second.nSize;
         }
 
-        if (nLogTotalBytes < m_nCheckFileTypeSize) 
+        if (nLogTotalBytes < m_nCheckFileTypeSize)
             continue;
 
         // List of keys to delete
@@ -247,13 +254,13 @@ void CYLoggerClearLogFile::ProcessClearLogTypeSize(FileClassMap& mapLogFileInfo)
         // Log file map for each type.
         for (auto& objFileInfo : mapTypeFileInfo)
         {
-            if (nLogTotalBytes < m_nCheckFileTypeSize) 
+            if (nLogTotalBytes < m_nCheckFileTypeSize)
                 break;
 
             nLogTotalBytes -= objFileInfo.second.nSize;
 
             lstKeysToDelete.push_back(objFileInfo.first);
-            std::filesystem::remove(objFileInfo.second.strLogFilePath);
+            CYPublicFunction::Remove(objFileInfo.second.strLogFilePath);
         }
 
         // Delete key.
@@ -290,7 +297,7 @@ void CYLoggerClearLogFile::ProcessClearLogALLSize(FileClassMap& mapLogFileInfo)
         if (nALLSize < m_nCheckALLFileSize) break;
 
         nALLSize -= objInfo.second.nSize;
-        std::filesystem::remove(objInfo.second.strLogFilePath);
+        CYPublicFunction::Remove(objInfo.second.strLogFilePath);
     }
 }
 
@@ -299,7 +306,7 @@ void CYLoggerClearLogFile::ProcessClearLogALLSize(FileClassMap& mapLogFileInfo)
 */
 void CYLoggerClearLogFile::EnumLogFile(TString strLogPath, std::list<TString>& vecLogList)
 {
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     HANDLE hFindFile = INVALID_HANDLE_VALUE;
     WIN32_FIND_DATA struFindFileData;
     hFindFile = FindFirstFile((strLogPath + TEXT("*")).c_str(), &struFindFileData);
@@ -336,22 +343,32 @@ void CYLoggerClearLogFile::EnumLogFile(TString strLogPath, std::list<TString>& v
     dirent* p = nullptr;
     while ((p = readdir(dir)) != nullptr)
     {
-        if (p->d_name[0] != '.')
+        // Skip "." and ".." directories
+        if (strcmp(p->d_name, ".") == 0 || strcmp(p->d_name, "..") == 0)
         {
-            TString strFullPath = strLogPath + p->d_name;
-            struct stat s;
-            stat(strFullPath.c_str(), &s);
+            continue;
+        }
+
+        TString strFullPath = strLogPath + p->d_name;
+        struct stat s;
+        if (stat(strFullPath.c_str(), &s) == 0)
+        {
             if (S_ISDIR(s.st_mode))
             {
                 EnumLogFile(strFullPath + "/", vecLogList);
             }
             else
             {
-                vecLogList.push_back(strLogPath + p->d_name);
+                // Only add .log files
+                std::string strName = p->d_name;
+                if (strName.find(".log") != std::string::npos)
+                {
+                    vecLogList.push_back(strLogPath + p->d_name);
+                }
             }
         }
     }
-    closedir(dir);//关闭指定目录
+    closedir(dir);
 #endif
 }
 
@@ -360,7 +377,7 @@ void CYLoggerClearLogFile::EnumLogFile(TString strLogPath, std::list<TString>& v
 */
 void CYLoggerClearLogFile::EnumNotLogFile(TString strLogPath, std::list<TString>& vecNotLogList)
 {
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
     HANDLE hFindFile = INVALID_HANDLE_VALUE;
     WIN32_FIND_DATA struFindFileData;
     hFindFile = FindFirstFile((strLogPath + TEXT("*")).c_str(), &struFindFileData);
@@ -396,11 +413,16 @@ void CYLoggerClearLogFile::EnumNotLogFile(TString strLogPath, std::list<TString>
     dirent* p = nullptr;
     while ((p = readdir(dir)) != nullptr)
     {
-        if (p->d_name[0] != '.')
+        // Skip "." and ".." directories
+        if (strcmp(p->d_name, ".") == 0 || strcmp(p->d_name, "..") == 0)
         {
-            TString strFullPath = strLogPath + p->d_name;
-            struct stat s;
-            stat(strFullPath.c_str(), &s);
+            continue;
+        }
+
+        TString strFullPath = strLogPath + p->d_name;
+        struct stat s;
+        if (stat(strFullPath.c_str(), &s) == 0)
+        {
             if (S_ISDIR(s.st_mode))
             {
                 EnumNotLogFile(strFullPath + "/", vecNotLogList);
@@ -414,10 +436,10 @@ void CYLoggerClearLogFile::EnumNotLogFile(TString strLogPath, std::list<TString>
                 }
             }
         }
-        }
-    closedir(dir);//关闭指定目录
-#endif
     }
+    closedir(dir);
+#endif
+}
 
 /**
  * @brief Get log file information.
@@ -425,15 +447,14 @@ void CYLoggerClearLogFile::EnumNotLogFile(TString strLogPath, std::list<TString>
 void CYLoggerClearLogFile::GetFileInfomation(CYLogFileInfo& objLogFileInfo)
 {
     EXCEPTION_BEGIN
+    {
+        // Get file size
+        objLogFileInfo.nSize = CYPublicFunction::GetFileSize(objLogFileInfo.strLogFilePath);
 
-    // Get file size
-    objLogFileInfo.nSize = std::filesystem::file_size(objLogFileInfo.strLogFilePath);
-
-    // Get file creation time
-    const auto timepoint = std::filesystem::last_write_time(objLogFileInfo.strLogFilePath);
-    objLogFileInfo.tpCreateTime = std::chrono::clock_cast<std::chrono::system_clock>(timepoint);
-
-    EXCEPTION_END
+    // Get create time
+    objLogFileInfo.tpCreateTime = CYPublicFunction::GetLastWriteTime(objLogFileInfo.strLogFilePath);
+    }
+        EXCEPTION_END
 }
 
 /**
@@ -476,7 +497,7 @@ ELogType CYLoggerClearLogFile::GetLogFileType(const std::list<CYLogFileInfo>& ls
     ELogType eLogType = ELogType::LOG_TYPE_NONE;
     for (const auto& objFileInfo : lstLogFile)
     {
-        if(strCheckName.compare(objFileInfo.strCheckName) == 0)
+        if (strCheckName.compare(objFileInfo.strCheckName) == 0)
             return objFileInfo.eLogType;;
     }
     return eLogType;

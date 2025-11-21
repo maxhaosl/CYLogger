@@ -1,8 +1,7 @@
-#include "Src/Common/CYFileRestriction.hpp"
-#include "Src/Common/CYPublicFunction.hpp"
+#include "Common/CYFileRestriction.hpp"
+#include "Common/CYPublicFunction.hpp"
+#include "Common/CYFormatDefine.hpp"
 #include "CYCoroutine/Common/Time/CYTimeStamps.hpp"
-
-#include <format>
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -14,12 +13,10 @@ int CYFileRestriction::m_nCheckFileSize = 1024 * 1024 * 5;
 CYFileRestriction::CYFileRestriction()
     : m_nFileSize(0)
 {
-
 }
 
 CYFileRestriction::~CYFileRestriction()
 {
-
 }
 
 /**
@@ -69,7 +66,7 @@ const TString CYFileRestriction::GetNewLogName(const TString& strCurrentLogName)
     TString strFileName = CYPublicFunction::GetBaseLogName(strCurrentLogName);
 
     TString strFileExt = CYPublicFunction::GetFileExt(strCurrentLogName);
-    return std::format(TEXT("{}_{}.{}"), strFilePath, strData, strFileExt);
+    return strFilePath + TEXT("_") + strData + TEXT(".") + strFileExt;
 }
 
 CYLOGGER_NAMESPACE_END

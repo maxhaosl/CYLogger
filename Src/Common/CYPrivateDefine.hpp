@@ -47,23 +47,38 @@
 #include "Inc/ICYLoggerDefine.hpp"
 #include "CYCoroutine/CYTypeDefine.hpp"
 
+#ifdef CYLOGGER_WIN_OS
 #include <winsock2.h>
 #include <windows.h>
 #include <sys/timeb.h>
+#include <tchar.h>
+#else
+#include <sys/time.h>
 #include <chrono>
+#include <unistd.h>
+#include <string.h>
+#endif
 
 CYLOGGER_NAMESPACE_BEGIN
 
+#ifdef CYLOGGER_WIN_OS
 #define TRED		FOREGROUND_RED | FOREGROUND_INTENSITY
 #define TGREEN		FOREGROUND_GREEN | FOREGROUND_INTENSITY
 #define TYELLOW		FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY
 #define TNORMAL		FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE
+#else
+// Unix/Linux color codes
+#define TRED		"\033[1;31m"
+#define TGREEN		"\033[1;32m"
+#define TYELLOW		"\033[1;33m"
+#define TNORMAL		"\033[0m"
+#endif
 #define TWHITE		TNORMAL | FOREGROUND_INTENSITY
 #define TBLUE		FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY
 
 #define LOG_DIR  TEXT("Log")
 
-#ifdef WIN32
+#ifdef CYLOGGER_WIN_OS
 #define LOG_SEPARATOR		TEXT('\\')
 #define LOG_SEPARATOR_STR	TEXT("\\")
 #else
@@ -76,8 +91,8 @@ CYLOGGER_NAMESPACE_BEGIN
 */
 enum RetCode : int16_t
 {
-	ERR_NOERR = 0x00,
-	ERR_COND_TIMEOUT = 0x01,
+    ERR_NOERR = 0x00,
+    ERR_COND_TIMEOUT = 0x01,
 };
 
 CYLOGGER_NAMESPACE_END

@@ -1,7 +1,7 @@
 #include "CYCoroutine/CYCoroutine.hpp"
-#include "Src/Entity/Appender/CYLoggerBufferAppender.hpp"
-#include "Src/Statistics/CYStatistics.hpp"
-#include "Src/Common/Exception/CYExceptionLogFile.hpp"
+#include "Entity/Appender/CYLoggerBufferAppender.hpp"
+#include "Statistics/CYStatistics.hpp"
+#include "Common/Exception/CYExceptionLogFile.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

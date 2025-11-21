@@ -44,7 +44,7 @@
 #ifndef __CY_LOGGER_BUFFER_APPENDER_HPP__
 #define __CY_LOGGER_BUFFER_APPENDER_HPP__
 
-#include "Src/Entity/Appender/CYLoggerBaseAppender.hpp"
+#include "Entity/Appender/CYLoggerBaseAppender.hpp"
 
 #include <string>
 #include <map>

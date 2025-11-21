@@ -1,8 +1,8 @@
-#include "Src/Common/Message/CYNormalMessage.hpp"
-#include "Src/Common/CYPrivateDefine.hpp"
-#include "Src/Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
+#include "Common/Message/CYNormalMessage.hpp"
+#include "Common/CYPrivateDefine.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
 #include "CYCoroutine/Common/Exception/CYBaseException.hpp"
-#include "Src/Common/Exception/CYExceptionLogFile.hpp"
+#include "Common/Exception/CYExceptionLogFile.hpp"
 #include <sstream>
 
 CYLOGGER_NAMESPACE_BEGIN
@@ -12,7 +12,11 @@ CYNormalMessage::CYNormalMessage(const TString& strChannel, ELogType eMsgType, i
 {
     EXCEPTION_BEGIN
     {
+#ifdef _WIN32
         m_nProcessId = GetCurrentProcessId();
+#else
+        m_nProcessId = getpid();
+#endif
 		m_ptrTemplateLayout = LoggerTemplateLayoutManager()->GetTemplateLayout();
     }
     EXCEPTION_END
