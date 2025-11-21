@@ -38,12 +38,17 @@ elseif(APPLE)
     endif()
 elseif(ANDROID)
     set(CYLOGGER_PLATFORM "Android")
+    add_definitions(-DCYLOGGER_ANDROID_OS)
+    add_definitions(-DCYLOGGER_LINUX_OS)
 elseif(UNIX)
     set(CYLOGGER_PLATFORM "Linux")
 endif()
 
 # 处理器架构检测
-if(CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
+if(ANDROID)
+    # Android平台使用CMAKE_ANDROID_ARCH_ABI
+    set(CYLOGGER_ARCH ${CMAKE_ANDROID_ARCH_ABI})
+elseif(CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
     set(CYLOGGER_ARCH "arm64")
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
     set(CYLOGGER_ARCH "x64")
@@ -73,6 +78,13 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_EXAMPLES "Build examples" ON)
 
 # 首先构建CYCoroutine依赖
+# 确保CYCoroutine构建与CYLogger相同类型的库
+set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS} CACHE BOOL "Build shared libraries" FORCE)
+if(BUILD_SHARED_LIBS)
+    set(BUILD_STATIC_LIBS OFF CACHE BOOL "Build static libraries" FORCE)
+else()
+    set(BUILD_STATIC_LIBS ON CACHE BOOL "Build static libraries" FORCE)
+endif()
 add_subdirectory(ThirdParty/CYCoroutine/Build)
 
 # 添加子目录

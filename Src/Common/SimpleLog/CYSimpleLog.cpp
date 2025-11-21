@@ -118,7 +118,7 @@ CYSimpleLogFile::~CYSimpleLogFile()
     CloseLog();
 }
 
-bool CYSimpleLogFile::InitLog(bool bLogTime, bool bLogLineCount, const TChar* szWorkPath, const TChar* pszLogDir, const TChar* szFilePath, va_list args)
+bool CYSimpleLogFile::InitLog(bool bLogTime, bool bLogLineCount, const TChar* szWorkPath, const TChar* pszLogDir, const TChar* szFilePath, ...)
 {
     if (m_bInit)
         return true;
@@ -137,16 +137,10 @@ bool CYSimpleLogFile::InitLog(bool bLogTime, bool bLogLineCount, const TChar* sz
 
     TChar szPath[MAX_LOG_PATH_SIZE];
 
-    va_list args_copy;
-
-#if defined(_MSC_VER) || defined(__BORLANDC__)
-    args_copy = args;
-#else
-    va_copy(args_copy, args);
-#endif
-    //va_start(args, szFilePath);
-    cy_vsnprintf_s(szPath, MAX_LOG_PATH_SIZE, MAX_LOG_PATH_SIZE, szFilePath, args_copy);
-    va_end(args_copy);
+    va_list args;
+    va_start(args, szFilePath);
+    cy_vsnprintf_s(szPath, MAX_LOG_PATH_SIZE, MAX_LOG_PATH_SIZE, szFilePath, args);
+    va_end(args);
 
     cy_tcscpy_s(m_szFilePath, MAX_LOG_PATH_SIZE, ConvertFilePath(szPath, szWorkPath, pszLogDir).c_str());
     cy_tcscpy_s(m_szWorkPath, MAX_LOG_PATH_SIZE, szWorkPath);
@@ -161,9 +155,6 @@ bool CYSimpleLogFile::InitLog(bool bLogTime, bool bLogLineCount, const TChar* sz
 
 void CYSimpleLogFile::CreateDir()
 {
-    if (m_szFilePath == nullptr)
-        return;
-
     if (0 == cy_strlen(m_szFilePath))
         return;
 
@@ -388,21 +379,15 @@ CYSimpleLogConsole::~CYSimpleLogConsole()
     CloseLog();
 }
 
-bool CYSimpleLogConsole::InitLog(bool bLogTime, bool bLogLineCount, const TChar* szWorkPath/* = nullptr*/, const TChar* pszLogDir/* = TEXT("Log")*/, const TChar* szConsoleTitle, va_list args)
+bool CYSimpleLogConsole::InitLog(bool bLogTime, bool bLogLineCount, const TChar* szWorkPath/* = nullptr*/, const TChar* pszLogDir/* = TEXT("Log")*/, const TChar* szConsoleTitle, ...)
 {
     m_bLogTime = bLogTime;
     m_bLogLineCount = bLogLineCount;
 
-    va_list args_copy;
-
-#if defined(_MSC_VER) || defined(__BORLANDC__)
-    args_copy = args;
-#else
-    va_copy(args_copy, args);
-#endif
-    //va_start(args, szFilePath);
-    cy_vsnprintf_s(m_szConsoleTitle, 128, 128, szConsoleTitle, args_copy);
-    va_end(args_copy);
+    va_list args;
+    va_start(args, szConsoleTitle);
+    cy_vsnprintf_s(m_szConsoleTitle, 128, 128, szConsoleTitle, args);
+    va_end(args);
 
     if (!szConsoleTitle)
         cy_strcpy(m_szConsoleTitle, DEFAULT_CONSOLE_TOTLE);

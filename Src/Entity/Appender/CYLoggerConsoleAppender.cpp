@@ -77,7 +77,7 @@ void CYLoggerConsoleAppender::Log(const TStringView& strMsg, int nTypeIndex, boo
         OutputDebugString(TEXT("\r\n"));
     }
 #else
-    printf(strMsg.data());
+    printf("%s", strMsg.data());
     printf("\n");
 #endif
 

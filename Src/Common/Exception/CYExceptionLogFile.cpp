@@ -48,10 +48,7 @@ bool CYExceptionLogFile::InitLog(bool bLogTime/* = true*/, bool bLogLineCount/* 
 {
 	assert(m_ptrLogFile);
 
-	va_list args;
-	va_start(args, szFilePath);
-	bool bRet = m_ptrLogFile->InitLog(bLogTime, bLogLineCount, szWorkPath, pszLogDir, szFilePath, args);
-	va_end(args);
+	bool bRet = m_ptrLogFile->InitLog(bLogTime, bLogLineCount, szWorkPath, pszLogDir, szFilePath);
 
 	return bRet;
 }

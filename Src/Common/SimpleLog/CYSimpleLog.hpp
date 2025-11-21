@@ -97,7 +97,7 @@ public:
     CYSimpleLog();
     ~CYSimpleLog();
 
-    virtual bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, va_list args = nullptr) = 0;
+    virtual bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, ...) = 0;
     virtual bool WriteString(TChar* szStr) = 0;
     virtual void CloseLog() = 0;
 
@@ -122,7 +122,7 @@ public:
     CYSimpleLogFile();
     ~CYSimpleLogFile();
 
-    bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, va_list args = nullptr);
+    bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szFilePath = nullptr, ...);
     void CloseLog();
 
     bool WriteString(TChar* szStr);
@@ -145,7 +145,7 @@ public:
     CYSimpleLogConsole();
     ~CYSimpleLogConsole();
 
-    bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szConsoleTitle = nullptr, va_list args = nullptr);
+    bool InitLog(bool bLogTime = true, bool bLogLineCount = true, const TChar* szWorkPath = nullptr, const TChar* pszLogDir = TEXT("Log"), const TChar* szConsoleTitle = nullptr, ...);
     bool WriteString(TChar* szStr);
     void CloseLog();
 

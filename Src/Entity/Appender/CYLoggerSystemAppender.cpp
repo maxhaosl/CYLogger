@@ -28,7 +28,7 @@ namespace
 	void WriteToSyslog(const TString& strName, const TString& message, int eventType)
 	{
 		openlog(strName.c_str(), LOG_PID | LOG_CONS, LOG_USER);
-		syslog(eventType, message.c_str());
+		syslog(eventType, "%s", message.c_str());
 		closelog();
 	}		
 #endif
@@ -93,7 +93,7 @@ void CYLoggerSystemAppender::Log(const TStringView& strMsg, int nTypeIndex, bool
     default:  eventType = LOG_INFO;			break;
     }
 
-    syslog(eventType, logMessage);
+    syslog(eventType, "%s", logMessage);
     closelog();
 #endif
 

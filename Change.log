@@ -1,14 +1,26 @@
 CYLogger V1.0.0 features:
-1. C++ 20 coroutine implementation
-2. Double buffer queue.
-3. independent lock.
-4. log pattern filter.
-5. Log template layout.
-6. Exception handling.
-7. The interface is simple and easy to use and supports cross-platform.
+1. C++20 coroutine implementation
+2. Double buffer queue
+3. Independent lock
+4. Log pattern filter
+5. Log template layout
+6. Exception handling
+7. Simple and easy-to-use interface with cross-platform support
 
 Included plugins:
-1. CYCoroutine.
+1. CYCoroutine
 
-2025-4-1：
-1. Fixed the compilation problem of VS engineering different platforms.
+2025-11-21:
+1. Added Android platform support with NDK r26b
+2. Fixed Android-specific compilation issues with std::filesystem
+3. Fixed va_list parameter issues for Android platform
+4. Fixed format string security warnings
+5. Added support for all Android architectures: armeabi-v7a, arm64-v8a, x86, x86_64
+6. Organized library outputs by platform in Bin directory structure
+7. Added build scripts for all platforms: Windows, macOS, iOS, Linux, Android
+8. Fixed architecture name inconsistencies between CYLogger and CYCoroutine
+9. Added support for both static and shared libraries on all platforms
+10. Improved CMake configuration for cross-platform builds
+
+2025-04-01:
+1. Fixed compilation issues for VS projects on different platforms

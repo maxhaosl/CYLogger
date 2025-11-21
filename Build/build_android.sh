@@ -57,9 +57,14 @@ fi
 
 # 编译
 echo "Building..."
-make -j$(nproc)
+if command -v nproc >/dev/null 2>&1; then
+    make -j$(nproc)
+else
+    # macOS上使用sysctl获取CPU核心数
+    make -j$(sysctl -n hw.ncpu)
+fi
 
 echo "Build completed successfully!"
-echo "Output directory: $PROJECT_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE"
+echo "Output directory: $PROJECT_ROOT/Bin/Android/$ANDROID_ABI/$LIB_TYPE"
 
 cd "$BUILD_DIR"

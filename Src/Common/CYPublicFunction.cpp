@@ -591,6 +591,18 @@ std::chrono::system_clock::time_point CYPublicFunction::GetLastWriteTime(const T
         return tp;
     }
     return std::chrono::system_clock::time_point{};
+#elif defined(CYLOGGER_ANDROID_OS)
+    struct stat st;
+    if (stat(strPath.c_str(), &st) == 0)
+    {
+        auto tp = std::chrono::system_clock::from_time_t(st.st_mtime);
+
+        int offsetHours = GetLocalUTCOffsetHours();
+        tp += std::chrono::hours(offsetHours);
+
+        return tp;
+    }
+    return std::chrono::system_clock::time_point{};
 #else
     // Get file creation time
     const auto timepoint = std::filesystem::last_write_time(strPath);

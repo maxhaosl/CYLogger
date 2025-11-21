@@ -51,7 +51,13 @@ endif()
 
 # 链接库
 find_package(Threads REQUIRED)
-target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine)
+
+# 根据构建类型选择正确的CYCoroutine库
+if(BUILD_SHARED_LIBS)
+    target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_shared)
+else()
+    target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_static)
+endif()
 
 # Windows特定设置
 if(WIN32)
@@ -73,3 +79,24 @@ install(EXPORT CYLoggerTargets
     NAMESPACE CYLogger::
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/CYLogger
 )
+
+# 导出CYCoroutine目标
+if(BUILD_SHARED_LIBS)
+    if(TARGET CYCoroutine_shared)
+        install(TARGETS CYCoroutine_shared
+            EXPORT CYLoggerTargets
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        )
+    endif()
+else()
+    if(TARGET CYCoroutine_static)
+        install(TARGETS CYCoroutine_static
+            EXPORT CYLoggerTargets
+            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        )
+    endif()
+endif()
