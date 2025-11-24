@@ -16,6 +16,9 @@ if "%BUILD_LIST%"=="" set BUILD_LIST=Release,Debug
 set CRT_LIST=%4
 if "%CRT_LIST%"=="" set CRT_LIST=MD,MT
 
+call :EnsureFmtSubmodule
+if errorlevel 1 exit /b 1
+
 set ARCH_LIST=%ARCH_LIST:,= %
 set LIB_LIST=%LIB_LIST:,= %
 set BUILD_LIST=%BUILD_LIST:,= %
@@ -66,6 +69,31 @@ powershell -NoProfile -Command "Get-ChildItem -Path '%PROJECT_ROOT%\Bin\Windows'
 
 goto :eof
 
+:EnsureFmtSubmodule
+set "FMT_HEADER=%PROJECT_ROOT%\ThirdParty\fmt\include\fmt\format.h"
+if exist "%FMT_HEADER%" (
+    exit /b 0
+)
+
+echo fmt headers not found. Initializing ThirdParty\fmt submodule...
+pushd "%PROJECT_ROOT%" >nul
+git submodule update --init --recursive ThirdParty/fmt
+set "GIT_ERROR=%ERRORLEVEL%"
+popd >nul
+
+if not "%GIT_ERROR%"=="0" (
+    echo Failed to update fmt submodule. Please check your git setup.
+    exit /b %GIT_ERROR%
+)
+
+if not exist "%FMT_HEADER%" (
+    echo fmt headers still missing after submodule update.
+    exit /b 1
+)
+
+echo fmt submodule ready.
+exit /b 0
+
 :EnsureDependencies
 setlocal enabledelayedexpansion
 REM Re-establish variables from parent scope after setlocal
@@ -102,8 +130,37 @@ if errorlevel 1 (
 )
 
 set BASE_RUNTIME=!RUNTIME_INPUT!
-call :ResolveRuntimeForConfig "!CONFIG!" "!BASE_RUNTIME!" "RESOLVED_RUNTIME"
-if errorlevel 1 (
+set RESOLVED_RUNTIME=
+if /I "!CONFIG!"=="Debug" (
+    if /I "!BASE_RUNTIME!"=="MDD" (
+        set RESOLVED_RUNTIME=MDD
+    ) else if /I "!BASE_RUNTIME!"=="MTD" (
+        set RESOLVED_RUNTIME=MTD
+    ) else if /I "!BASE_RUNTIME!"=="MT" (
+        set RESOLVED_RUNTIME=MTD
+    ) else if /I "!BASE_RUNTIME!"=="MD" (
+        set RESOLVED_RUNTIME=MDD
+    ) else (
+        echo Unsupported CRT runtime "!BASE_RUNTIME!" for Debug build.
+        endlocal & exit /b 1
+    )
+) else if /I "!CONFIG!"=="Release" (
+    if /I "!BASE_RUNTIME!"=="MT" (
+        set RESOLVED_RUNTIME=MT
+    ) else if /I "!BASE_RUNTIME!"=="MD" (
+        set RESOLVED_RUNTIME=MD
+    ) else if /I "!BASE_RUNTIME!"=="MDD" (
+        echo Error: MDD is not valid for Release build. Use MD instead.
+        endlocal & exit /b 1
+    ) else if /I "!BASE_RUNTIME!"=="MTD" (
+        echo Error: MTD is not valid for Release build. Use MT instead.
+        endlocal & exit /b 1
+    ) else (
+        echo Unsupported CRT runtime "!BASE_RUNTIME!" for Release build.
+        endlocal & exit /b 1
+    )
+) else (
+    echo Unsupported build type "!CONFIG!".
     endlocal & exit /b 1
 )
 set RUNTIME_FOR_CONFIG=!RESOLVED_RUNTIME!
@@ -124,7 +181,7 @@ REM Always build CYCoroutine as static library (BUILD_SHARED_LIBS=OFF)
 REM Use OUTPUT_ARCH for directory name, but CMAKE_ARCH for CMake -A parameter
 set DEP_DIR=%BUILD_DIR%deps_windows_!OUTPUT_ARCH!_!RUNTIME_FOR_CONFIG!_%CONFIG%_static
 echo Preparing CYCoroutine dependencies in %DEP_DIR% (static library only)...
-cmake -S "%PROJECT_ROOT%" -B "%DEP_DIR%" -G "Visual Studio 17 2022" -A !CMAKE_ARCH! -DCMAKE_BUILD_TYPE=%CONFIG% -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DCYLOGGER_MSVC_RUNTIME=!RUNTIME_FOR_CONFIG! -DTARGET_ARCH=!OUTPUT_ARCH!
+cmake -S "%PROJECT_ROOT%" -B "%DEP_DIR%" -G "Visual Studio 17 2022" -A !CMAKE_ARCH! -DCMAKE_BUILD_TYPE=%CONFIG% -DBUILD_SHARED_LIBS=OFF -DBUILD_EXAMPLES=OFF -DCYLOGGER_MSVC_RUNTIME=!RUNTIME_FOR_CONFIG! -DWINDOWS_RUNTIME=!RUNTIME_FOR_CONFIG! -DTARGET_ARCH=!OUTPUT_ARCH!
 if errorlevel 1 (
     endlocal & exit /b 1
 )
@@ -138,13 +195,16 @@ REM Copy the static library to the target directory
 REM Use OUTPUT_ARCH for source path as well
 if not exist "%ARCH_DIR%" mkdir "%ARCH_DIR%"
 REM Fix the source path - use the correct output directory structure
-for %%F in ("%DEP_DIR%\Bin\Windows\!OUTPUT_ARCH!\!RUNTIME_FOR_CONFIG!\%CONFIG%\CYCoroutine.lib") do (
-    if exist "%%F" (
-        copy /Y "%%F" "%ARCH_DIR%\CYCoroutine.lib" >nul
-        echo Copied CYCoroutine.lib to %ARCH_DIR%
-    ) else (
-        echo Warning: CYCoroutine.lib not found at expected location: %%F
-    )
+set "PREFERRED_LIB=%DEP_DIR%\Bin\Windows\!OUTPUT_ARCH!\!RUNTIME_FOR_CONFIG!\%CONFIG%\CYCoroutine.lib"
+set "FALLBACK_LIB=%PROJECT_ROOT%\Bin\Windows\!OUTPUT_ARCH!\!RUNTIME_FOR_CONFIG!\%CONFIG%\CYCoroutine.lib"
+if exist "%PREFERRED_LIB%" (
+    copy /Y "%PREFERRED_LIB%" "%ARCH_DIR%\CYCoroutine.lib" >nul
+    echo Copied CYCoroutine.lib to %ARCH_DIR% from dependency tree
+) else if exist "%FALLBACK_LIB%" (
+    copy /Y "%FALLBACK_LIB%" "%ARCH_DIR%\CYCoroutine.lib" >nul
+    echo Copied CYCoroutine.lib to %ARCH_DIR% from global Bin directory
+) else (
+    echo Warning: CYCoroutine.lib not found at "%PREFERRED_LIB%" or "%FALLBACK_LIB%"
 )
 
 endlocal & exit /b 0
@@ -190,47 +250,6 @@ if /I "%CURRENT_VALUE%"=="DEBUG" (
 set "%VAR_NAME%=%CURRENT_VALUE%"
 exit /b 0
 
-endlocal & exit /b 0
-
-:ResolveRuntimeForConfig
-set "CFG=%~1"
-set "BASE=%~2"
-set "OUT_VAR=%~3"
-
-if /I "%CFG%"=="Debug" (
-    REM For Debug, accept MDD, MTD directly, or resolve MD/MT to MDD/MTD
-    if /I "%BASE%"=="MDD" (
-        set RESULT=MDD
-    ) else if /I "%BASE%"=="MTD" (
-        set RESULT=MTD
-    ) else if /I "%BASE%"=="MT" (
-        set RESULT=MTD
-    ) else (
-        REM Default to MDD for Debug if MD or unspecified
-        set RESULT=MDD
-    )
-) else if /I "%CFG%"=="Release" (
-    REM For Release, only accept MD or MT (not MDD or MTD)
-    if /I "%BASE%"=="MT" (
-        set RESULT=MT
-    ) else if /I "%BASE%"=="MDD" (
-        echo Error: MDD is not valid for Release build. Use MD instead.
-        exit /b 1
-    ) else if /I "%BASE%"=="MTD" (
-        echo Error: MTD is not valid for Release build. Use MT instead.
-        exit /b 1
-    ) else (
-        REM Default to MD for Release
-        set RESULT=MD
-    )
-) else (
-    echo Unsupported build type "%CFG%".
-    exit /b 1
-)
-
-set "%OUT_VAR%=%RESULT%"
-exit /b 0
-
 :ValidateBuildRuntimeCombination
 set "CFG=%~1"
 set "RUNTIME=%~2"
@@ -256,3 +275,4 @@ if /I "%CFG%"=="Debug" (
 )
 
 exit /b 0
+

@@ -157,6 +157,10 @@ void CYLoggerEntity<APPEND>::WriteLog(const SharePtr<CYBaseMessage>& ptrMessage)
 template<BaseOf APPEND>
 const ELogType CYLoggerEntity<APPEND>::GetId() const
 {
+	if (!m_ptrAppender)
+	{
+		return LOG_TYPE_NONE;
+	}
 	return m_ptrAppender->GetId();
 }
 
@@ -166,6 +170,11 @@ const ELogType CYLoggerEntity<APPEND>::GetId() const
 template<BaseOf APPEND>
 const TString& CYLoggerEntity<APPEND>::GetLogName()
 {
+	if (!m_ptrAppender)
+	{
+		static const TString s_empty;
+		return s_empty;
+	}
 	return m_ptrAppender->GetLogName();
 }
 
@@ -175,7 +184,10 @@ const TString& CYLoggerEntity<APPEND>::GetLogName()
 template<BaseOf APPEND>
 void CYLoggerEntity<APPEND>::ForceNewFile()
 {
-	return m_ptrAppender->ForceNewFile();
+	if (m_ptrAppender)
+	{
+		m_ptrAppender->ForceNewFile();
+	}
 }
 
 CYLOGGER_NAMESPACE_END

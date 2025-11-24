@@ -62,12 +62,12 @@ find_package(Threads REQUIRED)
 if(USE_CYCOROUTINE)
     # Always link the static CYCoroutine target to avoid export confusion
     if(TARGET CYCoroutine_static)
-        target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_static)
+        target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_static fmt::fmt)
     else()
         message(FATAL_ERROR "CYCoroutine_static target not found while USE_CYCOROUTINE=ON")
     endif()
 else()
-    target_link_libraries(CYLogger PUBLIC Threads::Threads)
+    target_link_libraries(CYLogger PUBLIC Threads::Threads fmt::fmt)
 endif()
 
 # Windows extras
@@ -79,20 +79,12 @@ if(WIN32)
     )
 endif()
 
-# Installation rules
+# Installation rules (without export to avoid fmt dependency issues)
 install(TARGETS CYLogger
-    EXPORT CYLoggerTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
-# Export the CMake target files
-install(EXPORT CYLoggerTargets
-    FILE CYLoggerTargets.cmake
-    NAMESPACE CYLogger::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/CYLogger
 )
 
 # Re-export CYCoroutine so that package consumers can reuse it
@@ -105,3 +97,6 @@ if(TARGET CYCoroutine_static)
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
 endif()
+
+# Note: fmt library is linked but not exported separately to avoid alias issues
+# fmt is statically linked into CYLogger, so no separate export is needed

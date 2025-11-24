@@ -7,6 +7,7 @@
 #include "Common/CYFileRestriction.hpp"
 #include "Entity/Filter/CYLoggerPatternFilterManager.hpp"
 #include "Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
+#include <cstdlib>
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -165,6 +166,12 @@ void CYLoggerControl::SetLogFilterLevel(ELogLevelFilter eLogFilterLevel)
 void CYLoggerControl::SetRestriction(bool bEnableCheck, bool m_bClearUnLogFile, int nLimitTimeClearLog, int nLimitTimeExpiredFile, int nCheckFileSizeTime, int nCheckFileCountTime, int nCheckFileSize, int nFileCountPerType, int nCheckFileTypeSize, int nCheckALLFileSize)
 {
 	IfTrueThrow(!m_ptrSchedule, TEXT("m_ptrSchedule cannot be empty"));
+
+    const char* pszEnvDisable = std::getenv("CYLOGGER_DISABLE_RESTRICTIONS");
+    if (pszEnvDisable && pszEnvDisable[0] && pszEnvDisable[0] != '0')
+    {
+        return;
+    }
 
 	CYFileRestriction::SetRestriction(nCheckFileSize);
     m_ptrSchedule->SetRestriction(bEnableCheck, m_bClearUnLogFile, nLimitTimeClearLog, nLimitTimeExpiredFile, nCheckFileSizeTime, nCheckFileCountTime, nCheckFileSize, nFileCountPerType, nCheckFileTypeSize, nCheckALLFileSize);

@@ -75,6 +75,18 @@ endif()
 
 # CPU architecture detection
 # Use a custom variable instead of relying solely on CMAKE_SYSTEM_PROCESSOR
+# Normalize CMAKE_OSX_ARCHITECTURES because CMake defines it as an empty string by default
+set(_CYLOGGER_OSX_ARCH_LIST "")
+set(_CYLOGGER_OSX_ARCH_DEFINED FALSE)
+if(DEFINED CMAKE_OSX_ARCHITECTURES)
+    string(STRIP "${CMAKE_OSX_ARCHITECTURES}" _CYLOGGER_OSX_ARCH_STRIPPED)
+    if(NOT "${_CYLOGGER_OSX_ARCH_STRIPPED}" STREQUAL "")
+        set(_CYLOGGER_OSX_ARCH_DEFINED TRUE)
+        set(_CYLOGGER_OSX_ARCH_LIST ${CMAKE_OSX_ARCHITECTURES})
+        list(JOIN _CYLOGGER_OSX_ARCH_LIST ";" _CYLOGGER_OSX_ARCH_JOINED)
+    endif()
+endif()
+
 if(DEFINED TARGET_ARCH)
     # Respect the explicitly requested architecture
     # Map x64 to x86_64 for consistent output paths on Windows
@@ -113,8 +125,25 @@ elseif(DEFINED CMAKE_SYSTEM_PROCESSOR_OVERRIDE)
         set(CYLOGGER_ARCH ${CMAKE_SYSTEM_PROCESSOR_OVERRIDE})
     endif()
 # Fall back to best-effort detection
-elseif(CMAKE_OSX_ARCHITECTURES MATCHES "arm64")
-    set(CYLOGGER_ARCH "arm64")
+elseif(_CYLOGGER_OSX_ARCH_DEFINED)
+    if(_CYLOGGER_OSX_ARCH_JOINED MATCHES "arm64")
+        set(CYLOGGER_ARCH "arm64")
+    elseif(_CYLOGGER_OSX_ARCH_JOINED MATCHES "x86_64")
+        set(CYLOGGER_ARCH "x86_64")
+    elseif(_CYLOGGER_OSX_ARCH_JOINED MATCHES "i386|i686|x86")
+        set(CYLOGGER_ARCH "x86")
+    else()
+        list(GET _CYLOGGER_OSX_ARCH_LIST 0 _CYLOGGER_OSX_FIRST_ARCH)
+        if(_CYLOGGER_OSX_FIRST_ARCH MATCHES "arm64|aarch64")
+            set(CYLOGGER_ARCH "arm64")
+        elseif(_CYLOGGER_OSX_FIRST_ARCH MATCHES "x86_64|AMD64")
+            set(CYLOGGER_ARCH "x86_64")
+        elseif(_CYLOGGER_OSX_FIRST_ARCH MATCHES "i386|i686|x86")
+            set(CYLOGGER_ARCH "x86")
+        else()
+            set(CYLOGGER_ARCH "${_CYLOGGER_OSX_FIRST_ARCH}")
+        endif()
+    endif()
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
     set(CYLOGGER_ARCH "x86_64")
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "i386|i686|x86")
@@ -155,11 +184,31 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Inc)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/CYCoroutine/Inc)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/CYCoroutine/Src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/fmt/include)
 
 # Build toggles
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_EXAMPLES "Build examples" ON)
 option(USE_CYCOROUTINE "Use CYCoroutine library" ON)
+
+set(_CYLOGGER_INITIAL_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+
+# Add fmt library for std::format support
+# Force fmt to build as static library to avoid linking issues
+set(FMT_MASTER_PROJECT OFF CACHE BOOL "fmt master project" FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
+set(FMT_INSTALL OFF CACHE BOOL "Install fmt" FORCE)
+set(FMT_TEST OFF CACHE BOOL "Build fmt tests" FORCE)
+set(FMT_DOC OFF CACHE BOOL "Build fmt documentation" FORCE)
+
+# Add fmt as a subdirectory
+add_subdirectory(ThirdParty/fmt)
+
+# Restore BUILD_SHARED_LIBS for CYLogger (fmt enforces static build)
+set(BUILD_SHARED_LIBS ${_CYLOGGER_INITIAL_BUILD_SHARED_LIBS} CACHE BOOL "Build shared libraries" FORCE)
+
+# Add definition to use fmt instead of std::format
+add_definitions(-DUSE_FMT_LIBRARY)
 
 # Optionally build the bundled CYCoroutine dependency
 if(USE_CYCOROUTINE)

@@ -5,10 +5,16 @@ set -euo pipefail
 
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$BUILD_DIR/.."
+OUTPUT_BASE="$PROJECT_ROOT/Bin"
+mkdir -p "$OUTPUT_BASE"
+source "$BUILD_DIR/output_layout.sh"
 BUILD_TYPE=${1:-Release}
 LIB_TYPE=${2:-Static}
 ANDROID_ABI=${3:-arm64-v8a}
 ANDROID_API_LEVEL=${4:-31}
+ANDROID_PLATFORM_KEY="android"
+ANDROID_PLATFORM_DIR="$(map_platform_dir "$ANDROID_PLATFORM_KEY")"
+ANDROID_SLICE_DIR="$(platform_slice_dir "$ANDROID_PLATFORM_KEY" "$ANDROID_ABI" "$BUILD_TYPE")"
 
 log() {
     echo "[build_android] $1"
@@ -150,7 +156,7 @@ cmake "${cmake_args[@]}" "$PROJECT_ROOT"
 
 # Ensure CYCoroutine dependencies are built first
 ensure_cycoroutine_android() {
-    local arch_dir="$PROJECT_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE"
+    local arch_dir="$ANDROID_SLICE_DIR"
     local static_lib="$arch_dir/libCYCoroutine.a"
     local shared_lib="$arch_dir/libCYCoroutine.so"
 
@@ -228,6 +234,6 @@ fi
 cmake --build "$BUILD_PATH" --target CYLogger --parallel "$JOBS"
 
 log "Build completed successfully!"
-log "Output directory: $PROJECT_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE"
+log "Output directory: $ANDROID_SLICE_DIR"
 
 cd "$BUILD_DIR"

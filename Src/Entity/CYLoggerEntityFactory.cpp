@@ -11,6 +11,7 @@ CYLOGGER_NAMESPACE_BEGIN
  * @brief Sington.
 */
 SharePtr<CYLoggerEntityFactory> CYLoggerEntityFactory::m_ptrInstance;
+std::mutex CYLoggerEntityFactory::m_mutex;
 
 /**
  * @brief Map of Logger Entity.
@@ -33,10 +34,13 @@ CYLoggerEntityFactory::~CYLoggerEntityFactory()
 */
 SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> CYLoggerEntityFactory::CreateEntity(ELogType eLogType, const TString& strFileName, ELogFileMode eFileMode)
 {
-    auto iterFind = m_mapRegisterEntity.find(eLogType);
-    if (iterFind != m_mapRegisterEntity.end())
     {
-        return iterFind->second;
+        std::lock_guard<std::mutex> lock(m_mutex);
+        auto iterFind = m_mapRegisterEntity.find(eLogType);
+        if (iterFind != m_mapRegisterEntity.end())
+        {
+            return iterFind->second;
+        }
     }
     return RegisterLoggerEntity(eLogType, strFileName, eFileMode);
 }
@@ -50,6 +54,7 @@ SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> CYLoggerEntityFactory::RegisterLo
     auto ptrAppender = CYLoggerAppenderFactory::CreateFileAppender(strFileName, eFileMode, eLogType);
     ptrEntity->AttachAppender(ptrAppender);
 
+    std::lock_guard<std::mutex> lock(m_mutex);
     m_mapRegisterEntity[eLogType] = ptrEntity;
     return ptrEntity;
 }
@@ -59,6 +64,7 @@ SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> CYLoggerEntityFactory::RegisterLo
 */
 SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> CYLoggerEntityFactory::GetLoggerEntity(ELogType eLogType)
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     auto iterFind = m_mapRegisterEntity.find(eLogType);
     if (iterFind != m_mapRegisterEntity.end())
     {
@@ -72,6 +78,7 @@ SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> CYLoggerEntityFactory::GetLoggerE
 */
 void CYLoggerEntityFactory::ReleaseLoggerEntity(ELogType eLogType)
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     auto iterFind = m_mapRegisterEntity.find(eLogType);
     if (iterFind != m_mapRegisterEntity.end())
     {
@@ -87,6 +94,7 @@ void CYLoggerEntityFactory::ReleaseLoggerEntity(ELogType eLogType)
 */
 void CYLoggerEntityFactory::ReleaseAllLoggerEntity()
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     auto iter = m_mapRegisterEntity.begin();
     while (iter != m_mapRegisterEntity.end())
     {
@@ -102,11 +110,13 @@ void CYLoggerEntityFactory::ReleaseAllLoggerEntity()
 */
 void CYLoggerEntityFactory::ForceEntityNewFile()
 {
+    std::lock_guard<std::mutex> lock(m_mutex);
     auto iter = m_mapRegisterEntity.begin();
     while (iter != m_mapRegisterEntity.end())
     {
         auto ptrLoggerEntity = iter->second;
         ptrLoggerEntity->ForceNewFile();
+        ++iter;
     }
 }
 

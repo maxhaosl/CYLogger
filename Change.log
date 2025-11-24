@@ -10,6 +10,16 @@ CYLogger V1.0.0 features:
 Included plugins:
 1. CYCoroutine
 
+2025-11-24 (Windows static-only CYCoroutine refresh):
+1. `ThirdParty/CYCoroutine/Build/build_windows.bat` now trims trailing slashes from `%SOURCE_DIR%`, enforces CRLF endings, and refuses the old shared-library option so every Windows dependency build produces the static `CYCoroutine.lib` variant expected by CYLogger.
+2. The CYCoroutine Windows matrix runner skips shared combinations entirely while still iterating every architecture / CRT / build-type pair, ensuring the Bin layout stays consistent (`Bin/Windows/<arch>/<CRT>/<config>`).
+3. Static builds still generate the example executable for validation, while the shared flavor is no longer dispatched, eliminating the unresolved export errors that previously broke the pipeline.
+
+2025-11-24 (Linux clang-17 toolchain guard):
+1. `Build/build_linux.sh` now auto-detects `clang-17`/`clang++-17`, failing fast when the toolchain is missing and allowing overrides through `CYLOGGER_CC` / `CYLOGGER_CXX`.
+2. `Build/build_linux_all.sh` exports the resolved compiler pair so every matrix entry—and the CYCoroutine dependency builds it triggers—stay on a consistent toolchain.
+3. README updated with the new compiler requirements and override flow.
+
 2025-11-21 (build automation refresh):
 1. Added CLI flags to `Build/build_all_platforms.sh` to filter platforms, build types, architectures, and shared/static flavors.
 2. Ensured Linux and Android matrices always generate both static and shared libraries, with per-ABI Android API enforcement.
@@ -17,6 +27,10 @@ Included plugins:
 4. Reworked `Build/build_android.sh` to rely on `cmake --build` and respect the unified Android toolchain detection.
 5. Converted all shell-script comments to English and refreshed the README with detailed script usage and examples.
 6. Documented Docker-based Linux builds and the updated Bin directory layout for universal Apple binaries.
+
+2025-11-24 (CYCoroutine Apple universals):
+1. Updated `ThirdParty/CYCoroutine/Build/build_mac.sh` and `build_ios.sh` so every macOS/iOS slice automatically emits a universal `libCYCoroutine.{a,dylib}` under `ThirdParty/CYCoroutine/Bin/<platform>/universal/<config>`.
+2. Documented the new dependency behavior in both the CYLogger and CYCoroutine README files, clarifying where the universal artifacts live and how CYLogger consumes them.
 
 2025-11-21 (multi-arch helpers):
 1. Added `Build/build_linux_all.sh` to iterate every Linux architecture, build type, and library flavor in one command.

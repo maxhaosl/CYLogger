@@ -5,6 +5,11 @@ set -euo pipefail
 
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$BUILD_DIR/.."
+OUTPUT_BASE="$PROJECT_ROOT/Bin"
+mkdir -p "$OUTPUT_BASE"
+source "$BUILD_DIR/output_layout.sh"
+MACOS_PLATFORM_KEY="macos"
+MACOS_PLATFORM_DIR="$(map_platform_dir "$MACOS_PLATFORM_KEY")"
 SCRIPT_NAME="$(basename "$0")"
 
 # Colors for output
@@ -62,12 +67,15 @@ combine_universal() {
         suffix="a"
     fi
     
-    local dest_dir="$PROJECT_ROOT/Bin/macOS/universal/$build_type"
+    local dest_dir
+    dest_dir="$(platform_universal_dir "$MACOS_PLATFORM_KEY" "$build_type")"
     mkdir -p "$dest_dir"
     
     # Combine CYLogger universal library
-    local logger_src_arm="$PROJECT_ROOT/Bin/macOS/arm64/$build_type/libCYLogger.$suffix"
-    local logger_src_x86="$PROJECT_ROOT/Bin/macOS/x86_64/$build_type/libCYLogger.$suffix"
+    local logger_src_arm
+    logger_src_arm="$(platform_slice_dir "$MACOS_PLATFORM_KEY" "arm64" "$build_type")/libCYLogger.$suffix"
+    local logger_src_x86
+    logger_src_x86="$(platform_slice_dir "$MACOS_PLATFORM_KEY" "x86_64" "$build_type")/libCYLogger.$suffix"
     local logger_dest="$dest_dir/libCYLogger.$suffix"
     
     if [ -f "$logger_src_arm" ] && [ -f "$logger_src_x86" ]; then
@@ -81,8 +89,10 @@ combine_universal() {
     fi
     
     # Combine CYCoroutine universal library
-    local coroutine_src_arm="$PROJECT_ROOT/Bin/macOS/arm64/$build_type/libCYCoroutine.$suffix"
-    local coroutine_src_x86="$PROJECT_ROOT/Bin/macOS/x86_64/$build_type/libCYCoroutine.$suffix"
+    local coroutine_src_arm
+    coroutine_src_arm="$(platform_slice_dir "$MACOS_PLATFORM_KEY" "arm64" "$build_type")/libCYCoroutine.$suffix"
+    local coroutine_src_x86
+    coroutine_src_x86="$(platform_slice_dir "$MACOS_PLATFORM_KEY" "x86_64" "$build_type")/libCYCoroutine.$suffix"
     local coroutine_dest="$dest_dir/libCYCoroutine.$suffix"
     
     if [ -f "$coroutine_src_arm" ] && [ -f "$coroutine_src_x86" ]; then

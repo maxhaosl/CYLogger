@@ -5,10 +5,58 @@ set -euo pipefail
 
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$BUILD_DIR/.."
+OUTPUT_BASE="$PROJECT_ROOT/Bin"
+mkdir -p "$OUTPUT_BASE"
+source "$BUILD_DIR/output_layout.sh"
+LINUX_PLATFORM_KEY="linux"
+LINUX_PLATFORM_DIR="$(map_platform_dir "$LINUX_PLATFORM_KEY")"
 
 BUILD_TYPES_CSV=${1:-"Release,Debug"}
 LIB_TYPES_CSV=${2:-"Static,Shared"}
 ARCHES_CSV=${3:-"x86_64,x86"}
+
+ensure_fmt_submodule() {
+    local fmt_header="$PROJECT_ROOT/ThirdParty/fmt/include/fmt/format.h"
+    if [ -f "$fmt_header" ]; then
+        return 0
+    fi
+
+    echo "fmt headers not found. Initializing ThirdParty/fmt submodule..."
+    if git -C "$PROJECT_ROOT" submodule update --init --recursive ThirdParty/fmt; then
+        if [ -f "$fmt_header" ]; then
+            echo "fmt submodule ready."
+            return 0
+        fi
+        echo "fmt headers still missing after submodule update."
+        exit 1
+    else
+        echo "Failed to update fmt submodule. Ensure git is installed and accessible."
+        exit 1
+    fi
+}
+
+ensure_fmt_submodule
+
+canonicalize_linux_arch() {
+    local token
+    token=$(printf '%s' "$1" | xargs)
+    local lower
+    lower=$(printf '%s' "$token" | tr '[:upper:]' '[:lower:]')
+    case "$lower" in
+        x86_64|amd64|x64)
+            echo "x86_64"
+            ;;
+        i386|i686|x86)
+            echo "x86"
+            ;;
+        arm64|aarch64)
+            echo "arm64"
+            ;;
+        *)
+            echo "$token"
+            ;;
+    esac
+}
 
 IFS=',' read -ra BUILD_TYPES <<<"$BUILD_TYPES_CSV"
 IFS=',' read -ra LIB_TYPES <<<"$LIB_TYPES_CSV"
@@ -24,6 +72,9 @@ trim_array() {
 trim_array BUILD_TYPES
 trim_array LIB_TYPES
 trim_array LINUX_ARCHES
+for i in "${!LINUX_ARCHES[@]}"; do
+    LINUX_ARCHES[$i]="$(canonicalize_linux_arch "${LINUX_ARCHES[$i]}")"
+done
 
 detect_jobs() {
     if command -v nproc >/dev/null 2>&1; then
@@ -35,12 +86,38 @@ detect_jobs() {
     echo 4
 }
 
+detect_compiler() {
+    local override="$1" required="$2" resolved
+    if [ -n "$override" ]; then
+        echo "$override"
+        return
+    fi
+    if command -v "$required" >/dev/null 2>&1; then
+        resolved=$(command -v "$required")
+        echo "$resolved"
+        return
+    fi
+    echo ""
+}
+
+CC_BIN=$(detect_compiler "${CYLOGGER_CC:-}" "clang-17")
+CXX_BIN=$(detect_compiler "${CYLOGGER_CXX:-}" "clang++-17")
+
+if [ -z "$CC_BIN" ] || [ -z "$CXX_BIN" ]; then
+    echo "Error: clang-17 toolchain not found (set CYLOGGER_CC/CYLOGGER_CXX to override)." >&2
+    exit 1
+fi
+
+export CYLOGGER_CC="$CC_BIN"
+export CYLOGGER_CXX="$CXX_BIN"
+
 ensure_cycoroutine_linux() {
     local arch=$1
     local build_type=$2
     local lib_type=$3
 
-    local arch_dir="$PROJECT_ROOT/Bin/Linux/$arch/$build_type"
+    local arch_dir
+    arch_dir="$(platform_slice_dir "$LINUX_PLATFORM_KEY" "$arch" "$build_type")"
     local static_lib="$arch_dir/libCYCoroutine.a"
     local shared_lib="$arch_dir/libCYCoroutine.so"
 
@@ -69,6 +146,8 @@ ensure_cycoroutine_linux() {
 
     local dep_dir="$BUILD_DIR/deps_linux_${arch}_${build_type}_${shared_flag}"
     local -a cmake_args=(
+        "-DCMAKE_C_COMPILER=$CYLOGGER_CC"
+        "-DCMAKE_CXX_COMPILER=$CYLOGGER_CXX"
         "-DCMAKE_BUILD_TYPE=$build_type"
         "-DBUILD_SHARED_LIBS=$shared_flag"
         "-DBUILD_STATIC_LIBS=ON"
@@ -129,6 +208,6 @@ echo "========================================"
 
 echo ""
 echo "Generated libraries:"
-find "$PROJECT_ROOT/Bin/Linux" \( -name "*.a" -o -name "*.so" \) -print | sort
+find "$OUTPUT_BASE/$LINUX_PLATFORM_DIR" \( -name "*.a" -o -name "*.so" \) -print | sort
 
 

@@ -5,6 +5,10 @@ set -euo pipefail
 
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$BUILD_DIR/.."
+OUTPUT_BASE="$PROJECT_ROOT/Bin"
+mkdir -p "$OUTPUT_BASE"
+source "$BUILD_DIR/output_layout.sh"
+ANDROID_PLATFORM_DIR="$(map_platform_dir android)"
 BUILD_TYPE=${1:-Release}
 LIB_TYPE=${2:-Static}
 ANDROID_API_LEVEL=${3:-31}
@@ -37,4 +41,4 @@ echo "========================================"
 
 echo ""
 echo "Generated libraries:"
-find "$PROJECT_ROOT/Bin/Android" \( -name "*.so" -o -name "*.a" \) -print | sort
+find "$OUTPUT_BASE/$ANDROID_PLATFORM_DIR" \( -name "*.so" -o -name "*.a" \) -print | sort

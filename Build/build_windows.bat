@@ -19,6 +19,9 @@ set LIB_TYPE=%LIB_TYPE:"=%
 set TARGET_ARCH=%TARGET_ARCH:"=%
 set CRT_TYPE=%CRT_TYPE:"=%
 
+call :EnsureFmtSubmodule
+if errorlevel 1 exit /b 1
+
 REM Map architecture: x64 -> x86_64 for output paths, but keep x64 for CMake -A parameter
 set OUTPUT_ARCH=%TARGET_ARCH%
 if /I "%TARGET_ARCH%"=="x64" set OUTPUT_ARCH=x86_64
@@ -58,16 +61,18 @@ if /I "%LIB_TYPE%"=="Static" (
     cmake -G "Visual Studio 17 2022" -A %CMAKE_ARCH% ^
         -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ^
         -DBUILD_SHARED_LIBS=OFF ^
-        -DBUILD_EXAMPLES=ON ^
+        -DBUILD_EXAMPLES=OFF ^
         -DCYLOGGER_MSVC_RUNTIME=%EFFECTIVE_RUNTIME% ^
+        -DWINDOWS_RUNTIME=%EFFECTIVE_RUNTIME% ^
         -DTARGET_ARCH=%OUTPUT_ARCH% ^
         "%PROJECT_ROOT%"
 ) else (
     cmake -G "Visual Studio 17 2022" -A %CMAKE_ARCH% ^
         -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ^
         -DBUILD_SHARED_LIBS=ON ^
-        -DBUILD_EXAMPLES=ON ^
+        -DBUILD_EXAMPLES=OFF ^
         -DCYLOGGER_MSVC_RUNTIME=%EFFECTIVE_RUNTIME% ^
+        -DWINDOWS_RUNTIME=%EFFECTIVE_RUNTIME% ^
         -DTARGET_ARCH=%OUTPUT_ARCH% ^
         "%PROJECT_ROOT%"
 )
@@ -95,6 +100,31 @@ echo To run the console test:
 echo %PROJECT_ROOT%\Bin\Windows\%OUTPUT_ARCH%\%EFFECTIVE_RUNTIME%\%BUILD_TYPE%\CYLoggerConsoleTest.exe
 echo.
 goto :eof
+
+:EnsureFmtSubmodule
+set "FMT_HEADER=%PROJECT_ROOT%\ThirdParty\fmt\include\fmt\format.h"
+if exist "%FMT_HEADER%" (
+    exit /b 0
+)
+
+echo fmt headers not found. Initializing ThirdParty\fmt submodule...
+pushd "%PROJECT_ROOT%" >nul
+git submodule update --init --recursive ThirdParty/fmt
+set "GIT_ERROR=%ERRORLEVEL%"
+popd >nul
+
+if not "%GIT_ERROR%"=="0" (
+    echo Failed to update fmt submodule. Please check your git setup.
+    exit /b %GIT_ERROR%
+)
+
+if not exist "%FMT_HEADER%" (
+    echo fmt headers still missing after submodule update.
+    exit /b 1
+)
+
+echo fmt submodule ready.
+exit /b 0
 
 :NormalizeBuildType
 set "VAR_NAME=%~1"

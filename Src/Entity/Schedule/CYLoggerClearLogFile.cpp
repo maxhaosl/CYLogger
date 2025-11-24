@@ -83,16 +83,24 @@ void CYLoggerClearLogFile::ProcessClearLog(const std::list<ELogType>& lstLogType
 void CYLoggerClearLogFile::ProcessRunningLogFile(const std::list<ELogType>& lstLogType, std::list<CYLogFileInfo>& lstUsedLogFile)
 {
     lstUsedLogFile.clear();
+    auto ptrFactory = LoggerEntityFactory();
+    if (!ptrFactory)
+        return;
+
     for (auto& eLogType : lstLogType)
     {
-        SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> ptrEntity = LoggerEntityFactory()->GetLoggerEntity(eLogType);
-        if (ptrEntity->GetLogName().empty())
+        SharePtr<CYLoggerEntity<CYLoggerBaseAppender>> ptrEntity = ptrFactory->GetLoggerEntity(eLogType);
+        if (!ptrEntity)
+            continue;
+
+        const TString strLogName = ptrEntity->GetLogName();
+        if (strLogName.empty())
             continue;
 
         CYLogFileInfo objFileInfo;
         objFileInfo.eLogType = ptrEntity->GetId();
-        objFileInfo.strLogFilePath = ptrEntity->GetLogName();
-        objFileInfo.strCheckName = GetCheckName(ptrEntity->GetLogName());
+        objFileInfo.strLogFilePath = strLogName;
+        objFileInfo.strCheckName = GetCheckName(strLogName);
         lstUsedLogFile.emplace_back(objFileInfo);
     }
 }
