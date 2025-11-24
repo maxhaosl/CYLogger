@@ -1,0 +1,209 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-7c8a8317873531f8cfec.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "ThirdParty/CYCoroutine/Build",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-ThirdParty.CYCoroutine.Build-Debug-b7814ef01beb9ecb3c5e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "ThirdParty/CYCoroutine/Build",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "Src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Src-Debug-ce21f7176232c68744e8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Src",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "Example",
+					"childIndexes" : 
+					[
+						4,
+						5,
+						6
+					],
+					"jsonFile" : "directory-Example-Debug-fcb5ceb733991faee781.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "Example"
+				},
+				{
+					"build" : "Example/CYLoggerConsoleTest",
+					"jsonFile" : "directory-Example.CYLoggerConsoleTest-Debug-c1d19ba956a0834f8279.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 0,
+					"source" : "Example/CYLoggerConsoleTest",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "Example/CYLoggerSimpleTest",
+					"jsonFile" : "directory-Example.CYLoggerSimpleTest-Debug-0923016ce730d801a325.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 0,
+					"source" : "Example/CYLoggerSimpleTest",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "Example/CYLoggerTest",
+					"jsonFile" : "directory-Example.CYLoggerTest-Debug-7bb30806052a44bdf9e7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"parentIndex" : 3,
+					"projectIndex" : 0,
+					"source" : "Example/CYLoggerTest",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0,
+						2,
+						3,
+						4,
+						5,
+						6
+					],
+					"name" : "CYLogger",
+					"targetIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "CYCoroutine",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "CYCoroutine_static::@0c8e9dbe2cc07830c5f0",
+					"jsonFile" : "target-CYCoroutine_static-Debug-20b6e85f4213c6381b96.json",
+					"name" : "CYCoroutine_static",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "CYLogger::@fffd7673bb2fd0d58c2a",
+					"jsonFile" : "target-CYLogger-Debug-cfdc8465e98cff6fc8fe.json",
+					"name" : "CYLogger",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "CYLoggerConsoleTest::@29dcedf27b8083dc7ce1",
+					"jsonFile" : "target-CYLoggerConsoleTest-Debug-d1f8f08dad161bd8f20c.json",
+					"name" : "CYLoggerConsoleTest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "CYLoggerSimpleTest::@dcd47044384466ad93f7",
+					"jsonFile" : "target-CYLoggerSimpleTest-Debug-c8855265089bd4d76d91.json",
+					"name" : "CYLoggerSimpleTest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "CYLoggerTest::@d6633d00981b37aa5100",
+					"jsonFile" : "target-CYLoggerTest-Debug-eaa53918fc84b5c66365.json",
+					"name" : "CYLoggerTest",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "W:/GitHub/CYLogger/Build",
+		"source" : "W:/GitHub/CYLogger"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

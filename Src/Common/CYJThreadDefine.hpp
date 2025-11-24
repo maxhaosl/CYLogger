@@ -1,20 +1,24 @@
 #ifndef __CY_JTHREAD_DEFINE_HPP__
 #define __CY_JTHREAD_DEFINE_HPP__
 
+#if defined(__has_include)
+#  if __has_include(<version>)
+#    include <version>
+#  endif
+#endif
+
 #if defined(__cpp_lib_jthread)
-// C++20 jthread 存在
 #include <thread>
 #include <stop_token>
 
 #else
-// 没有 jthread -> fallback
 #include <thread>
 #include <atomic>
 #include <functional>
+#include <utility>
 
 namespace std
 {
-    // 简易 fallback jthread（不含 stop_token）
     class jthread
     {
     public:
@@ -33,11 +37,11 @@ namespace std
             join();
         }
 
-        // 禁止拷贝
+
         jthread(const jthread&) = delete;
         jthread& operator=(const jthread&) = delete;
 
-        // 允许移动
+
         jthread(jthread&& other) noexcept
         {
             swap(other);
@@ -72,7 +76,7 @@ namespace std
             return stop_requested_.load(std::memory_order_relaxed);
         }
 
-        // 在不支持 stop_token 的平台上，提供一个简单的替代实现
+        // Provide a simple alternative implementation on platforms that do not support stop_token
         struct stop_token
         {
             bool stop_requested() const { return false; }
@@ -80,7 +84,7 @@ namespace std
         
         stop_token get_stop_token() const noexcept
         {
-            // Fallback 不支持 stop_token
+            // Fallback does not support stop_token
             return stop_token{};
         }
 
@@ -116,7 +120,7 @@ namespace std
         std::thread thread_;
         std::atomic<bool> stop_requested_{ false };
     };
-} // namespace my
+} // namespace std
 
 #endif
 

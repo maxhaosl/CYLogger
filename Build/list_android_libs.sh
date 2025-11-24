@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# 列出所有Android库的脚本
-set -e
+# List all generated Android libraries
+set -euo pipefail
 
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$BUILD_DIR/.."
@@ -11,7 +11,7 @@ echo "CYLogger Android Libraries"
 echo "========================================"
 echo ""
 
-# 列出静态库
+# Enumerate static libraries
 echo "Static Libraries (.a):"
 find "$PROJECT_ROOT/Bin/Android" -name "*.a" | sort | while read file; do
     size=$(ls -lh "$file" | awk '{print $5}')

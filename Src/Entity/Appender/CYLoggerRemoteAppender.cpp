@@ -15,6 +15,7 @@
 
 #include <locale>
 #include <codecvt>
+#include <cstring>
 
 CYLOGGER_NAMESPACE_BEGIN
 

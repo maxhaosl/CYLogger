@@ -1,0 +1,715 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "W:/GitHub/CYLogger/Bin/Windows/x86_64/MD/CYCoroutine.lib"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"install",
+			"target_compile_definitions",
+			"set_target_properties_by_platform",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"ThirdParty/CYCoroutine/Build/CMakeLists.txt",
+			"Src/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 235,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 272,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 89,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 248,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 150,
+				"parent" : 5
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 2,
+				"line" : 53,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 136,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 137,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 138,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 139,
+				"parent" : 7
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 132,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 133,
+				"parent" : 0
+			},
+			{
+				"command" : 5,
+				"file" : 0,
+				"line" : 134,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : " -std=c++20 -std=c++20 -O0 -g -Xclang -gcodeview -D_DLL -D_MT -Xclang --dependent-lib=msvcrt"
+				},
+				{
+					"fragment" : "-std=c++20"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 6,
+					"define" : "NOMINMAX"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "WIN32_LEAN_AND_MEAN"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				},
+				{
+					"backtrace" : 6,
+					"define" : "_WIN32_WINNT=0x0601"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "_WINSOCK_DEPRECATED_NO_WARNINGS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 9,
+					"path" : "W:/GitHub/CYLogger"
+				},
+				{
+					"backtrace" : 10,
+					"path" : "W:/GitHub/CYLogger/Inc"
+				},
+				{
+					"backtrace" : 11,
+					"path" : "W:/GitHub/CYLogger/ThirdParty/CYCoroutine/Inc"
+				},
+				{
+					"backtrace" : 12,
+					"path" : "W:/GitHub/CYLogger/ThirdParty/CYCoroutine/Src"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "W:/GitHub/CYLogger/ThirdParty/CYCoroutine/Build/.."
+				},
+				{
+					"backtrace" : 14,
+					"path" : "W:/GitHub/CYLogger/ThirdParty/CYCoroutine/Build/../Inc"
+				},
+				{
+					"backtrace" : 15,
+					"path" : "W:/GitHub/CYLogger/ThirdParty/CYCoroutine/Build/../Src"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22
+			]
+		}
+	],
+	"id" : "CYCoroutine_static::@0c8e9dbe2cc07830c5f0",
+	"install" : 
+	{
+		"destinations" : 
+		[
+			{
+				"backtrace" : 2,
+				"path" : "lib"
+			},
+			{
+				"backtrace" : 4,
+				"path" : "lib"
+			}
+		],
+		"prefix" : 
+		{
+			"path" : "C:/Program Files (x86)/CYLogger"
+		}
+	},
+	"name" : "CYCoroutine_static",
+	"nameOnDisk" : "CYCoroutine.lib",
+	"paths" : 
+	{
+		"build" : "ThirdParty/CYCoroutine/Build",
+		"source" : "ThirdParty/CYCoroutine/Build"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22
+			]
+		},
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				46,
+				47,
+				48,
+				49,
+				50,
+				51,
+				52,
+				53,
+				54,
+				55,
+				56,
+				57,
+				58,
+				59,
+				60,
+				61,
+				62,
+				63,
+				64,
+				65,
+				66,
+				67,
+				68,
+				69,
+				70
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Common/CYDebugString.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Common/Exception/CYBaseException.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Common/Message/CYBaseMessage.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Common/Structure/CYStringUtils.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Common/Time/CYTimeStamps.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Engine/CYCoroutineEngine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Engine/CYCoroutineEngineDefine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Engine/CYExecutorCollection.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Executors/CYExecutor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Executors/CYInlineExecutor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Executors/CYManualExecutor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Executors/CYThreadExecutor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Executors/CYThreadPoolExecutor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Executors/CYWorkerThreadExecutor.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Results/Impl/CYConsumerContext.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Results/Impl/CYResultState.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Results/Impl/CYSharedResultState.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Task/CYTask.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Threads/CYAsyncCondition.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Threads/CYAsyncLock.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Threads/CYThread.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Timers/CYTimer.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "ThirdParty/CYCoroutine/Src/Timers/CYTimerQueue.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/CYCoroutine.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/CYCoroutineDefine.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/CYTypeDefine.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/CYBind.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/CYDebugString.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/CYList.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/Exception/CYBaseException.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/Exception/CYException.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/Message/CYBaseMessage.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/Structure/CYStringUtils.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Common/Time/CYTimeStamps.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Engine/CYCoroutineEngine.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Engine/CYCoroutineEngineDefine.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Executors/CYDerivableExecutor.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Executors/CYExecutor.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Executors/CYInlineExecutor.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Executors/CYManualExecutor.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Executors/CYThreadExecutor.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Executors/CYThreadPoolExecutor.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Executors/CYWorkerThreadExecutor.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYGenerator.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYLazyResult.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYLazyResultAwaitable.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYMakeResult.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYPromises.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYResult.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYResultAwaitable.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYResumeOn.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYSharedResult.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYSharedResultAwaitable.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/CYWhenResult.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYAtomicEx.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYBinarySemaphore.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYConsumerContext.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYCountingSemaphore.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYGeneratorState.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYLazyResultState.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYProducerContext.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYResultState.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYReturnValueStruct.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Results/Impl/CYSharedResultState.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Task/CYTask.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Threads/CYAsyncCondition.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Threads/CYAsyncLock.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Threads/CYCacheLine.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Threads/CYThread.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Timers/CYTimer.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ThirdParty/CYCoroutine/Inc/CYCoroutine/Timers/CYTimerQueue.hpp",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

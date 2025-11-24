@@ -10,6 +10,31 @@ CYLogger V1.0.0 features:
 Included plugins:
 1. CYCoroutine
 
+2025-11-21 (build automation refresh):
+1. Added CLI flags to `Build/build_all_platforms.sh` to filter platforms, build types, architectures, and shared/static flavors.
+2. Ensured Linux and Android matrices always generate both static and shared libraries, with per-ABI Android API enforcement.
+3. Improved dependency handling by auto-building CYCoroutine targets whenever required artifacts are missing.
+4. Reworked `Build/build_android.sh` to rely on `cmake --build` and respect the unified Android toolchain detection.
+5. Converted all shell-script comments to English and refreshed the README with detailed script usage and examples.
+6. Documented Docker-based Linux builds and the updated Bin directory layout for universal Apple binaries.
+
+2025-11-21 (multi-arch helpers):
+1. Added `Build/build_linux_all.sh` to iterate every Linux architecture, build type, and library flavor in one command.
+2. Added `Build/build_windows_all.bat` to mirror the matrix build flow on Windows hosts.
+3. Updated `Build/build_windows.bat` (and README) to accept an explicit architecture argument and to generate per-arch build folders/output paths.
+
+2025-11-21 (Windows CRT matrix):
+1. Added a `CYLOGGER_MSVC_RUNTIME` CMake cache option that drives `CMAKE_MSVC_RUNTIME_LIBRARY` and places Windows artifacts under `Bin/Windows/<arch>/<CRT>/<config>`.
+2. Updated `Build/build_windows.bat` to accept a fourth argument (`MD` or `MT`), propagate it to CMake, and keep per-runtime build folders.
+3. Extended `Build/build_windows_all.bat` and CYCoroutine dependency prep so the Windows matrix can iterate architectures, static/shared flavors, build types, and CRT variants in one go.
+
+2025-11-21 (Linux build improvements):
+1. Enhanced `Build/build_linux.sh` with robust architecture name normalization (supports aarch64→arm64, amd64→x86_64, etc.).
+2. Added architecture-specific compiler flags: `-m32` for x86 builds and `-m64` for x86_64 builds to ensure correct bitness.
+3. Replaced `make` with `cmake --build` for consistency across all build scripts and better cross-platform compatibility.
+4. Fixed `Build/build_linux_all.sh` by removing incompatible `--config` parameter for single-config generators (Unix Makefiles).
+5. Improved CYCoroutine dependency handling in `build_linux_all.sh` by adding `BUILD_STATIC_LIBS=ON` and `CYLOGGER_ROOT_DIR` to ensure correct output paths.
+
 2025-11-21:
 1. Added Android platform support with NDK r26b
 2. Fixed Android-specific compilation issues with std::filesystem

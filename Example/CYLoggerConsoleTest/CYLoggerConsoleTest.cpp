@@ -1,7 +1,8 @@
-﻿// CYLoggerConsoleTest.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
+﻿// CYLoggerConsoleTest.cpp : This file contains main(). Program execution starts and ends here.
 //
 
 #include <iostream>
+#include "ICYLogger.hpp"
 #ifdef CYLOGGER_WIN_OS
 #include <windows.h>
 #include <tchar.h>
@@ -15,7 +16,6 @@
 #define _T(x) x
 #define TCHAR char
 #endif
-#include "ICYLogger.hpp"
 
 int main()
 {

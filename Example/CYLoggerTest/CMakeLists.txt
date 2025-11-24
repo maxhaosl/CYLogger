@@ -1,13 +1,13 @@
-# GUI测试示例 (仅Windows)
+# GUI sample (Windows only)
 if(WIN32)
-    # 收集资源文件
+    # Gather resource files
     set(RESOURCES
         CYLoggerTest.rc
         res/CYLoggerTest.ico
     )
 
-    # 创建可执行文件
-    add_executable(CYLoggerTest
+    # Create the executable (Win32 subsystem for GUI/MFC apps)
+    add_executable(CYLoggerTest WIN32
         CYLoggerTest.cpp
         CYLoggerTestDlg.cpp
         CYLoggerTest.h
@@ -19,15 +19,21 @@ if(WIN32)
         ${RESOURCES}
     )
 
-    # 链接CYLogger库
+    # Ensure Visual Studio generates an MFC project linked against the shared runtime
+    set_target_properties(CYLoggerTest PROPERTIES
+        VS_GLOBAL_Keyword "MFCProj"
+        VS_GLOBAL_UseOfMfc "Dynamic"
+    )
+
+    # Link CYLogger
     target_link_libraries(CYLoggerTest PRIVATE CYLogger)
 
-    # 如果使用动态库，定义宏
+    # Define dll import macros when needed
     if(BUILD_SHARED_LIBS)
         target_compile_definitions(CYLoggerTest PRIVATE CYLOGGER_USE_DLL)
     endif()
 
-    # Windows特定链接库
+    # Windows specific link libraries
     target_link_libraries(CYLoggerTest PRIVATE
         comctl32
         gdi32
@@ -36,15 +42,39 @@ if(WIN32)
         shell32
     )
 
-    # 预编译头设置
+    # Precompiled header macros
     target_compile_definitions(CYLoggerTest PRIVATE
         WIN32
         _WINDOWS
         _CRT_SECURE_NO_WARNINGS
+        _AFXDLL
     )
 
-    # 设置输出目录
+    # Align runtime outputs with the main project
     set_target_properties(CYLoggerTest PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
     )
+
+    # Inherit MSVC runtime library setting from parent project
+    if(MSVC)
+        if(DEFINED CYLOGGER_MSVC_RUNTIME)
+            string(TOUPPER "${CYLOGGER_MSVC_RUNTIME}" _RUNTIME_UPPER)
+            if(_RUNTIME_UPPER STREQUAL "MT")
+                set(_RUNTIME_VALUE "MultiThreaded")
+            elseif(_RUNTIME_UPPER STREQUAL "MTD")
+                set(_RUNTIME_VALUE "MultiThreadedDebug")
+            elseif(_RUNTIME_UPPER STREQUAL "MDD")
+                set(_RUNTIME_VALUE "MultiThreadedDebugDLL")
+            else()
+                set(_RUNTIME_VALUE "MultiThreadedDLL")
+            endif()
+            set_target_properties(CYLoggerTest PROPERTIES
+                MSVC_RUNTIME_LIBRARY "${_RUNTIME_VALUE}"
+            )
+        elseif(DEFINED CMAKE_MSVC_RUNTIME_LIBRARY)
+            set_target_properties(CYLoggerTest PROPERTIES
+                MSVC_RUNTIME_LIBRARY "${CMAKE_MSVC_RUNTIME_LIBRARY}"
+            )
+        endif()
+    endif()
 endif()

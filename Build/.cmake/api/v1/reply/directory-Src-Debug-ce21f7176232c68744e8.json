@@ -1,0 +1,101 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"Src/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 72,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 81,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 89,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"W:/GitHub/CYLogger/Bin/Windows/x86_64/Debug/CYLogger.lib"
+			],
+			"targetId" : "CYLogger::@fffd7673bb2fd0d58c2a",
+			"targetIndex" : 1,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"Src/../Inc/ICYLoggerTemplateLayout.hpp"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/CYLogger",
+			"exportName" : "CYLoggerTargets",
+			"exportTargets" : 
+			[
+				{
+					"id" : "CYLogger::@fffd7673bb2fd0d58c2a",
+					"index" : 1
+				},
+				{
+					"id" : "CYCoroutine_static::@0c8e9dbe2cc07830c5f0",
+					"index" : 0
+				}
+			],
+			"paths" : 
+			[
+				"Src/CMakeFiles/Export/b6e247b98269378dca6c92abe58d5b5c/CYLoggerTargets.cmake"
+			],
+			"type" : "export"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"W:/GitHub/CYLogger/Bin/Windows/x86_64/MD/CYCoroutine.lib"
+			],
+			"targetId" : "CYCoroutine_static::@0c8e9dbe2cc07830c5f0",
+			"targetIndex" : 0,
+			"type" : "target"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "Src",
+		"source" : "Src"
+	}
+}

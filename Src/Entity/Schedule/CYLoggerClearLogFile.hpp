@@ -50,6 +50,7 @@
 
 #include <map>
 #include <list>
+#include <atomic>
 
 CYLOGGER_NAMESPACE_BEGIN
 

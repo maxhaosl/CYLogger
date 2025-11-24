@@ -4,13 +4,14 @@ CYLOGGER_NAMESPACE_BEGIN
 
 SharePtr<CYStatistics> CYStatistics::m_ptrInstance;
 //
-// memory_order_relaxed	不对执行顺序做任何保证
-// memory_order_acquire	本线程中，所有后续的读操作必须在本条原子操作完成后执行
-// memory_order_release	本线程中，所有之前的写操作完成后才能执行本条原子操作
-// memory_order_acq_rel	同时包含memory_order_acquire和memory_order_release标记
-// memory_order_consume	本线程中，所有后续的有关本原子类型的操作，必须在本条原子操作完成后执行
-// memory_order_seq_cst	全部存取都按顺序执行
-// memory_order_acquire保证配对使用的 memory_order_release操作之前的所有原子和非原子的写入操作有效，但memory_order_consume仅保证配对使用的 memory_order_release操作之前的所有原子的写入操作和依赖原子写入的非原子操作有效。
+// memory_order_relaxed:   No guarantees about execution order
+// memory_order_acquire:   All following reads in this thread occur after the atomic operation completes
+// memory_order_release:   All prior writes in this thread complete before the atomic operation executes
+// memory_order_acq_rel:   Combines acquire and release semantics
+// memory_order_consume:   Dependent operations in this thread happen after the atomic operation completes
+// memory_order_seq_cst:   All loads and stores see a single global order
+// memory_order_acquire guarantees that writes before the paired memory_order_release are visible,
+// but memory_order_consume only guarantees visibility of atomic writes and dependent non-atomic writes.
 //
 
 void CYStatistics::AddTotalLine(uint64_t nLine)

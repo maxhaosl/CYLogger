@@ -2,20 +2,20 @@
 
 include(CMakeFindDependencyMacro)
 
-# 查找依赖
+# Locate dependencies provided by the host project
 find_dependency(Threads REQUIRED)
 
-# 包含目标文件
+# Import the generated targets file
 include("${CMAKE_CURRENT_LIST_DIR}/CYLoggerTargets.cmake")
 
-# 设置变量
+# Publish helper variables for consumers
 set(CYLOGGER_VERSION @PROJECT_VERSION@)
 set(CYLOGGER_FOUND TRUE)
 
-# 检查组件
+# Validate requested components
 check_required_components(CYLogger)
 
-# 提供便利变量
+# Provide convenience aliases for callers
 if(TARGET CYLogger::CYLogger)
     set(CYLOGGER_LIBRARIES CYLogger::CYLogger)
     get_target_property(CYLOGGER_INCLUDE_DIRS CYLogger::CYLogger INTERFACE_INCLUDE_DIRECTORIES)

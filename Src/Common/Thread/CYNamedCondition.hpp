@@ -47,6 +47,7 @@
 #include "Inc/ICYLoggerDefine.hpp"
 #include "Common/CYNoCopy.hpp"
 #include "Common/CYPrivateDefine.hpp"
+#include <condition_variable>
 
 #include <mutex>
 #include <functional>

@@ -1,19 +1,19 @@
-# 收集所有源文件
+# Collect all library sources
 file(GLOB_RECURSE CYLOGGER_SOURCES
     "*.cpp"
     "*.hpp"
 )
 
-# 排除示例文件
+# Exclude example sources
 list(FILTER CYLOGGER_SOURCES EXCLUDE REGEX ".*Example.*")
 
-# 创建库目标
+# Create the core library target
 add_library(CYLogger ${CYLOGGER_SOURCES})
 
-# 添加Src目录到include路径
+# Make the Src directory available as an include path
 target_include_directories(CYLogger PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-# 设置目标属性
+# Target metadata
 set_target_properties(CYLogger PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION ${PROJECT_VERSION_MAJOR}
@@ -23,13 +23,20 @@ set_target_properties(CYLogger PROPERTIES
     PUBLIC_HEADER "../Inc/ICYLoggerTemplateLayout.hpp"
 )
 
-# 编译定义
+# Explicitly set MSVC runtime library for this target
+if(MSVC AND DEFINED CMAKE_MSVC_RUNTIME_LIBRARY)
+    set_target_properties(CYLogger PROPERTIES
+        MSVC_RUNTIME_LIBRARY "${CMAKE_MSVC_RUNTIME_LIBRARY}"
+    )
+endif()
+
+# Core compilation definitions
 target_compile_definitions(CYLogger PRIVATE
     $<$<BOOL:${BUILD_SHARED_LIBS}>:CYLOGGER_USE_DLL>
     $<$<BOOL:${BUILD_SHARED_LIBS}>:CYLOGGER_EXPORTS>
 )
 
-# 平台特定的编译定义
+# Platform-specific preprocessor flags
 if(WIN32)
     target_compile_definitions(CYLogger PRIVATE
         WIN32
@@ -49,22 +56,30 @@ elseif(UNIX)
     target_compile_definitions(CYLogger PRIVATE CYLOGGER_LINUX_OS)
 endif()
 
-# 链接库
+# Link against pthreads and optional dependencies
 find_package(Threads REQUIRED)
 
-# 根据构建类型选择正确的CYCoroutine库
-if(BUILD_SHARED_LIBS)
-    target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_shared)
+if(USE_CYCOROUTINE)
+    # Always link the static CYCoroutine target to avoid export confusion
+    if(TARGET CYCoroutine_static)
+        target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_static)
+    else()
+        message(FATAL_ERROR "CYCoroutine_static target not found while USE_CYCOROUTINE=ON")
+    endif()
 else()
-    target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_static)
+    target_link_libraries(CYLogger PUBLIC Threads::Threads)
 endif()
 
-# Windows特定设置
+# Windows extras
 if(WIN32)
-    target_link_libraries(CYLogger PUBLIC ws2_32)
+    target_link_libraries(CYLogger PUBLIC 
+        ws2_32
+        shell32
+        kernel32
+    )
 endif()
 
-# 安装规则
+# Installation rules
 install(TARGETS CYLogger
     EXPORT CYLoggerTargets
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -73,30 +88,20 @@ install(TARGETS CYLogger
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-# 导出目标
+# Export the CMake target files
 install(EXPORT CYLoggerTargets
     FILE CYLoggerTargets.cmake
     NAMESPACE CYLogger::
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/CYLogger
 )
 
-# 导出CYCoroutine目标
-if(BUILD_SHARED_LIBS)
-    if(TARGET CYCoroutine_shared)
-        install(TARGETS CYCoroutine_shared
-            EXPORT CYLoggerTargets
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        )
-    endif()
-else()
-    if(TARGET CYCoroutine_static)
-        install(TARGETS CYCoroutine_static
-            EXPORT CYLoggerTargets
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        )
-    endif()
+# Re-export CYCoroutine so that package consumers can reuse it
+# Note: CYCoroutine only supports static library on Windows, but supports both static and shared on other platforms (macOS, Linux, Android)
+if(TARGET CYCoroutine_static)
+    install(TARGETS CYCoroutine_static
+        EXPORT CYLoggerTargets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
 endif()

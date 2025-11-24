@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# 通用构建脚本 - 自动检测平台并构建
-set -e
+# Universal build script - detects host OS and runs the proper helper
+set -euo pipefail
 
 BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$BUILD_DIR/.."
@@ -11,7 +11,7 @@ LIB_TYPE=${2:-Static}
 echo "CYLogger Universal Build Script"
 echo "==============================="
 
-# 检测操作系统
+# Detect the host operating system
 OS=$(uname -s)
 case "$OS" in
     Darwin*)

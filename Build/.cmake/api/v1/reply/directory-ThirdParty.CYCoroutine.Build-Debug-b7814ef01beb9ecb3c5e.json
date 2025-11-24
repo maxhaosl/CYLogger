@@ -1,0 +1,102 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"ThirdParty/CYCoroutine/Build/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 272,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"W:/GitHub/CYLogger/Bin/Windows/x86_64/MD/CYCoroutine.lib"
+			],
+			"targetId" : "CYCoroutine_static::@0c8e9dbe2cc07830c5f0",
+			"targetIndex" : 0,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include/CYCoroutine",
+			"paths" : 
+			[
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/CYCoroutine.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/CYCoroutineDefine.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/CYTypeDefine.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/CYBind.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/CYDebugString.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/CYList.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/Exception/CYBaseException.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/Exception/CYException.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/Message/CYBaseMessage.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/Structure/CYStringUtils.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Common/Time/CYTimeStamps.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Engine/CYCoroutineEngine.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Engine/CYCoroutineEngineDefine.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Executors/CYDerivableExecutor.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Executors/CYExecutor.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Executors/CYInlineExecutor.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Executors/CYManualExecutor.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Executors/CYThreadExecutor.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Executors/CYThreadPoolExecutor.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Executors/CYWorkerThreadExecutor.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYGenerator.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYLazyResult.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYLazyResultAwaitable.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYMakeResult.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYPromises.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYResult.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYResultAwaitable.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYResumeOn.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYSharedResult.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYSharedResultAwaitable.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/CYWhenResult.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYAtomicEx.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYBinarySemaphore.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYConsumerContext.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYCountingSemaphore.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYGeneratorState.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYLazyResultState.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYProducerContext.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYResultState.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYReturnValueStruct.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Results/Impl/CYSharedResultState.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Task/CYTask.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Threads/CYAsyncCondition.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Threads/CYAsyncLock.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Threads/CYCacheLine.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Threads/CYThread.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Timers/CYTimer.hpp",
+				"ThirdParty/CYCoroutine/Build/../Inc/CYCoroutine/Timers/CYTimerQueue.hpp"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "ThirdParty/CYCoroutine/Build",
+		"source" : "ThirdParty/CYCoroutine/Build"
+	}
+}
