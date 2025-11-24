@@ -74,7 +74,7 @@ void CYLoggerFileAppender::OpenFile(int nFlags)
     //m_objLogFile.imbue(std::locale("chs"));
     m_objLogFile.imbue(std::locale(std::locale::classic(), ".OCP", std::locale::ctype | std::locale::collate));
 #endif
-    m_objLogFile.open(m_strFileName.c_str(), nFlags);
+    m_objLogFile.open(m_strFileName.c_str(), (std::ios_base::openmode)nFlags);
 
     IfTrueThrow(!m_objLogFile, TString(TEXT("cannot open file ")) += m_strFileName);
     if ((nFlags & TIos::app) == TIos::app)

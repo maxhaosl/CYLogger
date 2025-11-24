@@ -201,6 +201,9 @@ set(FMT_INSTALL OFF CACHE BOOL "Install fmt" FORCE)
 set(FMT_TEST OFF CACHE BOOL "Build fmt tests" FORCE)
 set(FMT_DOC OFF CACHE BOOL "Build fmt documentation" FORCE)
 
+# Set position-independent code for fmt to allow linking into shared libraries
+set(CMAKE_POSITION_INDEPENDENT_CODE ON CACHE BOOL "Build position-independent code" FORCE)
+
 # Add fmt as a subdirectory
 add_subdirectory(ThirdParty/fmt)
 

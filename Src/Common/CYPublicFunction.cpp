@@ -545,7 +545,7 @@ bool CYPublicFunction::Remove(const TString& strPath)
  */
 unsigned long long CYPublicFunction::GetFileSize(const TString& strPath)
 {
-#if defined(CYLOGGER_MAC_OS)
+#if defined(CYLOGGER_MAC_OS) || defined(CYLOGGER_LINUX_OS)
     struct stat st;
     if (stat(strPath.c_str(), &st) == 0)
     {
@@ -591,7 +591,7 @@ std::chrono::system_clock::time_point CYPublicFunction::GetLastWriteTime(const T
         return tp;
     }
     return std::chrono::system_clock::time_point{};
-#elif defined(CYLOGGER_ANDROID_OS)
+#elif defined(CYLOGGER_ANDROID_OS) || defined(CYLOGGER_LINUX_OS)
     struct stat st;
     if (stat(strPath.c_str(), &st) == 0)
     {
