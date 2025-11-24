@@ -29,6 +29,14 @@ TString CYLoggerConfig::GetLogPath()
 void CYLoggerConfig::SetLogPath(const TString& strPath)
 {
 	m_strLogPath = strPath;
+	if (m_strLogPath.c_str()[m_strLogPath.length() - 1] != TEXT('/') && m_strLogPath.c_str()[m_strLogPath.length() - 1] != TEXT('\\'))
+	{
+#ifdef CYLOGGER_WIN_OS
+		m_strLogPath += TEXT("\\");
+#else
+		m_strLogPath += TEXT("/");
+#endif
+	}
 }
 
 TString CYLoggerConfig::GetErrorLogName()

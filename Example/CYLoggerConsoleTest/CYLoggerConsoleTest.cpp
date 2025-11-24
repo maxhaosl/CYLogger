@@ -24,6 +24,9 @@ int main()
     char* lastSlash = _tcsrchr(szFilePath, '/');
     if (lastSlash) lastSlash[1] = 0;
 
+    lastSlash = _tcsrchr(szFilePath, '\\');
+    if (lastSlash) lastSlash[1] = 0;
+
     CY_LOG_CONFIG(szFilePath, LOG_SHOW_CONSOLE_WINDOW, LOG_LAYOUT_TYPE);
 
     char szBuffer[256] = { 1 };

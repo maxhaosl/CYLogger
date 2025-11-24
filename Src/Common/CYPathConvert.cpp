@@ -30,7 +30,7 @@ TString CYPathConvert::GetLogFilePath(const TChar* szChannel, const TChar* szFil
         TString strData = CYTimeStamps().GetTimeStr();
         TString strFileName = CYPublicFunction::GetFileName(szFile);
         TString strFileExt = CYPublicFunction::GetFileExt(szFile);
-        strFileALL.append(strFileName + strData + TEXT(".") + strFileExt);
+        strFileALL.append(strFileName + TEXT("_") + strData + TEXT(".") + strFileExt);
         break;
     }
     default:

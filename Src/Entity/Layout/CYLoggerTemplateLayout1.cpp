@@ -1,6 +1,7 @@
 #include "Entity/Layout/CYLoggerTemplateLayout1.hpp"
 #include "Entity/Filter/CYLoggerPatternFilterManager.hpp"
 #include "Common/CYFormatDefine.hpp"
+#include "Common/CYPublicFunction.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -108,6 +109,8 @@ TString CYLoggerTemplateLayout1::GetFormatMessage(const TString& strChannel, ELo
         ss << delimiters[TYPE_FIELD_VALUE_END] << s;
 
     ss << delimiters[TYPE_FIELD_VALUE_END]
+        << CYPublicFunction::GetFileName(strFile)
+        << TEXT("::")
         << Escape(s, strFunction, delimiters, escapeChar, bEscape)
         << TEXT("(")
         << nLine
@@ -123,6 +126,8 @@ TString CYLoggerTemplateLayout1::GetFormatMessage(const TString& strChannel, ELo
     }
 
     ss << Escape(s, strMsg, delimiters, escapeChar, bEscape);
+
+    
 
     return ss.str();
 }
