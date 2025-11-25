@@ -73,9 +73,16 @@ bool CYLoggerControl::AddApender(ELogType eLogType, const TChar* szChannel, cons
 	IfTrueThrow(nullptr == m_ptrSchedule, TEXT("m_ptrSchedule cannot be empty."));
 	m_ptrSchedule->AddLogType(eLogType);
 
-	TString strLogFile = CYPathConvert::GetLogFilePath(szChannel, szFile, eFileMode);
-	TString strLogPath = CYPathConvert::ConvertFilePath(strLogFile.c_str(), LoggerConfig()->GetLogPath().c_str(), LOG_DIR);
-	m_arrayEntity[eLogType] = CYLoggerEntityFactory::CreateEntity(eLogType, strLogPath, eFileMode);
+    if (eLogType != LOG_TYPE_REMOTE)
+    {
+        TString strLogFile = CYPathConvert::GetLogFilePath(szChannel, szFile, eFileMode);
+        TString strLogPath = CYPathConvert::ConvertFilePath(strLogFile.c_str(), LoggerConfig()->GetLogPath().c_str(), LOG_DIR);
+        m_arrayEntity[eLogType] = CYLoggerEntityFactory::CreateEntity(eLogType, strLogPath, eFileMode);
+    }
+    else
+    {
+        m_arrayEntity[eLogType] = CYLoggerEntityFactory::CreateEntity(eLogType, szFile, eFileMode);
+    }
 
 	IfTrueThrow(nullptr == m_arrayEntity[eLogType], TEXT("CreateEntity failed!"));
 	return nullptr != m_arrayEntity[eLogType];

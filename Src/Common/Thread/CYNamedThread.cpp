@@ -16,21 +16,23 @@ bool CYNamedThread::StartThread()
     if (this->m_thread.joinable())
         return false;
 
-#ifdef __cpp_lib_jthread
+#ifdef _WIN32
     std::stop_source objStopSource;
     m_objStopSource.swap(objStopSource);
     m_objToken = m_objStopSource.get_token();
-    this->m_thread = std::jthread([this]() { Entry(); });
 #else
-    this->m_thread = std::thread(&CYNamedThread::Entry, this);
+    m_bIsRunning = true;
 #endif
+    this->m_thread = jthread([this]() { Entry(); });
     return this->m_thread.joinable();
 }
 
 bool CYNamedThread::StopThread()
 {
-#ifdef __cpp_lib_jthread
+#ifdef _WIN32
     m_objStopSource.request_stop();
+#else
+    m_bIsRunning = false;
 #endif
     if (this->m_thread.joinable())
     {
@@ -40,24 +42,17 @@ bool CYNamedThread::StopThread()
     return false;
 }
 
-#ifdef __cpp_lib_jthread
-std::jthread::id CYNamedThread::GetId() const noexcept
+jthread::id CYNamedThread::GetId() const noexcept
 {
     return this->m_thread.get_id();
 }
-#else
-std::thread::id CYNamedThread::GetId() const noexcept
-{
-    return this->m_thread.get_id();
-}
-#endif
 
 bool CYNamedThread::IsRunning() const noexcept
 {
-#ifdef __cpp_lib_jthread
+#ifdef _WIN32
     return !m_objToken.stop_requested();
 #else
-    return this->m_thread.joinable();
+    return m_bIsRunning;
 #endif
 }
 

@@ -48,6 +48,7 @@
 #include "Common/CYJThreadDefine.hpp"
 #include <string>
 #include <future>
+#include <atomic>
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -64,11 +65,7 @@ public:
 
     virtual void Run() = 0;
 
-#ifdef __cpp_lib_jthread
-    std::jthread::id GetId() const noexcept;
-#else
-    std::thread::id GetId() const noexcept;
-#endif
+    jthread::id GetId() const noexcept;
 
 protected:
     void Wait();
@@ -79,14 +76,13 @@ protected:
 
 private:
     std::string m_strName;
-#ifdef __cpp_lib_jthread
-    std::jthread m_thread;
-
+#ifdef _WIN32
     std::stop_token m_objToken;
     std::stop_source m_objStopSource;
 #else
-    std::thread m_thread;
+    std::atomic_bool m_bIsRunning = false;
 #endif
+    jthread m_thread;
 };
 
 CYLOGGER_NAMESPACE_END

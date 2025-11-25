@@ -118,7 +118,6 @@ private:
      * @brief Sington.
     */
     static SharePtr<CYLoggerEntityFactory> m_ptrInstance;
-    static std::mutex m_mutex;
 };
 
 #define LoggerEntityFactory() CYLoggerEntityFactory::GetInstance()
