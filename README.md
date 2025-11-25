@@ -1,3 +1,5 @@
+[English](README.md) | [中文](README_zh.md)
+
 # CYLogger
 
 CYLogger is a cross-platform logging library powered by C++20 coroutines. It offers coroutine-aware appenders, lock-free buffers, flexible formatting, and portable build scripts that ship both static and shared libraries for every supported platform.
@@ -21,9 +23,10 @@ CYLogger is a cross-platform logging library powered by C++20 coroutines. It off
 
 ## Dependencies
 
-- [CYCoroutine](ThirdParty/CYCoroutine) – bundled and built automatically (static + shared)
+- [CYCoroutine](ThirdParty/CYCoroutine) – bundled and built automatically. On Windows, only static libraries (`CYCoroutine.lib`) are produced; on other platforms, both static and shared libraries are available. Its macOS/iOS helpers now emit universal slices under `ThirdParty/CYCoroutine/Bin/<platform>/universal/<config>`, so CYLogger no longer needs a separate `lipo` pass when prepping dependencies.
 - CMake 3.16+
 - C++20-compatible toolchains (MSVC 19.3x, Clang 14+, GCC 11+)
+- Linux builds default to `clang-17`/`clang++-17`; override with `CYLOGGER_CC` / `CYLOGGER_CXX` if you need a different compiler.
 - Android NDK r26b+ (auto-detected from common SDK folders)
 
 ## Build Requirements
@@ -115,10 +118,10 @@ docker run --rm -it \
 
 ## Per-platform Helpers
 
-- `build_macos.sh [Release|Debug] [Static|Shared]`: builds one flavor using `CMAKE_OSX_ARCHITECTURES` (default arm64;x86_64) and runs the console test if available.
-- `build_ios.sh [Release|Debug] [Static|Shared] [arm64|x86_64|arm64-simulator]`: maps to the appropriate ios-cmake platform tokens (`OS64`, `SIMULATOR64`, `SIMULATORARM64`).
-- `build_linux.sh [Release|Debug] [Static|Shared] [x86_64|x86]`: normalizes architecture names (aarch64→arm64, amd64→x86_64), passes `-DCMAKE_SYSTEM_PROCESSOR_OVERRIDE`, and automatically adds `-m32`/`-m64` compiler flags based on target architecture. Uses `cmake --build` for consistent cross-platform behavior.
-- `build_linux_all.sh [build_types_csv] [lib_types_csv] [arches_csv]`: iterates `build_linux.sh` across the provided comma-delimited lists (defaults to `Release,Debug`, `Static,Shared`, `x86_64,x86`). Automatically ensures CYCoroutine dependencies are built with correct output paths before building CYLogger.
+- `build_macos.sh [Release|Debug] [Static|Shared]`: builds one flavor using `CMAKE_OSX_ARCHITECTURES` (default arm64;x86_64) and runs the console test if available; CYCoroutine's Apple helper now contributes ready-made universal libraries in parallel.
+- `build_ios.sh [Release|Debug] [Static|Shared] [arm64|x86_64|arm64-simulator]`: maps to the appropriate ios-cmake platform tokens (`OS64`, `SIMULATOR64`, `SIMULATORARM64`) and benefits from CYCoroutine's automatic universal outputs when multiple slices exist.
+- `build_linux.sh [Release|Debug] [Static|Shared] [x86_64|x86]`: normalizes architecture names (aarch64→arm64, amd64→x86_64), passes `-DCMAKE_SYSTEM_PROCESSOR_OVERRIDE`, automatically adds `-m32`/`-m64` compiler flags based on target architecture, and auto-detects a `clang-17` toolchain (overridable via `CYLOGGER_CC`/`CYLOGGER_CXX`).
+- `build_linux_all.sh [build_types_csv] [lib_types_csv] [arches_csv]`: iterates `build_linux.sh` across the provided comma-delimited lists (defaults to `Release,Debug`, `Static,Shared`, `x86_64,x86`). Automatically ensures CYCoroutine dependencies are built with correct output paths before building CYLogger and propagates the detected compiler pair to every dependency build to keep ABI compatibility.
 - `build_windows.bat [Release|Debug] [Static|Shared] [x64|Win32|arm64] [MD|MT]`: forwards the architecture/runtime to CMake and emits artifacts under `Bin/Windows/<arch>/<crt>/<config>`.
 - `build_windows_all.bat [arches_csv] [lib_types_csv] [build_types_csv] [crt_csv]`: loops over every comma-separated combination (defaults to `x64`, `Static,Shared`, `Release,Debug`, `MD,MT`) and stops at the first failure.
 - `build_android.sh [Release|Debug] [Static|Shared] [ABI] [API_LEVEL]`: accepts `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`; API defaults to 31 but is clamped to ABI-specific minimums (19 for 32-bit, 21 for 64-bit). The script now invokes `cmake --build ... --target CYLogger`, so CYCoroutine artifacts are built automatically.

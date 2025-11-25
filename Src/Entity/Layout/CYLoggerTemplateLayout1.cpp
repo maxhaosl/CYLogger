@@ -127,8 +127,6 @@ TString CYLoggerTemplateLayout1::GetFormatMessage(const TString& strChannel, ELo
 
     ss << Escape(s, strMsg, delimiters, escapeChar, bEscape);
 
-    
-
     return ss.str();
 }
 

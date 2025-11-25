@@ -95,7 +95,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine;;$(SolutionDir)\..\..\Src;$(SolutionDir)\..\..\Inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -115,7 +115,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine;;$(SolutionDir)\..\..\Src;$(SolutionDir)\..\..\Inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -136,7 +136,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine;$(SolutionDir)\..\..\Inc;$(SolutionDir)\..\..\Src;$(SolutionDir)\..\..\Src;$(SolutionDir)\..\..\Inc</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -162,7 +162,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <BuildStlModules>false</BuildStlModules>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(SolutionDir)\..\..\ThirdParty\CYCoroutine\Inc;$(SolutionDir)\..\..\ThirdParty\CYCoroutine;;$(SolutionDir)\..\..\Src;$(SolutionDir)\..\..\Inc</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -182,7 +182,9 @@
     <ClInclude Include="..\..\..\Inc\ICYLoggerPatternFilter.hpp" />
     <ClInclude Include="..\..\..\inc\ICYLoggerTemplateLayout.hpp" />
     <ClInclude Include="..\..\..\Src\Common\CYFileRestriction.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYFormatDefine.hpp" />
     <ClInclude Include="..\..\..\Src\Common\CYFPSCounter.hpp" />
+    <ClInclude Include="..\..\..\Src\Common\CYJThreadDefine.hpp" />
     <ClInclude Include="..\..\..\Src\Common\CYPathConvert.hpp" />
     <ClInclude Include="..\..\..\Src\Common\CYPublicFunction.hpp" />
     <ClInclude Include="..\..\..\Src\Common\CYNoCopy.hpp" />

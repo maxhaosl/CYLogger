@@ -288,6 +288,12 @@
     <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutEscape.hpp">
       <Filter>Src\Entity\Layout</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYFormatDefine.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Common\CYJThreadDefine.hpp">
+      <Filter>Src\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Inc">

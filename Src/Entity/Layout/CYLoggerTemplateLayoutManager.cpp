@@ -14,7 +14,6 @@ CYLOGGER_NAMESPACE_BEGIN
 */
 SharePtr<CYLoggerTemplateLayoutManager> CYLoggerTemplateLayoutManager::m_ptrInstance;
 
-
 /**
  * @brief Get Singleton Instance.
 */
@@ -39,12 +38,10 @@ void CYLoggerTemplateLayoutManager::FreeInstance()
 CYLoggerTemplateLayoutManager::CYLoggerTemplateLayoutManager()
     : m_eCurrentLayoutType(ELogLayoutType::LOG_LAYOUT_TYPE_BUILDIN_1)
 {
-
 }
 
 CYLoggerTemplateLayoutManager::~CYLoggerTemplateLayoutManager()
 {
-
 }
 
 /**
@@ -79,7 +76,7 @@ void CYLoggerTemplateLayoutManager::SetCustomLayout(ICYLoggerTemplateLayout* pFi
 */
 SharePtr<ICYLoggerTemplateLayout> CYLoggerTemplateLayoutManager::CraeteTemplateLayout()
 {
-    if (!m_ptrCurrentLayout || m_eCurrentLayoutType!= LoggerConfig()->GetLayoutType())
+    if (!m_ptrCurrentLayout || m_eCurrentLayoutType != LoggerConfig()->GetLayoutType())
     {
         m_eCurrentLayoutType = LoggerConfig()->GetLayoutType();
         switch (m_eCurrentLayoutType)
