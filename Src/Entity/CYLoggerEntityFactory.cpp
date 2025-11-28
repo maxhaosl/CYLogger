@@ -2,6 +2,7 @@
 #include "Entity/Appender/CYLoggerBaseAppender.hpp"
 #include "Entity/CYLoggerEntity.hpp"
 #include "Entity/Appender/CYLoggerAppenderFactory.hpp"
+#include "CYCoroutine/CYCoroutine.hpp"
 
 #include <assert.h>
 
@@ -97,6 +98,7 @@ void CYLoggerEntityFactory::ReleaseAllLoggerEntity()
         ptrLoggerEntity.reset();
         iter = m_mapRegisterEntity.erase(iter);
     }
+    CYCoroFree();
 }
 
 /**
