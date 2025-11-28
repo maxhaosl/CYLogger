@@ -23,7 +23,7 @@ bool CYNamedThread::StartThread()
 #else
     m_bIsRunning = true;
 #endif
-    this->m_thread = jthread([this]() { Entry(); });
+    this->m_thread = cy_jthread([this]() { Entry(); });
     return this->m_thread.joinable();
 }
 
@@ -42,7 +42,7 @@ bool CYNamedThread::StopThread()
     return false;
 }
 
-jthread::id CYNamedThread::GetId() const noexcept
+cy_jthread::id CYNamedThread::GetId() const noexcept
 {
     return this->m_thread.get_id();
 }

@@ -19,9 +19,9 @@
 #endif
 
 #ifdef _WIN32
-using jthread = std::jthread;
+using cy_jthread = std::jthread;
 #else
-using jthread = std::thread;
+using cy_jthread = std::thread;
 #endif
 
 #endif // __CY_JTHREAD_DEFINE_HPP__

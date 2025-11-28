@@ -65,7 +65,7 @@ public:
 
     virtual void Run() = 0;
 
-    jthread::id GetId() const noexcept;
+    cy_jthread::id GetId() const noexcept;
 
 protected:
     void Wait();
@@ -82,7 +82,7 @@ private:
 #else
     std::atomic_bool m_bIsRunning = false;
 #endif
-    jthread m_thread;
+    cy_jthread m_thread;
 };
 
 CYLOGGER_NAMESPACE_END
