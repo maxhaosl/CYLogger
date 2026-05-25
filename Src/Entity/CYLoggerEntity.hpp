@@ -139,7 +139,11 @@ void CYLoggerEntity<APPEND>::AttachAppender(const SharePtr<APPEND>& ptrAppender)
 template<BaseOf APPEND>
 void CYLoggerEntity<APPEND>::DetachAppender()
 {
-	m_ptrAppender.reset();
+    if (m_ptrAppender)
+    {
+        m_ptrAppender->StopLogThread();
+    }
+    m_ptrAppender.reset();
 }
 
 /**

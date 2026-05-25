@@ -255,7 +255,7 @@ bool CYSimpleLogFile::WriteString(TChar* szStr)
         }
 #endif	//CY_USE_UNICODE
 
-        int nLength = cy_strlen(szStr);
+        size_t nLength = cy_strlen(szStr);
         if (nLength > 150)
         {
             nLength = cy_strlen(szStr);

@@ -49,6 +49,7 @@
 #define CYLOGGER_NAMESPACE_BEGIN        namespace cry {
 #define CYLOGGER_NAMESPACE              cry
 #define CYLOGGER_NAMESPACE_END          }
+#define CYLOGGER_USE_CYCOROUTINE        1
 
 #if defined(__MINGW32__)
 #    define CYLOGGER_MINGW_OS

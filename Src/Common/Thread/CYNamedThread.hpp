@@ -74,7 +74,7 @@ protected:
     void SetThreadName(std::string_view strName) noexcept;
     static void SetName(std::string_view strName) noexcept;
 
-private:
+protected:
     std::string m_strName;
 #ifdef _WIN32
     std::stop_token m_objToken;

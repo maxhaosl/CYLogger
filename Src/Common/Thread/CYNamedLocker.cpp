@@ -4,6 +4,7 @@
 CYLOGGER_NAMESPACE_BEGIN
 
 CYNamedLocker::CYNamedLocker(const TChar* pszName)
+	: std::mutex()
 {
 	if (pszName != nullptr)
 	{

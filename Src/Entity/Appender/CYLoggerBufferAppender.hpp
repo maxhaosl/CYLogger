@@ -76,10 +76,10 @@ public:
 	virtual void FlipBuffer() override;
 
 protected:
-	/**
-	 * @brief Coroutine work function.
-	*/
-	CYCOROUTINE_NAMESPACE::CYResult<int> DoFlipBuffer(std::function<int()>&& fun);
+    /**
+     * @brief Coroutine work function.
+    */
+    int DoFlipBuffer(std::function<int()>&& fun);
 
 	/**
 	 * @brief Update Public Statistics.

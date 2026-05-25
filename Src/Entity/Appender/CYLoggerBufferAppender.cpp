@@ -1,7 +1,9 @@
-#include "CYCoroutine/CYCoroutine.hpp"
 #include "Entity/Appender/CYLoggerBufferAppender.hpp"
 #include "Statistics/CYStatistics.hpp"
 #include "Common/Exception/CYExceptionLogFile.hpp"
+#if CYLOGGER_USE_CYCOROUTINE
+#include "CYCoroutine/CYCoroutine.hpp"
+#endif
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -186,10 +188,11 @@ void CYLoggerBufferAppender::UpdatePrivateStats()
     }
 }
 
+#if CYLOGGER_USE_CYCOROUTINE
 /**
-* @brief Coroutine work function.
+ * @brief Coroutine work function.
 */
-CYCOROUTINE_NAMESPACE::CYResult<int> CYLoggerBufferAppender::DoFlipBuffer(std::function<int()>&& fun)
+static CYCOROUTINE_NAMESPACE::CYResult<int> CoDoFlipBuffer(std::function<int()>&& fun)
 {
     auto ret = co_await CYBackgroundCoro()->Submit([fun = std::forward<decltype(fun)>(fun)]() {
         try
@@ -198,11 +201,23 @@ CYCOROUTINE_NAMESPACE::CYResult<int> CYLoggerBufferAppender::DoFlipBuffer(std::f
         }
         catch (...)
         {
-
         }
         return 0;
         });
     co_return ret;
+}
+#endif
+
+/**
+* @brief Work function.
+*/
+int CYLoggerBufferAppender::DoFlipBuffer(std::function<int()>&& fun)
+{
+#if CYLOGGER_USE_CYCOROUTINE
+    return CoDoFlipBuffer(std::forward<decltype(fun)>(fun)).Get();
+#else
+    return fun();
+#endif
 }
 
 /**
@@ -210,7 +225,7 @@ CYCOROUTINE_NAMESPACE::CYResult<int> CYLoggerBufferAppender::DoFlipBuffer(std::f
 */
 void CYLoggerBufferAppender::FlipBuffer()
 {
-    auto objResult = DoFlipBuffer([&] {
+    DoFlipBuffer([&] {
         // Console Buffer.
         {
             LockGuard locker(m_mutexPublicDebugMessage);
@@ -300,7 +315,6 @@ void CYLoggerBufferAppender::FlipBuffer()
 
         return 0;
         });
-    auto nRet = objResult.Get();
 }
 
 CYLOGGER_NAMESPACE_END

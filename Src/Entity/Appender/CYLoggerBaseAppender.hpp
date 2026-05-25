@@ -146,7 +146,6 @@ public:
 	*/
 	virtual void FlipBuffer();
 
-protected:
 	/**
 	 * @brief Start Log Thread.
 	*/
@@ -172,10 +171,10 @@ protected:
 	*/
 	virtual void UpdatePrivateStats();
 
-	/**
-	 * @brief Coroutine work function.
-	*/
-	CYCOROUTINE_NAMESPACE::CYResult<std::tuple<int, int>> DoWork(std::function<std::tuple<int, int>()>&& fun);
+    /**
+     * @brief Work function.
+    */
+    std::tuple<int, int> DoWork(std::function<std::tuple<int, int>()>&& fun);
 
 protected:
 	/**

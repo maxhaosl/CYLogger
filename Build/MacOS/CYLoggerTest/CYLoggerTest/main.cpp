@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
     char szBuffer[256] = { 1 };
 
     int nLineCount = 0;
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 100; i++)
     {
         CY_LOG_TRACE("%d - %s", nLineCount, "This is a test message!");
         CY_LOG_DEBUG("%d - %s", nLineCount, "This is a test message!");

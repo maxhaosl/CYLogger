@@ -49,7 +49,7 @@ void CYPublicFunction::CreateDirectory(const TString& strPath)
         if (cy_strlen(dir) == 0)
             break;
 
-        cy_strcpy(p, dir);
+        cy_tcscpy_s(p, _MAX_DIR + 1, dir);
         cy_splitpath(p, nullptr, dir, fname, ext);
         if (cy_strlen(ext) > 0)
         {
@@ -530,7 +530,7 @@ TString CYPublicFunction::GetBasePath(const TString& strPath)
 bool CYPublicFunction::Remove(const TString& strPath)
 {
 #if defined(CYLOGGER_MAC_OS)
-    // macOS 10.15 filesystem::remove is not available ¡ú use POSIX unlink
+    // macOS 10.15 filesystem::remove is not available -> use POSIX unlink
     return ::unlink(strPath.c_str()) == 0;
 #elif defined(CYLOGGER_WIN_OS)
     return std::filesystem::remove(strPath) == 0;

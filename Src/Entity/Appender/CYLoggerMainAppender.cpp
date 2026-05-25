@@ -1,7 +1,9 @@
-#include "CYCoroutine/CYCoroutine.hpp"
 #include "Entity/Appender/CYLoggerMainAppender.hpp"
 #include "Statistics/CYStatistics.hpp"
 #include "Common/CYFormatDefine.hpp"
+#if CYLOGGER_USE_CYCOROUTINE
+#include "CYCoroutine/CYCoroutine.hpp"
+#endif
 
 CYLOGGER_NAMESPACE_BEGIN
 

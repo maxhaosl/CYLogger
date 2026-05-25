@@ -1,9 +1,14 @@
-#include "CYCoroutine/CYCoroutine.hpp"
 #include "Entity/Appender/CYLoggerBaseAppender.hpp"
 #include "Statistics/CYStatistics.hpp"
 #include "Entity/Appender/CYLoggerAppenderDefine.hpp"
 #include "Statistics/CYStatistics.hpp"
 #include "Common/Exception/CYExceptionLogFile.hpp"
+#if CYLOGGER_USE_CYCOROUTINE
+#include "CYCoroutine/CYCoroutine.hpp"
+#endif
+
+#include <atlbase.h>
+#include <atltrace.h>
 
 CYLOGGER_NAMESPACE_BEGIN
 
@@ -14,10 +19,8 @@ CYLoggerBaseAppender::CYLoggerBaseAppender(std::string_view strName) noexcept
     CYFPSCounter::StartCounter();
 }
 
-
 CYLoggerBaseAppender::~CYLoggerBaseAppender() noexcept
-{
-}
+{}
 
 /**
  * @brief Start Log Thread.
@@ -36,23 +39,44 @@ void CYLoggerBaseAppender::StopLogThread()
     CYNamedThread::StopThread();
 }
 
+#if CYLOGGER_USE_CYCOROUTINE
 /**
-* @brief Coroutine work function.
-*/
-CYCOROUTINE_NAMESPACE::CYResult<std::tuple<int, int>> CYLoggerBaseAppender::DoWork(std::function<std::tuple<int, int>()>&& fun)
+ * @brief Coroutine work funciton.
+ */
+static CYCOROUTINE_NAMESPACE::CYResult<std::tuple<int, int>> CoDoWork(std::function<std::tuple<int, int>()>&& fun)
 {
     auto ret = co_await CYBackgroundCoro()->Submit([fun = std::forward<decltype(fun)>(fun)]() {
         try
         {
-           return fun();
+            return fun();
         }
         catch (...)
         {
-        	
         }
-         return std::tuple<int, int>(0, 0);
+        return std::tuple<int, int>(0, 0);
         });
+
     co_return ret;
+}
+#endif
+
+/**
+* @brief Coroutine work function.
+*/
+std::tuple<int, int> CYLoggerBaseAppender::DoWork(std::function<std::tuple<int, int>()>&& fun)
+{
+#if CYLOGGER_USE_CYCOROUTINE
+    return CoDoWork(std::forward<decltype(fun)>(fun)).Get();
+#else
+    try
+    {
+        return fun();
+    }
+    catch (...)
+    {
+    }
+    return std::tuple<int, int>(0, 0);
+#endif
 }
 
 /**
@@ -120,40 +144,36 @@ void CYLoggerBaseAppender::UpdatePrivateStats()
     switch (eLogType)
     {
     case LOG_TYPE_NONE:
-        assert(0);
+        Statistics()->AddConsolePrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_TRACE:
-        Statistics()->AddTracePublicQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
+        Statistics()->AddTracePrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_DEBUG:
-        Statistics()->AddDebugPublicQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
+        Statistics()->AddDebugPrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_INFO:
-        Statistics()->AddInfoPublicQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
+        Statistics()->AddInfoPrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_WARN:
-        Statistics()->AddWarnPublicQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
+        Statistics()->AddWarnPrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_ERROR:
-        Statistics()->AddErrorPublicQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
+        Statistics()->AddErrorPrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_FATAL:
-        Statistics()->AddFatalPublicQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
+        Statistics()->AddFatalPrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_MAIN:
-        assert(0);
+        Statistics()->AddMainPrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_REMOTE:
-        assert(0);
+        Statistics()->AddRemotePrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     case LOG_TYPE_SYS:
-        Statistics()->AddSysPublicQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
-        break;
-    case LOG_TYPE_MAX:
-        assert(0);
+        Statistics()->AddSysPrivateQueue(static_cast<uint32_t>(m_lstPrivMessage.size()));
         break;
     default:
-        assert(0);
         break;
     }
 }
@@ -183,11 +203,11 @@ void CYLoggerBaseAppender::Run()
                 this->OnActivate();
                 m_bActivate = true;
             }
-            EXCEPTION_END
+                EXCEPTION_END
         }
 
         // Coroutine log processing.
-        auto objResult = DoWork([&] {
+        auto objTuple = DoWork([&] {
             int nTotalLine = 0;
             int nTotalBytes = 0;
             while (!m_lstPrivMessage.empty())
@@ -197,7 +217,7 @@ void CYLoggerBaseAppender::Run()
 
                 nTotalLine++;
                 const TString&& strMsg = ptrMessage->GetFormatMessage();
-                nTotalBytes += static_cast<int>(strMsg.size() * sizeof(TChar));
+                nTotalBytes += static_cast<int>(strMsg.size() + TEXT_BYTE_LEN);
                 Log(strMsg, ptrMessage->GetTypeIndex(), false);
 
                 UpdatePrivateStats();
@@ -208,15 +228,13 @@ void CYLoggerBaseAppender::Run()
         // Get result.
         EXCEPTION_BEGIN
         {
-            auto objTuple = objResult.Get();
             Statistics()->AddTotalLine(get<0>(objTuple));
             Statistics()->AddTotalBytes(get<1>(objTuple));
         }
-        EXCEPTION_END
+            EXCEPTION_END
     }
 
     this->Flush();
 }
 
 CYLOGGER_NAMESPACE_END
-

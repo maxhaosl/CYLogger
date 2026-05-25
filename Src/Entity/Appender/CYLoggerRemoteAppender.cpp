@@ -1,8 +1,10 @@
-#include "CYCoroutine/CYCoroutine.hpp"
 #include "Src/Entity/Appender/CYLoggerRemoteAppender.hpp"
 #include "Src/Statistics/CYStatistics.hpp"
 #include "Src/Common/Exception/CYExceptionLogFile.hpp"
 #include "CYCoroutine/Common/Structure/CYStringUtils.hpp"
+#if CYLOGGER_USE_CYCOROUTINE
+#include "CYCoroutine/CYCoroutine.hpp"
+#endif
 
 #ifdef CYLOGGER_WIN_OS
 #include <winsock2.h>
@@ -190,7 +192,7 @@ void CYLoggerRemoteAppender::OpenSocket()
 #ifdef CYLOGGER_WIN_OS
     (m_socket == INVALID_SOCKET)
 #else
-    (m_socket < 0)
+        (m_socket < 0)
 #endif
     {
         return;
@@ -229,7 +231,7 @@ void CYLoggerRemoteAppender::WriteSocket(std::string strMsg)
     }
 
     size_t nMsgLen = strMsg.length();
-    m_buffer.reserve(nMsgLen);
+    m_buffer.resize(nMsgLen);
     memcpy(&m_buffer[0], strMsg.data(), nMsgLen);
 
     sockaddr_in sain;

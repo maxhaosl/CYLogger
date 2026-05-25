@@ -57,22 +57,22 @@ double CYStatistics::GetTotalAverageFPS()
 
 void CYStatistics::AddTotalPublicQueue(uint32_t nSize)
 {
-    m_nTotalPublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nTotalPublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetTotalPublicQueue()
 {
-    return m_nTotalPublicQueue.load(std::memory_order_relaxed);
+    return m_nTotalPublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddTotalPrivateQueue(uint32_t nSize)
 {
-    m_nTotalPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nTotalPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetTotalPrivateQueue()
 {
-    return m_nTotalPrivateQueue.load(std::memory_order_relaxed);
+    return m_nTotalPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddConsoleLine(uint64_t nLine)
@@ -117,72 +117,72 @@ double CYStatistics::GetConsoleAverageFPS()
 
 void CYStatistics::AddConsolePublicDQueue(uint32_t nSize)
 {
-     m_nConsolePublicDQueue.exchange(nSize, std::memory_order_relaxed);
+     m_nConsolePublicDQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddConsolePublicTQueue(uint32_t nSize)
 {
-    m_nConsolePublicTQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nConsolePublicTQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddConsolePublicIQueue(uint32_t nSize)
 {
-    m_nConsolePublicIQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nConsolePublicIQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddConsolePublicWQueue(uint32_t nSize)
 {
-    m_nConsolePublicWQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nConsolePublicWQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddConsolePublicEQueue(uint32_t nSize)
 {
-    m_nConsolePublicEQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nConsolePublicEQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddConsolePublicFQueue(uint32_t nSize)
 {
-    m_nConsolePublicFQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nConsolePublicFQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddConsolePrivateQueue(uint32_t nSize)
 {
-    m_nConsolePrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nConsolePrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetConsolePublicDQueue()
 {
-    return m_nConsolePublicDQueue.load(std::memory_order_relaxed);
+    return m_nConsolePublicDQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetConsolePublicTQueue()
 {
-    return m_nConsolePublicTQueue.load(std::memory_order_relaxed);
+    return m_nConsolePublicTQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetConsolePublicIQueue()
 {
-    return m_nConsolePublicIQueue.load(std::memory_order_relaxed);
+    return m_nConsolePublicIQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetConsolePublicWQueue()
 {
-    return m_nConsolePublicWQueue.load(std::memory_order_relaxed);
+    return m_nConsolePublicWQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetConsolePublicEQueue()
 {
-    return m_nConsolePublicEQueue.load(std::memory_order_relaxed);
+    return m_nConsolePublicEQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetConsolePublicFQueue()
 {
-    return m_nConsolePublicFQueue.load(std::memory_order_relaxed);
+    return m_nConsolePublicFQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetConsolePrivateQueue()
 {
-    return m_nConsolePrivateQueue.load(std::memory_order_relaxed);
+    return m_nConsolePrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddTraceLine(uint64_t nLine)
@@ -227,22 +227,22 @@ double CYStatistics::GetTraceAverageFPS()
 
 void CYStatistics::AddTracePublicQueue(uint32_t nSize)
 {
-    m_nTracePublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nTracePublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetTracePublicQueue()
 {
-    return m_nTracePublicQueue.load(std::memory_order_relaxed);
+    return m_nTracePublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddTracePrivateQueue(uint32_t nSize)
 {
-    m_nTracePrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nTracePrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetTracePrivateQueue()
 {
-    return m_nTracePrivateQueue.load(std::memory_order_relaxed);
+    return m_nTracePrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddDebugLine(uint64_t nLine)
@@ -287,22 +287,22 @@ double CYStatistics::GetDebugAverageFPS()
 
 void CYStatistics::AddDebugPublicQueue(uint32_t nSize)
 {
-    m_nDebugPublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nDebugPublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetDebugPublicQueue()
 {
-    return m_nDebugPublicQueue.load(std::memory_order_relaxed);
+    return m_nDebugPublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddDebugPrivateQueue(uint32_t nSize)
 {
-    m_nDebugPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nDebugPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetDebugPrivateQueue()
 {
-    return m_nDebugPrivateQueue.load(std::memory_order_relaxed);
+    return m_nDebugPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddInfoLine(uint64_t nLine)
@@ -347,22 +347,22 @@ double CYStatistics::GetInfoAverageFPS()
 
 void CYStatistics::AddInfoPublicQueue(uint32_t nSize)
 {
-    m_nInfoPublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nInfoPublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetInfoPublicQueue()
 {
-    return m_nInfoPublicQueue.load(std::memory_order_relaxed);
+    return m_nInfoPublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddInfoPrivateQueue(uint32_t nSize)
 {
-    m_nInfoPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nInfoPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetInfoPrivateQueue()
 {
-    return m_nInfoPrivateQueue.load(std::memory_order_relaxed);
+    return m_nInfoPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddWarnLine(uint64_t nLine)
@@ -407,22 +407,22 @@ double CYStatistics::GetWarnAverageFPS()
 
 void CYStatistics::AddWarnPublicQueue(uint32_t nSize)
 {
-    m_nWarnPublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nWarnPublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetWarnPublicQueue()
 {
-    return m_nWarnPublicQueue.load(std::memory_order_relaxed);
+    return m_nWarnPublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddWarnPrivateQueue(uint32_t nSize)
 {
-    m_nWarnPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nWarnPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetWarnPrivateQueue()
 {
-    return m_nWarnPrivateQueue.load(std::memory_order_relaxed);
+    return m_nWarnPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddErrorLine(uint64_t nLine)
@@ -467,22 +467,22 @@ double CYStatistics::GetErrorAverageFPS()
 
 void CYStatistics::AddErrorPublicQueue(uint32_t nSize)
 {
-    m_nErrorPublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nErrorPublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetErrorPublicQueue()
 {
-    return m_nErrorPublicQueue.load(std::memory_order_relaxed);
+    return m_nErrorPublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddErrorPrivateQueue(uint32_t nSize)
 {
-    m_nErrorPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nErrorPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetErrorPrivateQueue()
 {
-    return m_nErrorPrivateQueue.load(std::memory_order_relaxed);
+    return m_nErrorPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddFatalLine(uint64_t nLine)
@@ -527,22 +527,22 @@ double CYStatistics::GetFatalAverageFPS()
 
 void CYStatistics::AddFatalPublicQueue(uint32_t nSize)
 {
-    m_nFatalPublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nFatalPublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetFatalPublicQueue()
 {
-    return m_nFatalPublicQueue.load(std::memory_order_relaxed);
+    return m_nFatalPublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddFatalPrivateQueue(uint32_t nSize)
 {
-    m_nFatalPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nFatalPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetFatalPrivateQueue()
 {
-    return m_nFatalPrivateQueue.load(std::memory_order_relaxed);
+    return m_nFatalPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddMainLine(uint64_t nLine)
@@ -587,72 +587,72 @@ double CYStatistics::GetMainAverageFPS()
 
 void CYStatistics::AddMainPublicDQueue(uint32_t nSize)
 {
-    m_nMainPublicDQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nMainPublicDQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddMainPublicTQueue(uint32_t nSize)
 {
-    m_nMainPublicTQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nMainPublicTQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddMainPublicIQueue(uint32_t nSize)
 {
-    m_nMainPublicIQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nMainPublicIQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddMainPublicWQueue(uint32_t nSize)
 {
-    m_nMainPublicWQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nMainPublicWQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddMainPublicEQueue(uint32_t nSize)
 {
-    m_nMainPublicEQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nMainPublicEQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddMainPublicFQueue(uint32_t nSize)
 {
-    m_nMainPublicFQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nMainPublicFQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddMainPrivateQueue(uint32_t nSize)
 {
-    m_nMainPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nMainPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetMainPublicDQueue()
 {
-    return m_nMainPublicDQueue.load(std::memory_order_relaxed);
+    return m_nMainPublicDQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetMainPublicTQueue()
 {
-    return m_nMainPublicTQueue.load(std::memory_order_relaxed);
+    return m_nMainPublicTQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetMainPublicIQueue()
 {
-    return m_nMainPublicIQueue.load(std::memory_order_relaxed);
+    return m_nMainPublicIQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetMainPublicWQueue()
 {
-    return m_nMainPublicWQueue.load(std::memory_order_relaxed);
+    return m_nMainPublicWQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetMainPublicEQueue()
 {
-    return m_nMainPublicEQueue.load(std::memory_order_relaxed);
+    return m_nMainPublicEQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetMainPublicFQueue()
 {
-    return m_nMainPublicFQueue.load(std::memory_order_relaxed);
+    return m_nMainPublicFQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetMainPrivateQueue()
 {
-    return m_nMainPrivateQueue.load(std::memory_order_relaxed);
+    return m_nMainPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddRemoteLine(uint64_t nLine)
@@ -697,72 +697,72 @@ double CYStatistics::GetRemoteAverageFPS()
 
 void CYStatistics::AddRemotePublicDQueue(uint32_t nSize)
 {
-    m_nRemotePublicDQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nRemotePublicDQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddRemotePublicTQueue(uint32_t nSize)
 {
-    m_nRemotePublicTQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nRemotePublicTQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddRemotePublicIQueue(uint32_t nSize)
 {
-    m_nRemotePublicIQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nRemotePublicIQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddRemotePublicWQueue(uint32_t nSize)
 {
-    m_nRemotePublicWQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nRemotePublicWQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddRemotePublicEQueue(uint32_t nSize)
 {
-    m_nRemotePublicEQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nRemotePublicEQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddRemotePublicFQueue(uint32_t nSize)
 {
-    m_nRemotePublicFQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nRemotePublicFQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddRemotePrivateQueue(uint32_t nSize)
 {
-    m_nRemotePrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nRemotePrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetRemotePublicDQueue()
 {
-    return m_nRemotePublicDQueue.load(std::memory_order_relaxed);
+    return m_nRemotePublicDQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetRemotePublicTQueue()
 {
-    return m_nRemotePublicTQueue.load(std::memory_order_relaxed);
+    return m_nRemotePublicTQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetRemotePublicIQueue()
 {
-    return m_nRemotePublicIQueue.load(std::memory_order_relaxed);
+    return m_nRemotePublicIQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetRemotePublicWQueue()
 {
-    return m_nRemotePublicWQueue.load(std::memory_order_relaxed);
+    return m_nRemotePublicWQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetRemotePublicEQueue()
 {
-    return m_nRemotePublicEQueue.load(std::memory_order_relaxed);
+    return m_nRemotePublicEQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetRemotePublicFQueue()
 {
-    return m_nRemotePublicFQueue.load(std::memory_order_relaxed);
+    return m_nRemotePublicFQueue.load(std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetRemotePrivateQueue()
 {
-    return m_nRemotePrivateQueue.load(std::memory_order_relaxed);
+    return m_nRemotePrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddSysLine(uint64_t nLine)
@@ -807,22 +807,22 @@ double CYStatistics::GetSysAverageFPS()
 
 void CYStatistics::AddSysPublicQueue(uint32_t nSize)
 {
-    m_nSysPublicQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nSysPublicQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetSysPublicQueue()
 {
-    return m_nSysPublicQueue.load(std::memory_order_relaxed);
+    return m_nSysPublicQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::AddSysPrivateQueue(uint32_t nSize)
 {
-    m_nSysPrivateQueue.exchange(nSize, std::memory_order_relaxed);
+    m_nSysPrivateQueue.exchange(nSize, std::memory_order_seq_cst);
 }
 
 uint32_t CYStatistics::GetSysPrivateQueue()
 {
-    return m_nSysPrivateQueue.load(std::memory_order_relaxed);
+    return m_nSysPrivateQueue.load(std::memory_order_seq_cst);
 }
 
 void CYStatistics::Reset()

@@ -2,7 +2,9 @@
 #include "Entity/Appender/CYLoggerBaseAppender.hpp"
 #include "Entity/CYLoggerEntity.hpp"
 #include "Entity/Appender/CYLoggerAppenderFactory.hpp"
+#if CYLOGGER_USE_CYCOROUTINE
 #include "CYCoroutine/CYCoroutine.hpp"
+#endif
 
 #include <assert.h>
 
@@ -80,6 +82,7 @@ void CYLoggerEntityFactory::ReleaseLoggerEntity(ELogType eLogType)
     {
         auto ptrLoggerEntity = iterFind->second;
         ptrLoggerEntity->Flush();
+        ptrLoggerEntity->DetachAppender();
         ptrLoggerEntity.reset();
         m_mapRegisterEntity.erase(eLogType);
     }
@@ -95,10 +98,13 @@ void CYLoggerEntityFactory::ReleaseAllLoggerEntity()
     {
         auto ptrLoggerEntity = iter->second;
         ptrLoggerEntity->Flush();
+        ptrLoggerEntity->DetachAppender();
         ptrLoggerEntity.reset();
         iter = m_mapRegisterEntity.erase(iter);
     }
+#if CYLOGGER_USE_CYCOROUTINE
     CYCoroFree();
+#endif
 }
 
 /**
