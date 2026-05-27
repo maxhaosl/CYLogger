@@ -7,3 +7,6 @@
 [submodule "ThirdParty/libfork"]
 	path = ThirdParty/libfork
 	url = https://github.com/ConorWilliams/libfork.git
+[submodule "ThirdParty/CYCommon"]
+	path = ThirdParty/CYCommon
+	url = https://github.com/maxhaosl/CYCommon.git

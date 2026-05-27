@@ -203,7 +203,7 @@ void CYLoggerBaseAppender::Run()
                 this->OnActivate();
                 m_bActivate = true;
             }
-                EXCEPTION_END
+            EXCEPTION_END
         }
 
         // Coroutine log processing.

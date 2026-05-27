@@ -22,6 +22,9 @@ set CRT_TYPE=%CRT_TYPE:"=%
 call :EnsureFmtSubmodule
 if errorlevel 1 exit /b 1
 
+call :EnsureCYCommonSubmodule
+if errorlevel 1 exit /b 1
+
 REM Map architecture: x64 -> x86_64 for output paths, but keep x64 for CMake -A parameter
 set OUTPUT_ARCH=%TARGET_ARCH%
 if /I "%TARGET_ARCH%"=="x64" set OUTPUT_ARCH=x86_64
@@ -125,6 +128,31 @@ if not exist "%FMT_HEADER%" (
 
 echo fmt submodule ready.
 exit /b 0
+
+:EnsureCYCommonSubmodule
+set "CYCOMMON_DIR=%PROJECT_ROOT%\ThirdParty\CYCommon"
+set "CYCOMMON_HEADER=%PROJECT_ROOT%\ThirdParty\CYCommon\Inc\CYCommon\CYCommon.hpp"
+set "CYCOMMON_BUILD=%PROJECT_ROOT%\ThirdParty\CYCommon\Build\CMakeLists.txt"
+if exist "%CYCOMMON_HEADER%" if exist "%CYCOMMON_BUILD%" (
+    exit /b 0
+)
+
+REM CYCommon is expected to be a local copy (not a git submodule)
+REM Check if it exists at the sibling location
+set "CYCOMMON_SIBLING=%~dp0..\..\..\CYCommon"
+if exist "%CYCOMMON_SIBLING%\Inc\CYCommon\CYCommon.hpp" (
+    if exist "%CYCOMMON_SIBLING%\Build\CMakeLists.txt" (
+        echo Found CYCommon at sibling location: %CYCOMMON_SIBLING%
+        REM Create a symlink or copy would be needed here
+        exit /b 0
+    )
+)
+
+echo CYCommon not found at expected locations:
+echo   - %CYCOMMON_DIR%
+echo   - %CYCOMMON_SIBLING%
+echo Please ensure CYCommon is available as a local dependency.
+exit /b 1
 
 :NormalizeBuildType
 set "VAR_NAME=%~1"

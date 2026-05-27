@@ -2,7 +2,7 @@
 #include "Common/CYPrivateDefine.hpp"
 #include "Entity/Filter/CYLoggerPatternFilterManager.hpp"
 #include "Entity/Layout/CYLoggerTemplateLayoutManager.hpp"
-#include "CYCoroutine/Common/Exception/CYBaseException.hpp"
+#include "CYCommon/Common/Exception/CYBaseException.hpp"
 #include "Common/Exception/CYExceptionLogFile.hpp"
 
 #include <sstream>

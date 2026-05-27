@@ -46,7 +46,7 @@
 
 #include "Inc/ICYLoggerDefine.hpp"
 #include "Entity/Appender/CYLoggerBaseAppender.hpp"
-#include "CYCoroutine/Common/Exception/CYException.hpp"
+#include "CYCommon/Common/Exception/CYException.hpp"
 #include "Common/CYPublicFunction.hpp"
 #include "Common/CYFileRestriction.hpp"
 #include "Common/Thread/CYNamedLocker.hpp"

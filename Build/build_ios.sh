@@ -14,6 +14,33 @@ LIB_TYPE=${2:-Static}
 REQUESTED_ARCHES_RAW=${3:-"arm64;x86_64"}
 REQUESTED_ARCHES_RAW=${REQUESTED_ARCHES_RAW//,/;}
 
+# Ensure CYCommon submodule exists
+ensure_cycommon_submodule() {
+    # CYCommon can be in multiple locations:
+    # 1. ThirdParty/CYCommon (bundled with CYLogger)
+    # 2. ../../../CYCommon (sibling location)
+    local cycommon_header="$PROJECT_ROOT/ThirdParty/CYCommon/Inc/CYCommon/CYCommon.hpp"
+    local cycommon_build="$PROJECT_ROOT/ThirdParty/CYCommon/Build/CMakeLists.txt"
+
+    if [ -f "$cycommon_header" ] && [ -f "$cycommon_build" ]; then
+        return 0
+    fi
+
+    # Check sibling location
+    local cycommon_sibling="$PROJECT_ROOT/../../../CYCommon/Inc/CYCommon/CYCommon.hpp"
+    if [ -f "$cycommon_sibling" ]; then
+        return 0
+    fi
+
+    echo "CYCommon not found at expected locations:"
+    echo "  - $cycommon_header"
+    echo "  - $cycommon_sibling"
+    echo "Please ensure CYCommon is available as a local dependency."
+    return 1
+}
+
+ensure_cycommon_submodule || exit 1
+
 declare -a IOS_ARCHES=()
 IFS=';' read -r -a _ios_arch_tokens <<< "$REQUESTED_ARCHES_RAW"
 for token in "${_ios_arch_tokens[@]}"; do

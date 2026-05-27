@@ -1,7 +1,7 @@
 #include "Src/Entity/Appender/CYLoggerRemoteAppender.hpp"
 #include "Src/Statistics/CYStatistics.hpp"
 #include "Src/Common/Exception/CYExceptionLogFile.hpp"
-#include "CYCoroutine/Common/Structure/CYStringUtils.hpp"
+#include "CYCommon/Common/Structure/CYStringUtils.hpp"
 #if CYLOGGER_USE_CYCOROUTINE
 #include "CYCoroutine/CYCoroutine.hpp"
 #endif
@@ -33,7 +33,7 @@ CYLoggerRemoteAppender::CYLoggerRemoteAppender(const TString& strHost) noexcept
 {
     EXCEPTION_BEGIN
     {
-       m_strHost = CYCOROUTINE_NAMESPACE::CYStringUtils::TString2String(strHost.data());
+       m_strHost = CYCOMMON_NAMESPACE::CYStringUtils::TString2String(strHost.data());
         size_t index = m_strHost.rfind(TEXT(':'));
         if (index != TString::npos)
         {
@@ -84,7 +84,7 @@ void CYLoggerRemoteAppender::Log(const TStringView& strMsg, int nTypeIndex, bool
     Statistics()->AddRemoteCurrentFPS(CYFPSCounter::GetCurrentFPS());
     Statistics()->AddRemoteAverageFPS(CYFPSCounter::GetAverageFPS());
 
-    WriteSocket(CYCOROUTINE_NAMESPACE::CYStringUtils::TString2String(strMsg.data()));
+    WriteSocket(CYCOMMON_NAMESPACE::CYStringUtils::TString2String(strMsg.data()));
 }
 
 /**

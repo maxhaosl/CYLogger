@@ -45,7 +45,7 @@
 #define __CY_PRIVATE_DEFINE_HPP__
 
 #include "Inc/ICYLoggerDefine.hpp"
-#include "CYCoroutine/CYTypeDefine.hpp"
+#include "CYCommon/CYTypeDefine.hpp"
 
 #ifdef CYLOGGER_WIN_OS
 #include <winsock2.h>

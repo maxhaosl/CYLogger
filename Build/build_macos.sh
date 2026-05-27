@@ -26,6 +26,33 @@ if [ ${#MACOS_ARCHES[@]} -eq 0 ]; then
     MACOS_ARCHES+=("$(uname -m)")
 fi
 
+# Ensure CYCommon submodule exists
+ensure_cycommon_submodule() {
+    # CYCommon can be in multiple locations:
+    # 1. ThirdParty/CYCommon (bundled with CYLogger)
+    # 2. ../../../CYCommon (sibling location)
+    local cycommon_header="$PROJECT_ROOT/ThirdParty/CYCommon/Inc/CYCommon/CYCommon.hpp"
+    local cycommon_build="$PROJECT_ROOT/ThirdParty/CYCommon/Build/CMakeLists.txt"
+
+    if [ -f "$cycommon_header" ] && [ -f "$cycommon_build" ]; then
+        return 0
+    fi
+
+    # Check sibling location
+    local cycommon_sibling="$PROJECT_ROOT/../../../CYCommon/Inc/CYCommon/CYCommon.hpp"
+    if [ -f "$cycommon_sibling" ]; then
+        return 0
+    fi
+
+    echo "CYCommon not found at expected locations:"
+    echo "  - $cycommon_header"
+    echo "  - $cycommon_sibling"
+    echo "Please ensure CYCommon is available as a local dependency."
+    return 1
+}
+
+ensure_cycommon_submodule || exit 1
+
 detect_jobs() {
     if command -v sysctl >/dev/null 2>&1; then
         sysctl -n hw.ncpu 2>/dev/null && return

@@ -59,15 +59,31 @@ endif()
 # Link against pthreads and optional dependencies
 find_package(Threads REQUIRED)
 
-if(USE_CYCOROUTINE)
-    # Always link the static CYCoroutine target to avoid export confusion
-    if(TARGET CYCoroutine_static)
-        target_link_libraries(CYLogger PUBLIC Threads::Threads CYCoroutine_static fmt::fmt)
+if(USE_CYCOMMON)
+    # Link CYCommon if USE_CYCOMMON is enabled
+    if(TARGET CYCommon::static)
+        target_link_libraries(CYLogger PUBLIC Threads::Threads CYCommon::static fmt::fmt)
+    elseif(TARGET CYCommon_static)
+        target_link_libraries(CYLogger PUBLIC Threads::Threads CYCommon_static fmt::fmt)
     else()
-        message(FATAL_ERROR "CYCoroutine_static target not found while USE_CYCOROUTINE=ON")
+        # Fallback to header-only usage if library target not available
+        target_link_libraries(CYLogger PUBLIC Threads::Threads fmt::fmt)
     endif()
 else()
     target_link_libraries(CYLogger PUBLIC Threads::Threads fmt::fmt)
+endif()
+
+if(USE_CYCOROUTINE)
+    # Always link the static CYCoroutine target to avoid export confusion
+    if(TARGET CYCoroutine_static)
+        # CYCoroutine already links CYCommon internally, so no need to link again
+        # unless USE_CYCOMMON is off
+        if(NOT USE_CYCOMMON)
+            target_link_libraries(CYLogger PUBLIC CYCoroutine_static)
+        endif()
+    else()
+        message(FATAL_ERROR "CYCoroutine_static target not found while USE_CYCOROUTINE=ON")
+    endif()
 endif()
 
 # Windows extras

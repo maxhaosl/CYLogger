@@ -4,7 +4,7 @@
 #include "Inc/ICYLogger.hpp"
 #include "Common/CYPrivateDefine.hpp"
 #include "Entity/CYLoggerEntity.hpp"
-#include "CYCoroutine/Common/Message/CYBaseMessage.hpp"
+#include "CYCommon/Common/Message/CYBaseMessage.hpp"
 
 #include <array>
 

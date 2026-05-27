@@ -5,7 +5,7 @@
 #include "Entity/Appender/CYLoggerRemoteAppender.hpp"
 #include "Entity/Appender/CYLoggerSystemAppender.hpp"
 #include "Config/CYLoggerConfig.hpp"
-#include "CYCoroutine/Common/Exception/CYException.hpp"
+#include "CYCommon/Common/Exception/CYException.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN
 

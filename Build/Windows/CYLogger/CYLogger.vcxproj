@@ -73,18 +73,20 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)D</TargetName>
     <OutDir>$(SolutionDir)\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\..\..\Bin\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)\..\..\Bin\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)\..\..\Bin\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\..\..\Bin\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)\..\..\Bin\obj\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -95,7 +97,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc;$(ProjectDir)\..\..\..\ThirdParty\libfork\include;$(ProjectDir)\..\..\..\ThirdParty\CYCommon;$(ProjectDir)\..\..\..\ThirdParty\CYCommon\Inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -115,7 +117,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc;$(ProjectDir)\..\..\..\ThirdParty\libfork\include;$(ProjectDir)\..\..\..\ThirdParty\CYCommon;$(ProjectDir)\..\..\..\ThirdParty\CYCommon\Inc</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -136,7 +138,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc;$(ProjectDir)\..\..\..\ThirdParty\libfork\include;$(ProjectDir)\..\..\..\ThirdParty\CYCommon;$(ProjectDir)\..\..\..\ThirdParty\CYCommon\Inc</AdditionalIncludeDirectories>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -162,7 +164,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <BuildStlModules>false</BuildStlModules>
       <EnableModules>true</EnableModules>
-      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;../../../;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine\Inc;$(ProjectDir)\..\..\..\ThirdParty\CYCoroutine;$(ProjectDir)\..\..\..\Src;$(ProjectDir)\..\..\..\Inc;$(ProjectDir)\..\..\..\ThirdParty\libfork\include;$(ProjectDir)\..\..\..\ThirdParty\CYCommon;$(ProjectDir)\..\..\..\ThirdParty\CYCommon\Inc</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>

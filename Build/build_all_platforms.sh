@@ -34,6 +34,33 @@ MACOS_DEPLOYMENT_TARGET=${MACOS_DEPLOYMENT_TARGET:-"11.0"}
 IOS_DEPLOYMENT_TARGET=${IOS_DEPLOYMENT_TARGET:-"13.0"}
 ANDROID_API_LEVEL_DEFAULT=${ANDROID_API_LEVEL:-"31"}
 
+# Ensure CYCommon submodule exists
+ensure_cycommon_submodule() {
+    # CYCommon can be in multiple locations:
+    # 1. ThirdParty/CYCommon (bundled with CYLogger)
+    # 2. ../../../CYCommon (sibling location)
+    local cycommon_header="$PROJECT_ROOT/ThirdParty/CYCommon/Inc/CYCommon/CYCommon.hpp"
+    local cycommon_build="$PROJECT_ROOT/ThirdParty/CYCommon/Build/CMakeLists.txt"
+
+    if [ -f "$cycommon_header" ] && [ -f "$cycommon_build" ]; then
+        return 0
+    fi
+
+    # Check sibling location
+    local cycommon_sibling="$PROJECT_ROOT/../../../CYCommon/Inc/CYCommon/CYCommon.hpp"
+    if [ -f "$cycommon_sibling" ]; then
+        return 0
+    fi
+
+    echo "CYCommon not found at expected locations:"
+    echo "  - $cycommon_header"
+    echo "  - $cycommon_sibling"
+    echo "Please ensure CYCommon is available as a local dependency."
+    return 1
+}
+
+ensure_cycommon_submodule || exit 1
+
 LINUX_ARCHES_DEFAULT=("x86_64" "x86")
 ANDROID_ABIS_DEFAULT=("arm64-v8a" "armeabi-v7a" "x86_64" "x86")
 BUILD_TYPES_DEFAULT=("Release" "Debug")

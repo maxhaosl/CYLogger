@@ -45,7 +45,7 @@
 #define __CY_STR_MESSAGE_HPP__
 
 #include "Inc/ICYLogger.hpp"
-#include "CYCoroutine/Common/Message/CYBaseMessage.hpp"
+#include "CYCommon/Common/Message/CYBaseMessage.hpp"
 #include "Entity/Layout/CYLoggerTemplateLayoutEscape.hpp"
 
 CYLOGGER_NAMESPACE_BEGIN

@@ -50,8 +50,11 @@
 #include "Common/Time/CYTimeElapsed.hpp"
 #include "Common/CYFPSCounter.hpp"
 
-#include "CYCoroutine/Common/Exception/CYException.hpp"
+#include "CYCommon/Common/Exception/CYException.hpp"
+
+#if CYLOGGER_USE_CYCOROUTINE
 #include "CYCoroutine/Results/CYResult.hpp"
+#endif
 
 #include <deque>
 #include <mutex>

@@ -12,6 +12,33 @@ BUILD_TYPE=${1:-Release}
 LIB_TYPE=${2:-Static}
 ANDROID_ABI=${3:-arm64-v8a}
 ANDROID_API_LEVEL=${4:-31}
+
+# Ensure CYCommon submodule exists
+ensure_cycommon_submodule() {
+    # CYCommon can be in multiple locations:
+    # 1. ThirdParty/CYCommon (bundled with CYLogger)
+    # 2. ../../../CYCommon (sibling location)
+    local cycommon_header="$PROJECT_ROOT/ThirdParty/CYCommon/Inc/CYCommon/CYCommon.hpp"
+    local cycommon_build="$PROJECT_ROOT/ThirdParty/CYCommon/Build/CMakeLists.txt"
+
+    if [ -f "$cycommon_header" ] && [ -f "$cycommon_build" ]; then
+        return 0
+    fi
+
+    # Check sibling location
+    local cycommon_sibling="$PROJECT_ROOT/../../../CYCommon/Inc/CYCommon/CYCommon.hpp"
+    if [ -f "$cycommon_sibling" ]; then
+        return 0
+    fi
+
+    echo "CYCommon not found at expected locations:"
+    echo "  - $cycommon_header"
+    echo "  - $cycommon_sibling"
+    echo "Please ensure CYCommon is available as a local dependency."
+    return 1
+}
+
+ensure_cycommon_submodule || exit 1
 ANDROID_PLATFORM_KEY="android"
 ANDROID_PLATFORM_DIR="$(map_platform_dir "$ANDROID_PLATFORM_KEY")"
 ANDROID_SLICE_DIR="$(platform_slice_dir "$ANDROID_PLATFORM_KEY" "$ANDROID_ABI" "$BUILD_TYPE")"

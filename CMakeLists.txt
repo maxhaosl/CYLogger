@@ -186,6 +186,66 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/CYCoroutine/Inc)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/CYCoroutine/Src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/fmt/include)
 
+# CYCommon dependency
+option(USE_CYCOMMON "Use CYCommon library" ON)
+
+# CYCommon can be either:
+# 1. A bundled library under ThirdParty/CYCommon (local copy, no git submodule)
+# 2. A sibling library at the same level as CYLogger's parent
+if(USE_CYCOMMON)
+    # First, check if CYCommon exists as a bundled library
+    if(NOT DEFINED CYCOMMON_ROOT_DIR)
+        get_filename_component(CYCOMMON_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/CYCommon" ABSOLUTE)
+    endif()
+
+    # Check if bundled CYCommon exists
+    if(EXISTS "${CYCOMMON_ROOT_DIR}/Build/CMakeLists.txt")
+        message(STATUS "Found bundled CYCommon at ${CYCOMMON_ROOT_DIR}")
+    elseif(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/CYCommon/Build/CMakeLists.txt")
+        # Use the bundled CYCommon
+        set(CYCOMMON_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/CYCommon")
+        message(STATUS "Using bundled CYCommon at ${CYCOMMON_ROOT_DIR}")
+    else()
+        # Fallback: check if CYCommon exists at the sibling path (same parent as CYLogger)
+        get_filename_component(_CYCOMMON_SIBLING_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../CYCommon" ABSOLUTE)
+        if(EXISTS "${_CYCOMMON_SIBLING_PATH}/Build/CMakeLists.txt")
+            set(CYCOMMON_ROOT_DIR "${_CYCOMMON_SIBLING_PATH}")
+            message(STATUS "Using sibling CYCommon at ${CYCOMMON_ROOT_DIR}")
+        else()
+            message(WARNING "CYCommon not found. CYCommon dependency will be disabled.")
+            set(USE_CYCOMMON OFF)
+        endif()
+    endif()
+
+    # If CYCommon is available, add it as a subdirectory
+    if(USE_CYCOMMON AND EXISTS "${CYCOMMON_ROOT_DIR}/Build/CMakeLists.txt")
+        message(STATUS "Including CYCommon dependency from ${CYCOMMON_ROOT_DIR}")
+
+        # Forward build options to CYCommon
+        # CYCommon only supports static library on Windows
+        set(CYCOMMON_BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS})
+        if(WIN32)
+            set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared libraries" FORCE)
+            set(BUILD_STATIC_LIBS ON CACHE BOOL "Build static libraries" FORCE)
+        endif()
+
+        # Pass the runtime library setting to CYCommon
+        if(MSVC)
+            set(CYCOMMON_WINDOWS_RUNTIME ${CYLOGGER_MSVC_RUNTIME} CACHE STRING "Windows runtime library" FORCE)
+        endif()
+
+        # Add CYCommon as a subdirectory
+        add_subdirectory(${CYCOMMON_ROOT_DIR}/Build)
+
+        # Restore BUILD_SHARED_LIBS for CYLogger
+        set(BUILD_SHARED_LIBS ${CYCOMMON_BUILD_SHARED_LIBS} CACHE BOOL "Build shared libraries" FORCE)
+
+        # Add CYCommon include directory
+        include_directories(${CYCOMMON_ROOT_DIR}/Inc)
+        add_definitions(-DUSE_CYCOMMON)
+    endif()
+endif()
+
 # Build toggles
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_EXAMPLES "Build examples" ON)

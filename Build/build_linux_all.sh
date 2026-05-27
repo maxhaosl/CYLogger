@@ -13,6 +13,33 @@ BUILD_TYPES_CSV="Release,Debug"
 LIB_TYPES_CSV="Static,Shared"
 ARCHES_CSV="x86_64,x86"
 
+# Ensure CYCommon submodule exists
+ensure_cycommon_submodule() {
+    # CYCommon can be in multiple locations:
+    # 1. ThirdParty/CYCommon (bundled with CYLogger)
+    # 2. ../../../CYCommon (sibling location)
+    local cycommon_header="$PROJECT_ROOT/ThirdParty/CYCommon/Inc/CYCommon/CYCommon.hpp"
+    local cycommon_build="$PROJECT_ROOT/ThirdParty/CYCommon/Build/CMakeLists.txt"
+
+    if [ -f "$cycommon_header" ] && [ -f "$cycommon_build" ]; then
+        return 0
+    fi
+
+    # Check sibling location
+    local cycommon_sibling="$PROJECT_ROOT/../../../CYCommon/Inc/CYCommon/CYCommon.hpp"
+    if [ -f "$cycommon_sibling" ]; then
+        return 0
+    fi
+
+    echo "CYCommon not found at expected locations:"
+    echo "  - $cycommon_header"
+    echo "  - $cycommon_sibling"
+    echo "Please ensure CYCommon is available as a local dependency."
+    return 1
+}
+
+ensure_cycommon_submodule || exit 1
+
 canonicalize_linux_arch() {
     local token lower
     token=$(printf '%s' "$1" | xargs)

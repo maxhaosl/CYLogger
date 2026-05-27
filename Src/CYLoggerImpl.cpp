@@ -5,7 +5,7 @@
 #include "Common/Message/CYEscapeMessage.hpp"
 #include "Common/Message/CYNormalMessage.hpp"
 #include "Common/Message/CYStrMessage.hpp"
-#include "CYCoroutine/Common/Exception/CYException.hpp"
+#include "CYCommon/Common/Exception/CYException.hpp"
 #include "Common/Exception/CYExceptionLogFile.hpp"
 #include "Statistics/CYStatistics.hpp"
 
