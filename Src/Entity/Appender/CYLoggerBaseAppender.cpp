@@ -7,8 +7,10 @@
 #include "CYCoroutine/CYCoroutine.hpp"
 #endif
 
+#ifdef CYLOGGER_WIN_OS
 #include <atlbase.h>
 #include <atltrace.h>
+#endif
 
 CYLOGGER_NAMESPACE_BEGIN
 

@@ -404,28 +404,47 @@ combine_universal() {
     local dest_dir="$OUTPUT_DIR/$platform_dir/universal/$build_type"
     mkdir -p "$dest_dir"
 
-    # Combine CYLogger universal library
-    local logger_src_arm="$OUTPUT_DIR/$platform_dir/arm64/$build_type/libCYLogger.$suffix"
-    local logger_src_x86="$OUTPUT_DIR/$platform_dir/x86_64/$build_type/libCYLogger.$suffix"
-    local logger_dest="$dest_dir/libCYLogger.$suffix"
-
-    if [ -f "$logger_src_arm" ] && [ -f "$logger_src_x86" ]; then
-        log_info "Creating CYLogger $platform_dir $build_type $( [ "$shared" = "ON" ] && echo "shared" || echo "static") universal binary"
-        lipo -create "$logger_src_arm" "$logger_src_x86" -output "$logger_dest"
-    else
-        log_warn "Missing CYLogger $platform_dir $build_type inputs for lipo. Skipping CYLogger universal artifact."
+    # For iOS with arm64, x86_64, and arm64-simulator:
+    # arm64-device and arm64-simulator BOTH produce arm64 architecture slices.
+    # lipo -create CANNOT combine two arm64 slices (same arch conflict).
+    # Solution: use ONLY arm64-device + x86_64 for universal (skip arm64-simulator).
+    # arm64-simulator builds go to their own directory (not included in universal).
+    local _ios_universal="false"
+    if [ "$platform" = "ios" ]; then
+        _ios_universal="true"
     fi
 
-    # Combine CYCoroutine universal library
-    local coroutine_src_arm="$OUTPUT_DIR/$platform_dir/arm64/$build_type/libCYCoroutine.$suffix"
-    local coroutine_src_x86="$OUTPUT_DIR/$platform_dir/x86_64/$build_type/libCYCoroutine.$suffix"
-    local coroutine_dest="$dest_dir/libCYCoroutine.$suffix"
-
-    if [ -f "$coroutine_src_arm" ] && [ -f "$coroutine_src_x86" ]; then
-        log_info "Creating CYCoroutine $platform_dir $build_type $( [ "$shared" = "ON" ] && echo "shared" || echo "static") universal binary"
-        lipo -create "$coroutine_src_arm" "$coroutine_src_x86" -output "$coroutine_dest"
+    # Determine which architectures to combine for universal.
+    # On iOS: arm64 (device) + x86_64. arm64-simulator is excluded (same arch as device).
+    # On macOS: arm64 + x86_64.
+    local _arch1=""
+    local _arch2=""
+    if [ "$_ios_universal" = "true" ]; then
+        _arch1="arm64"
+        _arch2="x86_64"
     else
-        log_warn "Missing CYCoroutine $platform_dir $build_type inputs for lipo. Skipping CYCoroutine universal artifact."
+        _arch1="arm64"
+        _arch2="x86_64"
+    fi
+
+    # CYLogger universal
+    local logger_src_a="$OUTPUT_DIR/$platform_dir/$_arch1/$build_type/libCYLogger.$suffix"
+    local logger_src_b="$OUTPUT_DIR/$platform_dir/$_arch2/$build_type/libCYLogger.$suffix"
+    if [ -f "$logger_src_a" ] && [ -f "$logger_src_b" ]; then
+        log_info "Creating CYLogger $platform_dir $build_type universal binary (arch: $_arch1 + $_arch2)"
+        lipo -create "$logger_src_a" "$logger_src_b" -output "$dest_dir/libCYLogger.$suffix"
+    else
+        log_warn "Missing CYLogger universal inputs. Skipping."
+    fi
+
+    # CYCoroutine universal
+    local coroutine_src_a="$OUTPUT_DIR/$platform_dir/$_arch1/$build_type/libCYCoroutine.$suffix"
+    local coroutine_src_b="$OUTPUT_DIR/$platform_dir/$_arch2/$build_type/libCYCoroutine.$suffix"
+    if [ -f "$coroutine_src_a" ] && [ -f "$coroutine_src_b" ]; then
+        log_info "Creating CYCoroutine $platform_dir $build_type universal binary (arch: $_arch1 + $_arch2)"
+        lipo -create "$coroutine_src_a" "$coroutine_src_b" -output "$dest_dir/libCYCoroutine.$suffix"
+    else
+        log_warn "Missing CYCoroutine universal inputs. Skipping."
     fi
 }
 
@@ -442,11 +461,33 @@ build_macos_matrix() {
 
 build_ios_matrix() {
     local deployment_target=$1
+    # CYLogger's build_ios.sh handles all iOS build logic correctly:
+    # - All three architectures: arm64 (device), x86_64, arm64-simulator
+    # - Both Static and Shared library types
+    # - Universal binary creation with proper arm64-device/arm64-simulator conflict avoidance
+    # - CYCommon and CYCoroutine dependency management
+    # It is invoked once per build type with the full arch list.
+    # NOTE: build_ios.sh is called instead of build_slice because:
+    #   1. build_slice -> CYLogger CMakeLists.txt directly misses CYCommon/CYCoroutine dependency
+    #   2. build_ios.sh properly integrates CYCommon and CYCoroutine builds via add_subdirectory
+    #   3. build_ios.sh handles arm64-simulator lipo conflicts (arm64-device vs arm64-simulator)
+    #   4. build_ios.sh matches the existing build_all_IOS.sh usage pattern
     for build_type in "${BUILD_TYPES[@]}"; do
         for shared in "${SHARED_KINDS[@]}"; do
-            build_slice "ios" "arm64" "$build_type" "$shared" "$deployment_target"
-            build_slice "ios" "x86_64" "$build_type" "$shared" "$deployment_target"
-            combine_universal "ios" "$build_type" "$shared"
+            local lib_type
+            if [ "$shared" = "ON" ]; then
+                lib_type="Shared"
+            else
+                lib_type="Static"
+            fi
+            local arch_group="arm64;x86_64;arm64-simulator"
+            log_info "Building iOS: $build_type $lib_type ($arch_group)"
+            if bash "$SCRIPT_DIR/build_ios.sh" "$build_type" "$lib_type" "$arch_group"; then
+                log_info "Success: iOS $build_type $lib_type"
+            else
+                log_error "Failed: iOS $build_type $lib_type"
+                exit 1
+            fi
         done
     done
 }

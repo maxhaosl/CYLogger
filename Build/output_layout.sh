@@ -10,7 +10,7 @@ map_platform_dir() {
     normalized=$(printf '%s' "$raw" | tr '[:upper:]' '[:lower:]')
     case "$normalized" in
         macos|mac|darwin)
-            echo "macOS"
+            echo "MacOS"
             ;;
         ios|iphone|ipad)
             echo "iOS"
@@ -45,6 +45,7 @@ platform_universal_dir() {
     local build_type=$2
     local platform_dir
     platform_dir=$(map_platform_dir "$platform")
+    # Use the build_type as-is (should be "Debug" or "Release" to match CMake output)
     echo "$OUTPUT_BASE/$platform_dir/universal/$build_type"
 }
 

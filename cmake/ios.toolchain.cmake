@@ -813,7 +813,17 @@ else()
   set(IOS ON CACHE BOOL "")
 endif()
 # Set the architectures for which to build.
-set(CMAKE_OSX_ARCHITECTURES ${ARCHS} CACHE INTERNAL "")
+# Normalize architecture names for compilation:
+# arm64-simulator -> arm64 (the compiler doesn't understand "arm64-simulator")
+# x86_64-simulator -> x86_64 (for completeness)
+set(_toolchain_archs "${ARCHS}")
+if(_toolchain_archs STREQUAL "arm64-simulator")
+  set(_toolchain_archs "arm64")
+endif()
+if(_toolchain_archs STREQUAL "x86_64-simulator")
+  set(_toolchain_archs "x86_64")
+endif()
+set(CMAKE_OSX_ARCHITECTURES ${_toolchain_archs} CACHE INTERNAL "")
 # Change the type of target generated for try_compile() so it'll work when cross-compiling, weak compiler checks
 if(NOT ENABLE_STRICT_TRY_COMPILE_INT)
   set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)

@@ -26,7 +26,11 @@ if(WIN32)
     )
 
     # Link CYLogger
-    target_link_libraries(CYLoggerTest PRIVATE CYLogger)
+    if(BUILD_SHARED_LIBS)
+        target_link_libraries(CYLoggerTest PRIVATE CYLogger)
+    else()
+        target_link_libraries(CYLoggerTest PRIVATE CYLoggerStatic)
+    endif()
 
     # Define dll import macros when needed
     if(BUILD_SHARED_LIBS)
@@ -51,9 +55,36 @@ if(WIN32)
     )
 
     # Align runtime outputs with the main project
-    set_target_properties(CYLoggerTest PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-    )
+    if(CMAKE_CONFIGURATION_TYPES)
+        set_target_properties(CYLoggerTest PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG}"
+            RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE}"
+            RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO}"
+            RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL}"
+        )
+    else()
+        set_target_properties(CYLoggerTest PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+        )
+    endif()
+
+    # Enable PDB generation for this target on MSVC
+    if(MSVC)
+        # For multi-config generators, set per-configuration PDB output directory
+        if(CMAKE_CONFIGURATION_TYPES)
+            foreach(_cfg ${CMAKE_CONFIGURATION_TYPES})
+                string(TOUPPER "${_cfg}" _cfg_upper)
+                set_target_properties(CYLoggerTest PROPERTIES
+                    PDB_OUTPUT_DIRECTORY_${_cfg_upper} "${CMAKE_RUNTIME_OUTPUT_DIRECTORY_${_cfg_upper}}"
+                )
+            endforeach()
+        else()
+            set_target_properties(CYLoggerTest PROPERTIES
+                PDB_NAME "CYLoggerTest"
+                PDB_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+            )
+        endif()
+    endif()
 
     # Inherit MSVC runtime library setting from parent project
     if(MSVC)

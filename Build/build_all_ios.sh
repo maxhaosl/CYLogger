@@ -30,15 +30,18 @@ SUCCESSFUL_BUILDS=()
 # List of architecture sets to build together so build_ios.sh can emit
 # universal binaries on its own. Keep in sync with build_all_platforms.sh.
 declare -a IOS_ARCH_GROUPS=(
-    "arm64;x86_64"
+    "arm64;x86_64;arm64-simulator"
+    "device"
+    "simulator"
 )
 
 # Function to run a build and track results. Expects `arch_group` to be a
 # semicolon-separated architecture list understood by build_ios.sh.
 run_build() {
-    local build_type=$1
-    local lib_type=$2
-    local arch_group=$3
+    local build_type lib_type arch_group
+    build_type="$1"
+    lib_type="$2"
+    arch_group="$3"
     local arch_desc="${arch_group//;/, }"
     local description="$build_type $lib_type ($arch_desc)"
     

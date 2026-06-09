@@ -1,76 +1,32 @@
 #!/bin/bash
 
-# Android build helper
+# ============================================================
+# CYLogger Android Build Script
+# ============================================================
+# Builds CYLogger and its dependencies for a single Android ABI + build type.
+# Calls standalone CYCommon and CYCoroutine build scripts for deps.
+# Output: CYLogger/Bin/Android/<ABI>/<BuildType>/
+#
+# Usage: build_android.sh [BuildType] [LibType] [ABI] [APILevel]
+#   BuildType: Debug (default) or Release
+#   LibType: Static (default) or Shared
+#   ABI: arm64-v8a (default), armeabi-v7a, x86, x86_64
+#   APILevel: Android API level (default: 31)
+# ============================================================
+
 set -euo pipefail
 
-BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$BUILD_DIR/.."
-OUTPUT_BASE="$PROJECT_ROOT/Bin"
-mkdir -p "$OUTPUT_BASE"
-source "$BUILD_DIR/output_layout.sh"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SOURCE_DIR="$(dirname "$SCRIPT_DIR")"
+CYCOMMON_ROOT="$SOURCE_DIR/ThirdParty/CYCommon"
+CYCOROUTINE_ROOT="$SOURCE_DIR/ThirdParty/CYCoroutine"
 BUILD_TYPE=${1:-Release}
-LIB_TYPE=${2:-Static}
-ANDROID_ABI=${3:-arm64-v8a}
-ANDROID_API_LEVEL=${4:-31}
+ANDROID_ABI=${2:-arm64-v8a}
+ANDROID_API_LEVEL=${3:-31}
 
-# Ensure CYCommon submodule exists
-ensure_cycommon_submodule() {
-    # CYCommon can be in multiple locations:
-    # 1. ThirdParty/CYCommon (bundled with CYLogger)
-    # 2. ../../../CYCommon (sibling location)
-    local cycommon_header="$PROJECT_ROOT/ThirdParty/CYCommon/Inc/CYCommon/CYCommon.hpp"
-    local cycommon_build="$PROJECT_ROOT/ThirdParty/CYCommon/Build/CMakeLists.txt"
-
-    if [ -f "$cycommon_header" ] && [ -f "$cycommon_build" ]; then
-        return 0
-    fi
-
-    # Check sibling location
-    local cycommon_sibling="$PROJECT_ROOT/../../../CYCommon/Inc/CYCommon/CYCommon.hpp"
-    if [ -f "$cycommon_sibling" ]; then
-        return 0
-    fi
-
-    echo "CYCommon not found at expected locations:"
-    echo "  - $cycommon_header"
-    echo "  - $cycommon_sibling"
-    echo "Please ensure CYCommon is available as a local dependency."
-    return 1
-}
-
-ensure_cycommon_submodule || exit 1
-ANDROID_PLATFORM_KEY="android"
-ANDROID_PLATFORM_DIR="$(map_platform_dir "$ANDROID_PLATFORM_KEY")"
-ANDROID_SLICE_DIR="$(platform_slice_dir "$ANDROID_PLATFORM_KEY" "$ANDROID_ABI" "$BUILD_TYPE")"
-
-log() {
-    echo "[build_android] $1"
-}
-
-# Validate and adjust API level based on ABI
-android_api_for_abi() {
-    local abi=$1
-    local requested=$2
-    local min_api
-    case "$abi" in
-        armeabi-v7a|x86)
-            min_api=19
-            ;;
-        *)
-            min_api=21
-            ;;
-    esac
-
-    if ! [[ $requested =~ ^[0-9]+$ ]]; then
-        requested=$min_api
-    fi
-
-    if [ "$requested" -lt "$min_api" ]; then
-        echo "$min_api"
-    else
-        echo "$requested"
-    fi
-}
+# Build script paths
+CYCOMMON_BUILD_SCRIPT="$CYCOMMON_ROOT/Build/build_android.sh"
+CYCOROUTINE_BUILD_SCRIPT="$CYCOROUTINE_ROOT/Build/build_android.sh"
 
 detect_android_sdk() {
     local -a candidates=(
@@ -120,147 +76,185 @@ detect_android_ndk() {
     fi
 }
 
-prepare_android_env() {
-    local sdk_root
-    sdk_root=$(detect_android_sdk)
-    if [ -z "$sdk_root" ]; then
-        echo "Error: Android SDK not found. Install it or set ANDROID_SDK_ROOT."
-        exit 1
+android_api_for_abi() {
+    local abi=$1
+    local requested=$2
+    local min_api
+    case "$abi" in
+        armeabi-v7a|x86)
+            min_api=19
+            ;;
+        *)
+            min_api=21
+            ;;
+    esac
+
+    if ! [[ "$requested" =~ ^[0-9]+$ ]]; then
+        requested=$min_api
     fi
 
-    local ndk_root
-    ndk_root=$(detect_android_ndk "$sdk_root")
-    if [ -z "$ndk_root" ]; then
-        echo "Error: Android NDK not found under $sdk_root. Install it via sdkmanager."
-        exit 1
+    if [ "$requested" -lt "$min_api" ]; then
+        echo "$min_api"
+    else
+        echo "$requested"
     fi
-
-    export ANDROID_SDK_ROOT="$sdk_root"
-    export ANDROID_HOME="$sdk_root"
-    export ANDROID_NDK_HOME="$ndk_root"
-    export ANDROID_NDK_ROOT="$ndk_root"
-    log "Using Android SDK: $ANDROID_SDK_ROOT"
-    log "Using Android NDK: $ANDROID_NDK_HOME"
 }
 
-prepare_android_env
+log() {
+    echo "[CYLogger build] $1"
+}
 
-# Validate and adjust API level
-ANDROID_API_LEVEL=$(android_api_for_abi "$ANDROID_ABI" "$ANDROID_API_LEVEL")
-
-log "Building CYLogger for Android"
-log "Build Type: $BUILD_TYPE"
-log "Library Type: $LIB_TYPE"
-log "Android ABI: $ANDROID_ABI"
-log "Android API Level: $ANDROID_API_LEVEL"
-
-if [ "$LIB_TYPE" = "Static" ]; then
-    BUILD_SUBDIR="build_android_static_${ANDROID_ABI}_$BUILD_TYPE"
-    BUILD_SHARED="OFF"
-else
-    BUILD_SUBDIR="build_android_shared_${ANDROID_ABI}_$BUILD_TYPE"
-    BUILD_SHARED="ON"
+# Detect SDK/NDK
+SDK_ROOT=$(detect_android_sdk)
+if [ -z "$SDK_ROOT" ]; then
+    log "Error: Android SDK not found. Install it or set ANDROID_SDK_ROOT."
+    exit 1
 fi
 
-BUILD_PATH="$BUILD_DIR/$BUILD_SUBDIR"
-mkdir -p "$BUILD_PATH"
-cd "$BUILD_PATH"
+NDK_HOME=$(detect_android_ndk "$SDK_ROOT")
+if [ -z "$NDK_HOME" ]; then
+    log "Error: Android NDK not found under $SDK_ROOT. Install it via sdkmanager."
+    exit 1
+fi
 
-log "Configuring CMake..."
-cmake_args=(
-    "-DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
-    "-DANDROID_ABI=$ANDROID_ABI"
-    "-DANDROID_PLATFORM=android-$ANDROID_API_LEVEL"
-    "-DCMAKE_BUILD_TYPE=$BUILD_TYPE"
-    "-DBUILD_SHARED_LIBS=$BUILD_SHARED"
-    "-DBUILD_EXAMPLES=OFF"
-    "-DTARGET_ARCH=$ANDROID_ABI"
-    "-DANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
-    "-DANDROID_NDK=$ANDROID_NDK_HOME"
-)
+export ANDROID_SDK_ROOT="$SDK_ROOT"
+export ANDROID_HOME="$SDK_ROOT"
+export ANDROID_NDK_HOME="$NDK_HOME"
+export ANDROID_NDK_ROOT="$NDK_HOME"
 
-cmake "${cmake_args[@]}" "$PROJECT_ROOT"
+ANDROID_API_LEVEL=$(android_api_for_abi "$ANDROID_ABI" "$ANDROID_API_LEVEL")
 
-# Ensure CYCoroutine dependencies are built first
-ensure_cycoroutine_android() {
-    local arch_dir="$ANDROID_SLICE_DIR"
-    local static_lib="$arch_dir/libCYCoroutine.a"
-    local shared_lib="$arch_dir/libCYCoroutine.so"
-
-    local need_static=0
-    local need_shared=0
-
-    if [ ! -f "$static_lib" ]; then
-        need_static=1
-    fi
-
-    if [ "$LIB_TYPE" = "Shared" ] && [ ! -f "$shared_lib" ]; then
-        need_shared=1
-    fi
-
-    if [ "$need_static" -eq 0 ] && [ "$need_shared" -eq 0 ]; then
-        log "CYCoroutine dependencies already present for ${ANDROID_ABI}/${BUILD_TYPE}/${LIB_TYPE}"
-        return
-    fi
-
-    local shared_flag
-    if [ "$LIB_TYPE" = "Shared" ]; then
-        shared_flag="ON"
-    else
-        shared_flag="OFF"
-    fi
-
-    local dep_dir="$BUILD_DIR/deps_android_${ANDROID_ABI}_${BUILD_TYPE}_${shared_flag}"
-    local -a dep_cmake_args=(
-        "-DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
-        "-DANDROID_ABI=$ANDROID_ABI"
-        "-DANDROID_PLATFORM=android-$ANDROID_API_LEVEL"
-        "-DCMAKE_BUILD_TYPE=$BUILD_TYPE"
-        "-DBUILD_SHARED_LIBS=$shared_flag"
-        "-DBUILD_STATIC_LIBS=ON"
-        "-DBUILD_EXAMPLES=OFF"
-        "-DUSE_CYCOROUTINE=ON"
-        "-DCYLOGGER_ROOT_DIR=$PROJECT_ROOT"
-        "-DTARGET_ARCH=$ANDROID_ABI"
-        "-DANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
-        "-DANDROID_NDK=$ANDROID_NDK_HOME"
-    )
-
-    log "Preparing CYCoroutine dependency for ${ANDROID_ABI}/${BUILD_TYPE}/${LIB_TYPE}..."
-    cmake -S "$PROJECT_ROOT" -B "$dep_dir" "${dep_cmake_args[@]}"
-
-    if [ "$need_static" -eq 1 ]; then
-        log "Building CYCoroutine_static for ${ANDROID_ABI}/${BUILD_TYPE}..."
-        if command -v nproc >/dev/null 2>&1; then
-            JOBS=$(nproc)
-        else
-            JOBS=$(sysctl -n hw.ncpu 2>/dev/null || echo 4)
-        fi
-        cmake --build "$dep_dir" --target CYCoroutine_static --parallel "$JOBS"
-    fi
-
-    if [ "$need_shared" -eq 1 ]; then
-        log "Building CYCoroutine_shared for ${ANDROID_ABI}/${BUILD_TYPE}..."
-        if command -v nproc >/dev/null 2>&1; then
-            JOBS=$(nproc)
-        else
-            JOBS=$(sysctl -n hw.ncpu 2>/dev/null || echo 4)
-        fi
-        cmake --build "$dep_dir" --target CYCoroutine_shared --parallel "$JOBS"
-    fi
-}
-
-ensure_cycoroutine_android
-
-log "Building..."
 if command -v nproc >/dev/null 2>&1; then
     JOBS=$(nproc)
 else
     JOBS=$(sysctl -n hw.ncpu 2>/dev/null || echo 4)
 fi
-cmake --build "$BUILD_PATH" --target CYLogger --parallel "$JOBS"
+
+log "CYLogger Android Build"
+log "  Build Type: $BUILD_TYPE"
+log "  ABI: $ANDROID_ABI"
+log "  API Level: $ANDROID_API_LEVEL"
+log "  SDK: $SDK_ROOT"
+log "  NDK: $NDK_HOME"
+
+# ============================================================
+# Step 1: Build CYCommon (standalone)
+# ============================================================
+# CYCommon build_android.sh expects: BUILD_TYPE LIB_TYPE ABI API_LEVEL
+log "Building CYCommon for $ANDROID_ABI/$BUILD_TYPE..."
+if ! "$CYCOMMON_BUILD_SCRIPT" "$BUILD_TYPE" "static" "$ANDROID_ABI" "$ANDROID_API_LEVEL"; then
+    log "Error: CYCommon build failed."
+    exit 1
+fi
+
+# ============================================================
+# Step 2: Build CYCoroutine (standalone, depends on CYCommon)
+# ============================================================
+log "Building CYCoroutine for $ANDROID_ABI/$BUILD_TYPE..."
+if ! "$CYCOROUTINE_BUILD_SCRIPT" "$BUILD_TYPE" "$ANDROID_ABI" "$ANDROID_API_LEVEL"; then
+    log "Error: CYCoroutine build failed."
+    exit 1
+fi
+
+# ============================================================
+# Step 3: Build CYLogger itself
+# ============================================================
+log "Building CYLogger for $ANDROID_ABI/$BUILD_TYPE..."
+
+# Debug suffix
+if [ "$BUILD_TYPE" = "Debug" ]; then
+    _debug_suffix="D"
+else
+    _debug_suffix=""
+fi
+
+# --- Static build: build CYLoggerStatic + fmt (separate dir) ---
+log "Static build..."
+STATIC_BUILD_PATH="$SCRIPT_DIR/build_android_${ANDROID_ABI}_${BUILD_TYPE}_static"
+mkdir -p "$STATIC_BUILD_PATH"
+log "Configuring CMake (static)..."
+cmake -S "$SOURCE_DIR" -B "$STATIC_BUILD_PATH" \
+    -DCMAKE_TOOLCHAIN_FILE="$NDK_HOME/build/cmake/android.toolchain.cmake" \
+    -DANDROID_ABI="$ANDROID_ABI" \
+    -DANDROID_PLATFORM="android-$ANDROID_API_LEVEL" \
+    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
+    -DBUILD_SHARED_LIBS=OFF \
+    -DBUILD_EXAMPLES=OFF \
+    -DTARGET_ARCH="$ANDROID_ABI" \
+    -DANDROID_SDK_ROOT="$SDK_ROOT" \
+    -DANDROID_NDK="$NDK_HOME" \
+    -DANDROID_STL=c++_static \
+    -DCYLOGGER_SKIP_SHARED=ON
+
+log "Building CYLoggerStatic and fmt..."
+cmake --build "$STATIC_BUILD_PATH" --target CYLoggerStatic fmt --parallel "$JOBS"
+
+# --- Shared build: configure + build (separate dir) ---
+log "Shared build..."
+SHARED_BUILD_PATH="$SCRIPT_DIR/build_android_${ANDROID_ABI}_${BUILD_TYPE}_shared"
+mkdir -p "$SHARED_BUILD_PATH"
+log "Configuring CMake (shared)..."
+cmake -S "$SOURCE_DIR" -B "$SHARED_BUILD_PATH" \
+    -DCMAKE_TOOLCHAIN_FILE="$NDK_HOME/build/cmake/android.toolchain.cmake" \
+    -DANDROID_ABI="$ANDROID_ABI" \
+    -DANDROID_PLATFORM="android-$ANDROID_API_LEVEL" \
+    -DCMAKE_BUILD_TYPE="$BUILD_TYPE" \
+    -DBUILD_SHARED_LIBS=ON \
+    -DBUILD_STATIC_LIBS=OFF \
+    -DBUILD_EXAMPLES=OFF \
+    -DTARGET_ARCH="$ANDROID_ABI" \
+    -DANDROID_SDK_ROOT="$SDK_ROOT" \
+    -DANDROID_NDK="$NDK_HOME" \
+    -DANDROID_STL=c++_static \
+    -DCYLOGGER_SKIP_SHARED=OFF
+
+log "Building CYLogger_shared..."
+cmake --build "$SHARED_BUILD_PATH" --target CYLogger_shared --parallel "$JOBS"
+
+# ============================================================
+# Step 4: Copy artifacts to expected output directory
+# ============================================================
+EXPECTED_OUTPUT="$SOURCE_DIR/Bin/Android/$ANDROID_ABI/$BUILD_TYPE"
+mkdir -p "$EXPECTED_OUTPUT"
+
+log "Copying artifacts to $EXPECTED_OUTPUT..."
+
+# CYCommon
+if [ -f "$CYCOMMON_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE/libCYCommon${_debug_suffix}.a" ]; then
+    cp "$CYCOMMON_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE/libCYCommon${_debug_suffix}.a" "$EXPECTED_OUTPUT/"
+    log "  Placed: libCYCommon${_debug_suffix}.a"
+fi
+
+# CYCoroutine
+if [ -f "$CYCOROUTINE_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE/libCYCoroutine${_debug_suffix}.a" ]; then
+    cp "$CYCOROUTINE_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE/libCYCoroutine${_debug_suffix}.a" "$EXPECTED_OUTPUT/"
+    log "  Placed: libCYCoroutine${_debug_suffix}.a"
+fi
+if [ -f "$CYCOROUTINE_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE/libCYCoroutine${_debug_suffix}.so" ]; then
+    cp "$CYCOROUTINE_ROOT/Bin/Android/$ANDROID_ABI/$BUILD_TYPE/libCYCoroutine${_debug_suffix}.so" "$EXPECTED_OUTPUT/"
+    log "  Placed: libCYCoroutine${_debug_suffix}.so"
+fi
+
+# fmt (from static build output dir, fmt follows CYLogger's output directory)
+if [ "$BUILD_TYPE" = "Debug" ]; then
+    _fmt_lib="libfmtD.a"
+else
+    _fmt_lib="libfmt.a"
+fi
+if [ -f "$EXPECTED_OUTPUT/$_fmt_lib" ]; then
+    cp "$EXPECTED_OUTPUT/$_fmt_lib" "$EXPECTED_OUTPUT/" 2>/dev/null || true
+    log "  Placed: $_fmt_lib"
+fi
+
+# CYLogger static (from static build output dir)
+if [ -f "$EXPECTED_OUTPUT/libCYLogger${_debug_suffix}.a" ]; then
+    log "  OK: libCYLogger${_debug_suffix}.a (already in place)"
+fi
+
+# CYLogger shared (from shared build output dir)
+if [ -f "$EXPECTED_OUTPUT/libCYLogger${_debug_suffix}.so" ]; then
+    log "  OK: libCYLogger${_debug_suffix}.so (already in place)"
+fi
 
 log "Build completed successfully!"
-log "Output directory: $ANDROID_SLICE_DIR"
-
-cd "$BUILD_DIR"
+log "Output directory: $EXPECTED_OUTPUT"

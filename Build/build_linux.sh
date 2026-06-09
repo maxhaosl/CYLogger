@@ -61,6 +61,13 @@ ensure_cycommon_submodule() {
 ensure_fmt_submodule
 ensure_cycommon_submodule || exit 1
 
+# Ensure CYCommon static lib exists in CYLogger/Bin/Linux/<arch>/<config>/
+build_cycommon_for_slice() {
+    "$BUILD_DIR/build_cycommon_linux.sh" "$BUILD_TYPE" "$TARGET_ARCH"
+}
+
+# TARGET_ARCH is set later; call after canonicalization below
+
 canonicalize_linux_arch() {
     local token
     token=$(printf '%s' "$1" | xargs)
@@ -109,16 +116,86 @@ detect_compiler() {
     echo ""
 }
 
-CC_BIN=$(detect_compiler "${CYLOGGER_CC:-}" "clang-17")
-CXX_BIN=$(detect_compiler "${CYLOGGER_CXX:-}" "clang++-17")
+# Verify that a C++ toolchain can compile and link (clang may lack libstdc++ on some Linux images).
+linux_cxx_toolchain_works() {
+    local cxx="$1" cc="$2" tmpdir probe
+    [ -z "$cxx" ] && return 1
+    tmpdir=$(mktemp -d)
+    probe="$tmpdir/probe.cxx"
+    printf 'int main(){return 0;}\n' >"$probe"
+    if [ -n "$cc" ]; then
+        "$cxx" "$probe" -o "$tmpdir/probe" -std=c++20 2>/dev/null && [ -x "$tmpdir/probe" ]
+    else
+        "$cxx" "$probe" -o "$tmpdir/probe" -std=c++20 2>/dev/null && [ -x "$tmpdir/probe" ]
+    fi
+    local ok=$?
+    rm -rf "$tmpdir"
+    return "$ok"
+}
+
+# Find best available compiler (prefer clang-17, fall back to clang, then gcc)
+find_best_cc() {
+    local cc
+    cc=$(detect_compiler "${CYLOGGER_CC:-}" "clang-17");   [ -n "$cc" ] && echo "$cc" && return
+    cc=$(detect_compiler "${CYLOGGER_CC:-}" "clang");      [ -n "$cc" ] && echo "$cc" && return
+    cc=$(detect_compiler "${CYLOGGER_CC:-}" "gcc");        [ -n "$cc" ] && echo "$cc" && return
+    echo ""
+}
+
+find_best_cxx() {
+    local cxx
+    cxx=$(detect_compiler "${CYLOGGER_CXX:-}" "clang++-17"); [ -n "$cxx" ] && echo "$cxx" && return
+    cxx=$(detect_compiler "${CYLOGGER_CXX:-}" "clang++");    [ -n "$cxx" ] && echo "$cxx" && return
+    cxx=$(detect_compiler "${CYLOGGER_CXX:-}" "g++");        [ -n "$cxx" ] && echo "$cxx" && return
+    echo ""
+}
+
+select_linux_toolchain() {
+    local cc cxx
+    if [ -n "${CYLOGGER_CC:-}" ] && [ -n "${CYLOGGER_CXX:-}" ]; then
+        echo "${CYLOGGER_CC}|${CYLOGGER_CXX}"
+        return
+    fi
+    cc=$(find_best_cc)
+    cxx=$(find_best_cxx)
+    if linux_cxx_toolchain_works "$cxx" "$cc"; then
+        echo "${cc}|${cxx}"
+        return
+    fi
+    cc=$(detect_compiler "" "gcc")
+    cxx=$(detect_compiler "" "g++")
+    if linux_cxx_toolchain_works "$cxx" "$cc"; then
+        echo "${cc}|${cxx}"
+        return
+    fi
+    echo "${cc}|${cxx}"
+}
+
+IFS='|' read -r CC_BIN CXX_BIN <<<"$(select_linux_toolchain)"
 
 if [ -z "$CC_BIN" ] || [ -z "$CXX_BIN" ]; then
-    echo "Error: clang-17 toolchain not found (set CYLOGGER_CC/CYLOGGER_CXX to override)." >&2
+    echo "Error: No suitable C/C++ compiler found." >&2
+    echo "Tried: clang-17, clang, gcc (or set CYLOGGER_CC/CYLOGGER_CXX to override)" >&2
     exit 1
+fi
+
+CC_NAME=$(basename "$CC_BIN")
+CXX_NAME=$(basename "$CXX_BIN")
+if [ "$CC_NAME" = "clang-17" ] && [ "$CXX_NAME" = "clang++-17" ]; then
+    : # clang-17 found, no note needed
+elif command -v clang-17 >/dev/null 2>&1 && command -v clang++-17 >/dev/null 2>&1; then
+    echo "Note: clang-17 is installed but not in use (using $CC_NAME / $CXX_NAME)"
+else
+    echo "Note: Using $CC_NAME / $CXX_NAME (clang-17 not available)"
 fi
 
 export CYLOGGER_CC="$CC_BIN"
 export CYLOGGER_CXX="$CXX_BIN"
+
+if ! build_cycommon_for_slice; then
+    echo "Error: CYCommon build failed." >&2
+    exit 1
+fi
 
 echo "Building CYLogger for Linux..."
 echo "Build Type: $BUILD_TYPE"
@@ -132,9 +209,11 @@ fi
 if [ "$LIB_TYPE" = "Static" ]; then
     BUILD_SUBDIR="build_linux_static_${TARGET_ARCH}_$BUILD_TYPE"
     BUILD_SHARED="OFF"
+    CYLOGGER_WANT_SHARED="OFF"
 else
     BUILD_SUBDIR="build_linux_shared_${TARGET_ARCH}_$BUILD_TYPE"
     BUILD_SHARED="ON"
+    CYLOGGER_WANT_SHARED="ON"
 fi
 
 BUILD_PATH="$BUILD_DIR/$BUILD_SUBDIR"
@@ -147,16 +226,23 @@ CMAKE_ARGS=(
     "-DCMAKE_CXX_COMPILER=$CXX_BIN"
     -DCMAKE_BUILD_TYPE="$BUILD_TYPE"
     -DBUILD_SHARED_LIBS="$BUILD_SHARED"
-    -DBUILD_EXAMPLES=ON
+    -DCYLOGGER_WANT_SHARED="$CYLOGGER_WANT_SHARED"
+    -DBUILD_EXAMPLES=OFF
     -DTARGET_ARCH="$TARGET_ARCH"
     -DCMAKE_SYSTEM_PROCESSOR_OVERRIDE="$TARGET_ARCH"
 )
 
 # Add architecture-specific compiler flags
-if [ "$TARGET_ARCH" = "x86" ]; then
-    CMAKE_ARGS+=(-DCMAKE_C_FLAGS=-m32 -DCMAKE_CXX_FLAGS=-m32 -DCMAKE_EXE_LINKER_FLAGS=-m32)
-elif [ "$TARGET_ARCH" = "x86_64" ]; then
-    CMAKE_ARGS+=(-DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64)
+if [ "$TARGET_ARCH" = "x86_64" ]; then
+    CMAKE_ARGS+=(-DCMAKE_C_FLAGS=-m64)
+fi
+
+# If using clang and libc++ is available on this system, use it.
+# Otherwise clang defaults to libstdc++ which is the right choice.
+if [[ "$CXX_NAME" == clang* ]]; then
+    if [ -f /usr/lib/x86_64-linux-gnu/libc++.so ] || [ -f /usr/lib/libc++.so ]; then
+        CMAKE_ARGS+=(-DCMAKE_CXX_FLAGS="-stdlib=libc++")
+    fi
 fi
 
 cmake "${CMAKE_ARGS[@]}" "$PROJECT_ROOT"
