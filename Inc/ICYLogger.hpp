@@ -169,11 +169,14 @@ CYLOGGER_NAMESPACE_END
                                             CY_LOG()->AddApender(CYLOGGER_NAMESPACE::LOG_TYPE_REMOTE,nullptr, TEXT("127.0.0.1:7000"),   LOG_FILE_MODE);     \
                                             CY_LOG()->AddApender(CYLOGGER_NAMESPACE::LOG_TYPE_SYS,   nullptr, TEXT("CYLogger"),         LOG_FILE_MODE); 
 
-#define CY_LOG_CONFIG(strPath, bShowConsoleWindow, eLogLayoutType)  \
+#define CY_LOG_CONFIG_NO_APPENDER(strPath, bShowConsoleWindow, eLogLayoutType)  \
                                             CY_LOG()->SetConfig(strPath, bShowConsoleWindow);  \
                                             CY_LOG()->SetLayout(eLogLayoutType, nullptr); \
-                                            CY_LOG_APPENDER() \
                                             CY_LOG()->SetRestriction(LOG_LIMIT_ENABLE, LOG_LIMIT_CLEAR_UNLOGFILE, LOG_TIME_CLEAR_LOG, LOG_TIME_EXPIRED_FILE, LOG_CHECK_FILE_SIZE_TIME, LOG_CHECK_FILE_COUNT_TIME, LOG_CHECK_FILE_SIZE, LOG_COUNT_PER_TYPE, LOG_CHECK_FILE_TYPE_SIZE, LOG_CHECK_FILE_ALL_SIZE);  
+
+#define CY_LOG_CONFIG(strPath, bShowConsoleWindow, eLogLayoutType)  \
+                                            CY_LOG_CONFIG_NO_APPENDER(strPath, bShowConsoleWindow, eLogLayoutType)  \
+                                            CY_LOG_APPENDER()
 
 //////////////////////////////////////////////////////////////////////////
 #define CY_LOG_ESCAPE_TRACE(szMsg, ...)     CY_LOG()->WriteEscapeLog(CYLOGGER_NAMESPACE::LOG_LEVEL_TRACE | CYLOGGER_NAMESPACE::LOG_LEVEL_CONSOLE | LOG_LEVEL_REMOTE_TAIL,   CYLOGGER_NAMESPACE::LOG_TYPE_TRACE,     UNKNOWN_SEVER_CODE, __CHANNEL_, __TFILE__, __TFUNCTION__, __TLINE__, szMsg, ##__VA_ARGS__)
