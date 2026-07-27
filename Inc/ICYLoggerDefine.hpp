@@ -165,6 +165,7 @@ enum ELogLayoutType
     LOG_LAYOUT_TYPE_BUILDIN_1       = 0x01,         ///< Log built-in template 1.
     LOG_LAYOUT_TYPE_BUILDIN_2       = 0x02,         ///< Log built-in template 2.
     LOG_LAYOUT_TYPE_BUILDIN_3       = 0x03,         ///< Log built-in template 3.
+    LOG_LAYOUT_TYPE_BUILDIN_4       = 0x04,         ///< Log built-in template 3.
 };
 
 /**

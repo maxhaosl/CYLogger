@@ -153,7 +153,7 @@ bool CYLLoggerImpl::AddApender(ELogType eLogType, const TChar* szChannel, const 
 /**
  * @brief Write Log.
 */
-void CYLLoggerImpl::WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept
+void CYLLoggerImpl::WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept
 {
 	if (szMsg == nullptr)
 		return;
@@ -184,12 +184,12 @@ void CYLLoggerImpl::WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, c
     #endif
 
         TString strMsg = ptrLogBuffer.get();
-        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYNormalMessage>(TEXT(""), eMsgType, nSeverCode, strMsg, pszFile, pszFuncName, nLine));
+        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYNormalMessage>(szChannel, eMsgType, nSeverCode, strMsg, pszFile, pszFuncName, nLine));
     }
 	EXCEPTION_END
 }
 
-void CYLLoggerImpl::WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szMsg) noexcept
+void CYLLoggerImpl::WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* szMsg) noexcept
 {
 	if (szMsg == nullptr)
 		return;
@@ -203,12 +203,12 @@ void CYLLoggerImpl::WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, c
 	EXCEPTION_BEGIN
 	{
         TString strMsg = szMsg;
-        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYStrMessage>(TEXT(""), eMsgType, nSeverCode, strMsg));
+        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYStrMessage>(szChannel, eMsgType, nSeverCode, strMsg));
 	}
 	EXCEPTION_END
 }
 
-void CYLLoggerImpl::WriteEscapeLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept
+void CYLLoggerImpl::WriteEscapeLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept
 {
 	if (szMsg == nullptr)
 		return;
@@ -239,12 +239,12 @@ void CYLLoggerImpl::WriteEscapeLog(int nLogLevel, ELogType eMsgType, int nSeverC
     #endif
 
         TString strMsg = ptrLogBuffer.get();
-        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYEscapeMessage>(TEXT(""), eMsgType, nSeverCode, strMsg, pszFile, pszFuncName, nLine));
+        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYEscapeMessage>(szChannel, eMsgType, nSeverCode, strMsg, pszFile, pszFuncName, nLine));
 	}
 	EXCEPTION_END
 }
 
-void CYLLoggerImpl::WriteHexLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* pszFile, const TChar* pszFuncName, int nLine, const void* szMsg, int nLen) noexcept
+void CYLLoggerImpl::WriteHexLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* pszFile, const TChar* pszFuncName, int nLine, const void* szMsg, int nLen) noexcept
 {
 	if (szMsg == nullptr)
 		return;
@@ -291,7 +291,7 @@ void CYLLoggerImpl::WriteHexLog(int nLogLevel, ELogType eMsgType, int nSeverCode
         }
 
         TString strMsg = msgStream.str();
-        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYNormalMessage>(TEXT(""), eMsgType, nSeverCode, strMsg, pszFile, pszFuncName, nLine));
+        m_ptrLoggerControl->WriteLog(nLogLevel, MakeShared<CYNormalMessage>(szChannel, eMsgType, nSeverCode, strMsg, pszFile, pszFuncName, nLine));
 	}
     EXCEPTION_END
 }

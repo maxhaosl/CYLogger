@@ -1,5 +1,6 @@
 ﻿// CYLoggerConsoleTest.cpp : This file contains main(). Program execution starts and ends here.
 //
+#define __CHANNEL_ TEXT("SDK")
 
 #include <iostream>
 #include "ICYLogger.hpp"
@@ -27,7 +28,7 @@ int main()
     lastSlash = _tcsrchr(szFilePath, '\\');
     if (lastSlash) lastSlash[1] = 0;
 
-    CY_LOG_CONFIG(szFilePath, LOG_SHOW_CONSOLE_WINDOW, LOG_LAYOUT_TYPE);
+    CY_LOG_CONFIG(szFilePath, LOG_SHOW_CONSOLE_WINDOW, CYLOGGER_NAMESPACE::ELogLayoutType::LOG_LAYOUT_TYPE_BUILDIN_4);
 
     char szBuffer[256] = { 1 };
 

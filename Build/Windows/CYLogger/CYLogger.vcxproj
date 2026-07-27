@@ -225,6 +225,7 @@
     <ClInclude Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterManager.hpp" />
     <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout2.hpp" />
     <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout3.hpp" />
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout4.hpp" />
     <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutCustom.hpp" />
     <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout1.hpp" />
     <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggertemplateLayoutDefine.hpp" />
@@ -270,6 +271,7 @@
     <ClCompile Include="..\..\..\Src\Entity\Filter\CYLoggerPatternFilterManager.cpp" />
     <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout2.cpp" />
     <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout3.cpp" />
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout4.cpp" />
     <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutCustom.cpp" />
     <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout1.cpp" />
     <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutEscape.cpp" />

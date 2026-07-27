@@ -38,10 +38,10 @@ public:
 	/**
 	 * @brief Write Log.
 	*/
-	virtual void WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szMsg) noexcept override;
-	virtual void WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept override;
-	virtual void WriteEscapeLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept override;
-	virtual void WriteHexLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* pszFile, const TChar* pszFuncName, int nLine, const void* szMsg, int nLen) noexcept override;
+	virtual void WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* szMsg) noexcept override;
+	virtual void WriteLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept override;
+	virtual void WriteEscapeLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* pszFile, const TChar* pszFuncName, int nLine, const TChar* szMsg, ...) noexcept override;
+	virtual void WriteHexLog(int nLogLevel, ELogType eMsgType, int nSeverCode, const TChar* szChannel, const TChar* pszFile, const TChar* pszFuncName, int nLine, const void* szMsg, int nLen) noexcept override;
 
 	/**
 	 * @brief Set Log Config.

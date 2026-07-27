@@ -3,6 +3,7 @@
 #include "Entity/Layout/CYLoggerTemplateLayout1.hpp"
 #include "Entity/Layout/CYLoggerTemplateLayout2.hpp"
 #include "Entity/Layout/CYLoggerTemplateLayout3.hpp"
+#include "Entity/Layout/CYLoggerTemplateLayout4.hpp"
 #include "Config/CYLoggerConfig.hpp"
 
 #include <memory>
@@ -92,6 +93,9 @@ SharePtr<ICYLoggerTemplateLayout> CYLoggerTemplateLayoutManager::CraeteTemplateL
             break;
         case LOG_LAYOUT_TYPE_BUILDIN_3:
             m_ptrCurrentLayout = MakeShared<CYLoggerTemplateLayout3>();
+            break;
+        case LOG_LAYOUT_TYPE_BUILDIN_4:
+            m_ptrCurrentLayout = MakeShared<CYLoggerTemplateLayout4>();
             break;
         default:
             break;

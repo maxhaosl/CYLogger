@@ -124,6 +124,9 @@
     <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayoutEscape.cpp">
       <Filter>Src\Entity\Layout</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout4.cpp">
+      <Filter>Src\Entity\Layout</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\inc\ICYLogger.hpp">
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Src\Common\CYJThreadDefine.hpp">
       <Filter>Src\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Src\Entity\Layout\CYLoggerTemplateLayout4.hpp">
+      <Filter>Src\Entity\Layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
